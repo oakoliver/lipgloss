@@ -7,17 +7,17 @@ Ported from [charmbracelet/lipgloss](https://github.com/charmbracelet/lipgloss) 
 ## Install
 
 ```bash
-npm install lipgloss
+npm install @oakoliver/lipgloss
 # or
-bun add lipgloss
+bun add @oakoliver/lipgloss
 # or
-deno add npm:lipgloss
+deno add npm:@oakoliver/lipgloss
 ```
 
 ## Quick Start
 
 ```ts
-import { newStyle, normalBorder, roundedBorder, Center } from 'lipgloss';
+import { newStyle, normalBorder, roundedBorder, Center } from '@oakoliver/lipgloss';
 
 // Create a style
 const style = newStyle()
@@ -50,7 +50,7 @@ console.log(style.render('Hello, Lipgloss!'));
 ### Style
 
 ```ts
-import { newStyle, Style } from 'lipgloss';
+import { newStyle, Style } from '@oakoliver/lipgloss';
 
 const s = newStyle();
 ```
@@ -85,7 +85,7 @@ s.background('#2D2D2D')
 s.underlineColor('#00ff00')
 
 // ANSI basic (0-15)
-import { Red, BrightCyan } from 'lipgloss';
+import { Red, BrightCyan } from '@oakoliver/lipgloss';
 s.foreground(Red)
 
 // ANSI 256 (16-255)
@@ -107,7 +107,7 @@ s.maxHeight(24)   // truncate output exceeding this many lines
 #### Alignment
 
 ```ts
-import { Left, Center, Right, Top, Bottom } from 'lipgloss';
+import { Left, Center, Right, Top, Bottom } from '@oakoliver/lipgloss';
 
 s.align(Center)             // horizontal only
 s.align(Center, Bottom)     // horizontal and vertical
@@ -135,7 +135,7 @@ import {
   normalBorder, roundedBorder, blockBorder, thickBorder,
   doubleBorder, hiddenBorder, asciiBorder, markdownBorder,
   outerHalfBlockBorder, innerHalfBlockBorder,
-} from 'lipgloss';
+} from '@oakoliver/lipgloss';
 
 s.border(roundedBorder())                    // all sides
 s.border(normalBorder(), true, false)        // top+bottom only
@@ -203,7 +203,7 @@ import {
   joinHorizontal, joinVertical,
   place, placeHorizontal, placeVertical,
   Top, Bottom, Center, Left, Right,
-} from 'lipgloss';
+} from '@oakoliver/lipgloss';
 
 // Join blocks side by side (vertical alignment)
 joinHorizontal(Top, blockA, blockB, blockC);
@@ -225,7 +225,7 @@ placeVertical(24, Center, 'Hello');
 import {
   parseColor, colorToRGB, isDarkColor,
   lightDark, complementary, darken, lighten, alpha,
-} from 'lipgloss';
+} from '@oakoliver/lipgloss';
 
 isDarkColor('#1a1a2e')     // true
 isDarkColor('#ffffff')     // false
@@ -242,7 +242,7 @@ alpha('#ff0000', 0.5)     // { r: 128, g: 0, b: 0 }
 ### ANSI Utilities
 
 ```ts
-import { stripAnsi, stringWidth, truncate, styled, SGR } from 'lipgloss';
+import { stripAnsi, stringWidth, truncate, styled, SGR } from '@oakoliver/lipgloss';
 
 stripAnsi('\x1b[1mHello\x1b[0m')  // 'Hello'
 stringWidth('\x1b[1mHello\x1b[0m') // 5 (ignores ANSI, handles CJK)
