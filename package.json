@@ -1,0 +1,70 @@
+{
+  "name": "lipgloss",
+  "version": "1.0.0",
+  "description": "CSS-like terminal styling for JavaScript. Zero dependencies, multi-runtime (Node.js, Bun, Deno). Fluent API for colors, borders, padding, margins, alignment, and layout.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types",
+    "build:esm": "esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js --platform=node",
+    "build:cjs": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/index.cjs --platform=node",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "lipgloss",
+    "terminal",
+    "styling",
+    "ansi",
+    "tui",
+    "css",
+    "colors",
+    "borders",
+    "padding",
+    "margins",
+    "layout",
+    "charmbracelet",
+    "nodejs",
+    "bun",
+    "deno",
+    "typescript",
+    "zero-dependencies",
+    "multi-runtime"
+  ],
+  "author": "Antonio Oliveira <antonio@oakoliver.com> (https://oakoliver.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oakoliver/lipgloss.git"
+  },
+  "homepage": "https://github.com/oakoliver/lipgloss#readme",
+  "bugs": {
+    "url": "https://github.com/oakoliver/lipgloss/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.27.4",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
