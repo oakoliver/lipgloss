@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'bun:test';
-import { Style, newStyle, getLines, Top, Bottom, Center, Left, Right } from '../src/style.js';
+import { Style, newStyle, getLines, getFirstRune, Top, Bottom, Center, Left, Right } from '../src/style.js';
 import { normalBorder, roundedBorder, noBorder, doubleBorder, hiddenBorder } from '../src/border.js';
-import { stripAnsi, stringWidth } from '../src/ansi.js';
+import { stripAnsi, stringWidth, SGR } from '../src/ansi.js';
 import { NO_COLOR } from '../src/color.js';
 
 // Helper: strip ANSI and get visible content
@@ -566,5 +566,458 @@ describe('Style render - complex combinations', () => {
     const lines = result.split('\n');
     // top border + 2 content lines + bottom border = 4
     expect(lines.length).toBe(4);
+  });
+});
+
+// =========================================================================
+// Go parity tests: TestStyleUnset
+// =========================================================================
+describe('Style unset methods', () => {
+  it('unsetBold', () => {
+    const s = newStyle().bold(true).unsetBold();
+    expect(s.getBold()).toBe(false);
+    expect(visible(s.render('Hi'))).toBe('Hi');
+  });
+  it('unsetItalic', () => {
+    const s = newStyle().italic(true).unsetItalic();
+    expect(s.getItalic()).toBe(false);
+  });
+  it('unsetUnderline', () => {
+    const s = newStyle().underline(true).unsetUnderline();
+    expect(s.getUnderline()).toBe(false);
+    expect(s.getUnderlineStyle()).toBe('none');
+  });
+  it('unsetUnderlineSpaces', () => {
+    const s = newStyle().underlineSpaces(true).unsetUnderlineSpaces();
+    expect(s.getUnderlineSpaces()).toBe(false);
+  });
+  it('unsetStrikethrough', () => {
+    const s = newStyle().strikethrough(true).unsetStrikethrough();
+    expect(s.getStrikethrough()).toBe(false);
+  });
+  it('unsetStrikethroughSpaces', () => {
+    const s = newStyle().strikethroughSpaces(true).unsetStrikethroughSpaces();
+    expect(s.getStrikethroughSpaces()).toBe(false);
+  });
+  it('unsetReverse', () => {
+    const s = newStyle().reverse(true).unsetReverse();
+    expect(s.getReverse()).toBe(false);
+  });
+  it('unsetBlink', () => {
+    const s = newStyle().blink(true).unsetBlink();
+    expect(s.getBlink()).toBe(false);
+  });
+  it('unsetFaint', () => {
+    const s = newStyle().faint(true).unsetFaint();
+    expect(s.getFaint()).toBe(false);
+  });
+  it('unsetInline', () => {
+    const s = newStyle().inline(true).unsetInline();
+    expect(s.getInline()).toBe(false);
+  });
+  it('unsetForeground', () => {
+    const s = newStyle().foreground('#ff0000').unsetForeground();
+    expect(s.getForeground()).toBeNull();
+  });
+  it('unsetBackground', () => {
+    const s = newStyle().background('#0000ff').unsetBackground();
+    expect(s.getBackground()).toBeNull();
+  });
+  it('unsetMarginTop', () => {
+    const s = newStyle().marginTop(5).unsetMarginTop();
+    expect(s.getMarginTop()).toBe(0);
+  });
+  it('unsetMarginRight', () => {
+    const s = newStyle().marginRight(5).unsetMarginRight();
+    expect(s.getMarginRight()).toBe(0);
+  });
+  it('unsetMarginBottom', () => {
+    const s = newStyle().marginBottom(5).unsetMarginBottom();
+    expect(s.getMarginBottom()).toBe(0);
+  });
+  it('unsetMarginLeft', () => {
+    const s = newStyle().marginLeft(5).unsetMarginLeft();
+    expect(s.getMarginLeft()).toBe(0);
+  });
+  it('unsetPaddingTop', () => {
+    const s = newStyle().paddingTop(5).unsetPaddingTop();
+    expect(s.getPaddingTop()).toBe(0);
+  });
+  it('unsetPaddingRight', () => {
+    const s = newStyle().paddingRight(5).unsetPaddingRight();
+    expect(s.getPaddingRight()).toBe(0);
+  });
+  it('unsetPaddingBottom', () => {
+    const s = newStyle().paddingBottom(5).unsetPaddingBottom();
+    expect(s.getPaddingBottom()).toBe(0);
+  });
+  it('unsetPaddingLeft', () => {
+    const s = newStyle().paddingLeft(5).unsetPaddingLeft();
+    expect(s.getPaddingLeft()).toBe(0);
+  });
+  it('unsetPaddingChar', () => {
+    const s = newStyle().paddingChar('x').unsetPaddingChar();
+    expect(s.getPaddingChar()).toBe(' ');
+  });
+  it('unsetBorderTop', () => {
+    const s = newStyle().borderTop(true).unsetBorderTop();
+    expect(s.getBorderTop()).toBe(false);
+  });
+  it('unsetBorderRight', () => {
+    const s = newStyle().borderRight(true).unsetBorderRight();
+    expect(s.getBorderRight()).toBe(false);
+  });
+  it('unsetBorderBottom', () => {
+    const s = newStyle().borderBottom(true).unsetBorderBottom();
+    expect(s.getBorderBottom()).toBe(false);
+  });
+  it('unsetBorderLeft', () => {
+    const s = newStyle().borderLeft(true).unsetBorderLeft();
+    expect(s.getBorderLeft()).toBe(false);
+  });
+  it('unsetTabWidth', () => {
+    const s = newStyle().tabWidth(8).unsetTabWidth();
+    expect(s.getTabWidth()).toBe(4); // default
+  });
+  it('unsetHyperlink', () => {
+    const s = newStyle().hyperlink('https://example.com').unsetHyperlink();
+    expect(s.getHyperlink().link).toBe('');
+  });
+  it('unset does not affect other properties', () => {
+    const s = newStyle().bold(true).italic(true).foreground('#ff0000').unsetBold();
+    expect(s.getBold()).toBe(false);
+    expect(s.getItalic()).toBe(true);
+    expect(s.getForeground()).toBe('#ff0000');
+  });
+  it('unsetBold - render produces no bold ANSI', () => {
+    const s = newStyle().bold(true).unsetBold();
+    const result = s.render('Hello');
+    expect(result).not.toContain(SGR.bold);
+  });
+});
+
+// =========================================================================
+// Go parity tests: TestCustomPaddingChar
+// =========================================================================
+describe('Style paddingChar', () => {
+  it('should fill padding with custom character', () => {
+    const s = newStyle().paddingLeft(3).paddingRight(3).paddingChar('x');
+    const result = visible(s.render('TEST'));
+    expect(result).toBe('xxxTESTxxx');
+  });
+  it('should default to space', () => {
+    const s = newStyle().paddingLeft(2);
+    const result = visible(s.render('Hi'));
+    expect(result).toBe('  Hi');
+  });
+});
+
+// =========================================================================
+// Go parity tests: TestUnsetHyperlink (3 cases)
+// =========================================================================
+describe('Style unset hyperlink', () => {
+  it('should remove hyperlink', () => {
+    const s = newStyle().hyperlink('https://example.com').unsetHyperlink();
+    const result = s.render('Click');
+    expect(result).not.toContain('\x1b]8;');
+  });
+  it('should remove hyperlink with params', () => {
+    const s = newStyle().hyperlink('https://example.com', 'id=123').unsetHyperlink();
+    const result = s.render('Click');
+    expect(result).not.toContain('\x1b]8;');
+    expect(s.getHyperlink().params).toBe('');
+  });
+  it('should remove hyperlink from styled text', () => {
+    const s = newStyle().bold(true).foreground('#ff0000').hyperlink('https://example.com').unsetHyperlink();
+    const result = s.render('Click');
+    expect(result).not.toContain('\x1b]8;');
+    // Bold and foreground should still be there
+    expect(result).toContain(SGR.bold);
+    expect(result).toContain('\x1b[38;2;255;0;0m');
+  });
+});
+
+// =========================================================================
+// Go parity tests: TestGetFirstRuneAsString (10 cases)
+// =========================================================================
+describe('getFirstRune', () => {
+  it('empty string returns empty', () => {
+    expect(getFirstRune('')).toBe('');
+  });
+  it('single ASCII char', () => {
+    expect(getFirstRune('x')).toBe('x');
+  });
+  it('single Unicode char (box-drawing)', () => {
+    expect(getFirstRune('─')).toBe('─');
+  });
+  it('ASCII string returns first char', () => {
+    expect(getFirstRune('abc')).toBe('a');
+  });
+  it('Unicode string returns first char', () => {
+    expect(getFirstRune('╭╮╰╯')).toBe('╭');
+  });
+  it('mixed ASCII first', () => {
+    expect(getFirstRune('a╭')).toBe('a');
+  });
+  it('mixed Unicode first', () => {
+    expect(getFirstRune('╭a')).toBe('╭');
+  });
+  it('emoji', () => {
+    expect(getFirstRune('🎉test')).toBe('🎉');
+  });
+  it('multi-byte character', () => {
+    expect(getFirstRune('日本語')).toBe('日');
+  });
+  it('long string returns only first', () => {
+    expect(getFirstRune('Hello, World!')).toBe('H');
+  });
+});
+
+// =========================================================================
+// Go parity tests: TestStyleRender — exact ANSI output (like Go tests)
+// =========================================================================
+describe('Style render - exact ANSI output (Go parity)', () => {
+  it('foreground #FF6AD2', () => {
+    const result = newStyle().foreground('#FF6AD2').render('hello');
+    expect(result).toBe('\x1b[38;2;255;106;210mhello\x1b[0m');
+  });
+  it('bold', () => {
+    const result = newStyle().bold(true).render('hello');
+    expect(result).toBe('\x1b[1mhello\x1b[0m');
+  });
+  it('italic', () => {
+    const result = newStyle().italic(true).render('hello');
+    expect(result).toBe('\x1b[3mhello\x1b[0m');
+  });
+  it('underline', () => {
+    const result = newStyle().underline(true).render('hello');
+    // underline renders per-character because of space styler logic
+    const vis = visible(result);
+    expect(vis).toBe('hello');
+    expect(result).toContain('\x1b[4m');
+  });
+  it('blink', () => {
+    const result = newStyle().blink(true).render('hello');
+    expect(result).toBe('\x1b[5mhello\x1b[0m');
+  });
+  it('faint', () => {
+    const result = newStyle().faint(true).render('hello');
+    expect(result).toBe('\x1b[2mhello\x1b[0m');
+  });
+});
+
+// =========================================================================
+// Go parity: TestUnderline — exact underline behaviors
+// =========================================================================
+describe('Style underline detailed (Go parity)', () => {
+  it('underline(true) + underlineSpaces(true)', () => {
+    const s = newStyle().underline(true).underlineSpaces(true);
+    const result = s.render('hello world');
+    // All chars including spaces should be underlined
+    expect(result).toContain('\x1b[4m');
+    expect(visible(result)).toBe('hello world');
+  });
+  it('underline(true) + underlineSpaces(false)', () => {
+    const s = newStyle().underline(true).underlineSpaces(false);
+    const result = s.render('hello world');
+    // Per-char rendering: spaces have different styling than text
+    expect(visible(result)).toBe('hello world');
+  });
+  it('underlineStyle(curly)', () => {
+    const s = newStyle().underlineStyle('curly');
+    const result = s.render('hello');
+    expect(result).toContain('\x1b[4:3m');
+    expect(visible(result)).toBe('hello');
+  });
+});
+
+// =========================================================================
+// Go parity: TestStrikethrough — exact strikethrough behaviors
+// =========================================================================
+describe('Style strikethrough detailed (Go parity)', () => {
+  it('strikethrough(true) + strikethroughSpaces(true)', () => {
+    const s = newStyle().strikethrough(true).strikethroughSpaces(true);
+    const result = s.render('hello world');
+    expect(result).toContain(SGR.strikethrough);
+    expect(visible(result)).toBe('hello world');
+  });
+  it('strikethrough(true) + strikethroughSpaces(false)', () => {
+    const s = newStyle().strikethrough(true).strikethroughSpaces(false);
+    const result = s.render('hello world');
+    expect(visible(result)).toBe('hello world');
+  });
+});
+
+// =========================================================================
+// Go parity: TestStyleCopy — full property preservation
+// =========================================================================
+describe('Style copy', () => {
+  it('should preserve ALL properties', () => {
+    const original = newStyle()
+      .bold(true).italic(true).underline(true).strikethrough(true)
+      .reverse(true).blink(true).faint(true)
+      .foreground('#ff0000').background('#0000ff')
+      .padding(1, 2, 3, 4).margin(5, 6, 7, 8)
+      .border(normalBorder()).borderForeground('#00ff00')
+      .width(40).height(10).maxWidth(80).maxHeight(24)
+      .align(Center, Bottom)
+      .tabWidth(2).inline(false);
+
+    const copied = original.copy();
+
+    expect(copied.getBold()).toBe(true);
+    expect(copied.getItalic()).toBe(true);
+    expect(copied.getUnderline()).toBe(true);
+    expect(copied.getStrikethrough()).toBe(true);
+    expect(copied.getReverse()).toBe(true);
+    expect(copied.getBlink()).toBe(true);
+    expect(copied.getFaint()).toBe(true);
+    expect(copied.getForeground()).toBe('#ff0000');
+    expect(copied.getBackground()).toBe('#0000ff');
+    expect(copied.getPaddingTop()).toBe(1);
+    expect(copied.getPaddingRight()).toBe(2);
+    expect(copied.getPaddingBottom()).toBe(3);
+    expect(copied.getPaddingLeft()).toBe(4);
+    expect(copied.getMarginTop()).toBe(5);
+    expect(copied.getMarginRight()).toBe(6);
+    expect(copied.getMarginBottom()).toBe(7);
+    expect(copied.getMarginLeft()).toBe(8);
+    expect(copied.getBorderTop()).toBe(true);
+    expect(copied.getWidth()).toBe(40);
+    expect(copied.getHeight()).toBe(10);
+    expect(copied.getMaxWidth()).toBe(80);
+    expect(copied.getMaxHeight()).toBe(24);
+    expect(copied.getAlignHorizontal()).toBe(Center);
+    expect(copied.getAlignVertical()).toBe(Bottom);
+    expect(copied.getTabWidth()).toBe(2);
+  });
+  it('copy is independent from original', () => {
+    const original = newStyle().bold(true);
+    const copied = original.copy();
+    const modified = copied.bold(false);
+    expect(original.getBold()).toBe(true);
+    expect(copied.getBold()).toBe(true);
+    expect(modified.getBold()).toBe(false);
+  });
+});
+
+// =========================================================================
+// Go parity: TestStyleValue — SetString edge cases
+// =========================================================================
+describe('Style setString (Go parity)', () => {
+  it('setString with bold', () => {
+    const s = newStyle().bold(true).setString('Foo');
+    const result = s.render('Bar');
+    const vis = visible(result);
+    expect(vis).toBe('Foo Bar');
+    expect(result).toContain(SGR.bold);
+  });
+  it('setString with multiple args joined by space', () => {
+    const s = newStyle().setString('bar', 'foobar');
+    expect(visible(s.render())).toBe('bar foobar');
+  });
+  it('empty text with margin produces margin only', () => {
+    const s = newStyle().marginLeft(2).marginRight(2);
+    const result = visible(s.render(''));
+    // Empty string with side margins
+    expect(result).toBe('    '); // 2 left + 0 content + 2 right
+  });
+});
+
+// =========================================================================
+// Go parity: TestStringTransform edge cases
+// =========================================================================
+describe('Style transform (Go parity)', () => {
+  it('no-op transform', () => {
+    const s = newStyle().transform(x => x);
+    expect(visible(s.render('hello'))).toBe('hello');
+  });
+  it('uppercase transform', () => {
+    const s = newStyle().transform(x => x.toUpperCase());
+    expect(visible(s.render('hello'))).toBe('HELLO');
+  });
+  it('transform with CJK', () => {
+    const s = newStyle().transform(x => x.split('').reverse().join(''));
+    expect(visible(s.render('abc日本'))).toBe('本日cba');
+  });
+});
+
+// =========================================================================
+// Go parity: TestWidth / TestHeight with borders
+// =========================================================================
+describe('Style width with borders (Go parity)', () => {
+  it('width includes border size', () => {
+    const s = newStyle().width(20).border(normalBorder());
+    const result = s.render('hello');
+    const lines = result.split('\n');
+    // Each line should be 20 visible width
+    for (const line of lines) {
+      expect(stringWidth(visible(line))).toBe(20);
+    }
+  });
+  it('width without borders', () => {
+    const s = newStyle().width(20);
+    const result = s.render('hello');
+    expect(stringWidth(visible(result))).toBe(20);
+  });
+  it('width with single-sided border (left only)', () => {
+    const s = newStyle().width(20).border(normalBorder(), false, false, false, true);
+    const result = s.render('hello');
+    const lines = result.split('\n');
+    for (const line of lines) {
+      expect(stringWidth(visible(line))).toBe(20);
+    }
+  });
+  it('width with borderStyle only (no side bools)', () => {
+    const s = newStyle().width(20).borderStyle(normalBorder());
+    const result = s.render('hello');
+    const lines = result.split('\n');
+    for (const line of lines) {
+      expect(stringWidth(visible(line))).toBe(20);
+    }
+  });
+});
+
+describe('Style height with borders (Go parity)', () => {
+  it('height includes border size', () => {
+    const s = newStyle().height(5).border(normalBorder());
+    const result = s.render('hello');
+    const lines = result.split('\n');
+    // Total lines = border top(1) + content rows(5-2=3) + border bottom(1) = 5
+    expect(lines.length).toBe(5);
+  });
+  it('height without borders', () => {
+    const s = newStyle().height(5);
+    const result = s.render('hello');
+    expect(result.split('\n').length).toBe(5);
+  });
+  it('height with single-sided border (top only)', () => {
+    const s = newStyle().height(5).border(normalBorder(), true, false, false, false);
+    const result = s.render('hello');
+    const lines = result.split('\n');
+    // top border(1) + content(5-1=4) = 5
+    expect(lines.length).toBe(5);
+  });
+});
+
+// =========================================================================
+// Go parity: TestHyperlink — exact output
+// =========================================================================
+describe('Style hyperlink (Go parity)', () => {
+  it('plain hyperlink', () => {
+    const result = newStyle().hyperlink('https://example.com').render('Click');
+    expect(result).toContain('\x1b]8;;https://example.com\x1b\\');
+    expect(result).toContain('\x1b]8;;\x1b\\');
+    expect(visible(result)).toBe('Click');
+  });
+  it('hyperlink with params', () => {
+    const result = newStyle().hyperlink('https://example.com', 'id=123').render('Click');
+    expect(result).toContain('\x1b]8;id=123;https://example.com\x1b\\');
+  });
+  it('hyperlink with bold + foreground', () => {
+    const result = newStyle().bold(true).foreground('#ff0000').hyperlink('https://example.com').render('Click');
+    expect(result).toContain('\x1b]8;;https://example.com\x1b\\');
+    expect(result).toContain(SGR.bold);
+    expect(result).toContain('\x1b[38;2;255;0;0m');
   });
 });

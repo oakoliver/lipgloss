@@ -6,7 +6,7 @@
  */
 
 // Style
-export { Style, newStyle, getLines } from './style.js';
+export { Style, newStyle, getLines, getFirstRune } from './style.js';
 export type { Position } from './style.js';
 export { Top, Bottom, Center, Left, Right } from './style.js';
 

@@ -19,14 +19,12 @@ describe('joinHorizontal', () => {
     expect(lines.length).toBe(2);
     expect(lines[0]).toContain('A');
     expect(lines[0]).toContain('C');
-    // Second line should have B and a space (for C's column)
     expect(lines[1]).toContain('B');
   });
   it('should pad shorter blocks when bottom-aligned', () => {
     const result = joinHorizontal(Bottom, 'A\nB', 'C');
     const lines = result.split('\n');
     expect(lines.length).toBe(2);
-    // C should appear on the second line (bottom aligned)
     expect(lines[1]).toContain('B');
     expect(lines[1]).toContain('C');
   });
@@ -34,8 +32,17 @@ describe('joinHorizontal', () => {
     const result = joinHorizontal(Center, 'A\nB\nC', 'X');
     const lines = result.split('\n');
     expect(lines.length).toBe(3);
-    // X should be on the middle line
     expect(lines[1]).toContain('X');
+  });
+  // Go parity: fractional position 0.25
+  it('should handle fractional position 0.25', () => {
+    const result = joinHorizontal(0.25, 'A\nB\nC\nD', 'X');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(4);
+    // extra=3, split=round(3*0.25)=round(0.75)=1, top=3-1=2, bottom=1
+    // X appears at row 2 (0-indexed)
+    const xLine = lines.findIndex(l => l.includes('X'));
+    expect(xLine).toBe(2);
   });
 });
 
@@ -50,24 +57,32 @@ describe('joinVertical', () => {
     const result = joinVertical(Left, 'Hi', 'World');
     const lines = result.split('\n');
     expect(lines.length).toBe(2);
-    expect(lines[0]).toBe('Hi   '); // padded to width of "World" (5)
+    expect(lines[0]).toBe('Hi   ');
     expect(lines[1]).toBe('World');
   });
   it('should right-align', () => {
     const result = joinVertical(Right, 'Hi', 'World');
     const lines = result.split('\n');
-    expect(lines[0]).toBe('   Hi'); // right-padded
+    expect(lines[0]).toBe('   Hi');
     expect(lines[1]).toBe('World');
   });
   it('should center-align', () => {
     const result = joinVertical(Center, 'Hi', 'World');
     const lines = result.split('\n');
-    // 'Hi' has width 2, 'World' has width 5, gap = 3
-    // Center: left = floor(3 * 0.5) = 1, right = 2
-    // Wait — the implementation uses Math.round(gap * p) for split,
-    // then left = gap - split, right = gap - left
-    // split = round(3 * 0.5) = round(1.5) = 2, left = 3 - 2 = 1, right = 3 - 1 = 2
     expect(lines[0].startsWith(' ')).toBe(true);
+    expect(lines[0].trim()).toBe('Hi');
+  });
+  // Go parity: fractional position 0.25
+  it('should handle fractional position 0.25', () => {
+    const result = joinVertical(0.25, 'Hi', 'World');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(2);
+    // gap=3, split=round(3*0.25)=round(0.75)=1, left=3-1=2, right=3-2=1
+    // pos=0.25 means "closer to left edge" anchor, so text gets more left-padding
+    const leftSpaces = lines[0].length - lines[0].trimStart().length;
+    const rightSpaces = lines[0].length - lines[0].trimEnd().length;
+    expect(leftSpaces).toBe(2);
+    expect(rightSpaces).toBe(1);
     expect(lines[0].trim()).toBe('Hi');
   });
 });
@@ -106,9 +121,86 @@ describe('placeVertical', () => {
     expect(lines.length).toBe(3);
     expect(lines[2]).toBe('Hi');
   });
+  it('should center-align in height', () => {
+    const result = placeVertical(5, Center, 'Hi');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[2]).toBe('Hi');
+  });
   it('should not add lines if content already fills height', () => {
     const result = placeVertical(1, Top, 'Hi');
     expect(result).toBe('Hi');
+  });
+  // Go parity: TestAlignTextVertical cases
+  it('single line top in height 3', () => {
+    const result = placeVertical(3, Top, 'A');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(3);
+    expect(lines[0]).toBe('A');
+    expect(lines[1].trim()).toBe('');
+    expect(lines[2].trim()).toBe('');
+  });
+  it('single line center in height 3', () => {
+    const result = placeVertical(3, Center, 'A');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(3);
+    expect(lines[1]).toBe('A');
+  });
+  it('single line bottom in height 3', () => {
+    const result = placeVertical(3, Bottom, 'A');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(3);
+    expect(lines[2]).toBe('A');
+  });
+  it('2 lines top in height 5', () => {
+    const result = placeVertical(5, Top, 'A\nB');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[0]).toBe('A');
+    expect(lines[1]).toBe('B');
+  });
+  it('2 lines center in height 5', () => {
+    const result = placeVertical(5, Center, 'A\nB');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    // 2 content, gap=3, center: topPad=round(3*0.5)=2, bottom=1
+    expect(lines[1]).toBe('A');
+    expect(lines[2]).toBe('B');
+  });
+  it('2 lines bottom in height 5', () => {
+    const result = placeVertical(5, Bottom, 'A\nB');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[3]).toBe('A');
+    expect(lines[4]).toBe('B');
+  });
+  it('3 lines in height 3 (exact fit)', () => {
+    const result = placeVertical(3, Center, 'A\nB\nC');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(3);
+    expect(lines[0]).toBe('A');
+    expect(lines[1]).toBe('B');
+    expect(lines[2]).toBe('C');
+  });
+  it('content larger than height returns content unchanged', () => {
+    const result = placeVertical(2, Top, 'A\nB\nC');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(3); // not truncated
+  });
+  it('single line center in height 9 (even gap)', () => {
+    const result = placeVertical(9, Center, 'X');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(9);
+    // gap=8, topPad=round(8*0.5)=4
+    expect(lines[4]).toBe('X');
+  });
+  it('single line center in height 10 (odd gap)', () => {
+    const result = placeVertical(10, Center, 'X');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(10);
+    // gap=9, split=round(9*0.5)=round(4.5)=5, topCount=9-5=4
+    // Content 'X' is at index 4
+    expect(lines[4]).toBe('X');
   });
 });
 

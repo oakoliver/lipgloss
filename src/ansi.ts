@@ -87,7 +87,7 @@ export function resetHyperlink(): string {
  * Strip all ANSI escape sequences from a string.
  */
 // eslint-disable-next-line no-control-regex
-const ANSI_REGEX = /[\x1b\x9b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><~]/g;
+const ANSI_REGEX = /[\x1b\x9b][[()#;?]*(?:[0-9]{1,4}(?:[;:][0-9]{0,4})*)?[0-9A-ORZcf-nqry=><~]|\x1b\]8;[^\x1b]*\x1b\\/g;
 
 export function stripAnsi(str: string): string {
   return str.replace(ANSI_REGEX, '');

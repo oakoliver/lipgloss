@@ -133,24 +133,24 @@ function alignTextVertical(str: string, pos: Position, height: number): string {
 }
 
 /** Create styled spaces (optionally styled with background/reverse). */
-function styledSpaces(n: number, wsStyle: AnsiStyleOptions | null): string {
+function styledSpaces(n: number, wsStyle: AnsiStyleOptions | null, ch = ' '): string {
   if (n <= 0) return '';
-  const sp = ' '.repeat(n);
+  const sp = ch.repeat(n);
   if (wsStyle) return styled(sp, wsStyle);
   return sp;
 }
 
 /** Pad each line on the left. */
-function padLeft(str: string, n: number, wsStyle: AnsiStyleOptions | null): string {
+function padLeft(str: string, n: number, wsStyle: AnsiStyleOptions | null, ch = ' '): string {
   if (n <= 0) return str;
-  const sp = styledSpaces(n, wsStyle);
+  const sp = styledSpaces(n, wsStyle, ch);
   return str.split('\n').map(line => sp + line).join('\n');
 }
 
 /** Pad each line on the right. */
-function padRight(str: string, n: number, wsStyle: AnsiStyleOptions | null): string {
+function padRight(str: string, n: number, wsStyle: AnsiStyleOptions | null, ch = ' '): string {
   if (n <= 0) return str;
-  const sp = styledSpaces(n, wsStyle);
+  const sp = styledSpaces(n, wsStyle, ch);
   return str.split('\n').map(line => line + sp).join('\n');
 }
 
@@ -220,7 +220,7 @@ function renderHorizontalEdge(left: string, middle: string, right: string, width
 }
 
 /** Get first character of a string as a string (for corners). */
-function getFirstRune(s: string): string {
+export function getFirstRune(s: string): string {
   if (!s) return s;
   return [...s][0];
 }
@@ -301,6 +301,7 @@ export class Style {
   private _transform: ((s: string) => string) | null = null;
   private _link = '';
   private _linkParams = '';
+  private _paddingChar = ' ';
 
   /** Clone this style into a new instance. */
   private _clone(): Style {
@@ -353,6 +354,7 @@ export class Style {
     s._transform = this._transform;
     s._link = this._link;
     s._linkParams = this._linkParams;
+    s._paddingChar = this._paddingChar;
     return s;
   }
 
@@ -582,6 +584,57 @@ export class Style {
   colorWhitespace(v: boolean): Style {
     const s = this._clone(); s._colorWhitespace = v; s._set.add('colorWhitespace'); return s;
   }
+  paddingChar(ch: string): Style {
+    const s = this._clone(); s._paddingChar = ch || ' '; s._set.add('paddingChar'); return s;
+  }
+
+  // -----------------------------------------------------------------------
+  // Copy — returns a full copy preserving ALL properties
+  // -----------------------------------------------------------------------
+
+  copy(): Style {
+    return this._clone();
+  }
+
+  // -----------------------------------------------------------------------
+  // Unset methods — remove a property from the set so it reverts to default
+  // -----------------------------------------------------------------------
+
+  unsetBold(): Style { const s = this._clone(); s._set.delete('bold'); s._bold = false; return s; }
+  unsetItalic(): Style { const s = this._clone(); s._set.delete('italic'); s._italic = false; return s; }
+  unsetUnderline(): Style { const s = this._clone(); s._set.delete('underline'); s._underlineStyle = 'none'; return s; }
+  unsetUnderlineSpaces(): Style { const s = this._clone(); s._set.delete('underlineSpaces'); s._underlineSpaces = false; return s; }
+  unsetStrikethrough(): Style { const s = this._clone(); s._set.delete('strikethrough'); s._strikethrough = false; return s; }
+  unsetStrikethroughSpaces(): Style { const s = this._clone(); s._set.delete('strikethroughSpaces'); s._strikethroughSpaces = false; return s; }
+  unsetReverse(): Style { const s = this._clone(); s._set.delete('reverse'); s._reverse = false; return s; }
+  unsetBlink(): Style { const s = this._clone(); s._set.delete('blink'); s._blink = false; return s; }
+  unsetFaint(): Style { const s = this._clone(); s._set.delete('faint'); s._faint = false; return s; }
+  unsetInline(): Style { const s = this._clone(); s._set.delete('inline'); s._inline = false; return s; }
+  unsetForeground(): Style { const s = this._clone(); s._set.delete('fg'); s._fg = null; return s; }
+  unsetBackground(): Style { const s = this._clone(); s._set.delete('bg'); s._bg = null; return s; }
+  unsetUnderlineColor(): Style { const s = this._clone(); s._set.delete('ulColor'); s._ulColor = null; return s; }
+  unsetWidth(): Style { const s = this._clone(); s._set.delete('width'); s._width = 0; return s; }
+  unsetHeight(): Style { const s = this._clone(); s._set.delete('height'); s._height = 0; return s; }
+  unsetMaxWidth(): Style { const s = this._clone(); s._set.delete('maxWidth'); s._maxWidth = 0; return s; }
+  unsetMaxHeight(): Style { const s = this._clone(); s._set.delete('maxHeight'); s._maxHeight = 0; return s; }
+  unsetPaddingTop(): Style { const s = this._clone(); s._set.delete('paddingTop'); s._paddingTop = 0; return s; }
+  unsetPaddingRight(): Style { const s = this._clone(); s._set.delete('paddingRight'); s._paddingRight = 0; return s; }
+  unsetPaddingBottom(): Style { const s = this._clone(); s._set.delete('paddingBottom'); s._paddingBottom = 0; return s; }
+  unsetPaddingLeft(): Style { const s = this._clone(); s._set.delete('paddingLeft'); s._paddingLeft = 0; return s; }
+  unsetPaddingChar(): Style { const s = this._clone(); s._set.delete('paddingChar'); s._paddingChar = ' '; return s; }
+  unsetMarginTop(): Style { const s = this._clone(); s._set.delete('marginTop'); s._marginTop = 0; return s; }
+  unsetMarginRight(): Style { const s = this._clone(); s._set.delete('marginRight'); s._marginRight = 0; return s; }
+  unsetMarginBottom(): Style { const s = this._clone(); s._set.delete('marginBottom'); s._marginBottom = 0; return s; }
+  unsetMarginLeft(): Style { const s = this._clone(); s._set.delete('marginLeft'); s._marginLeft = 0; return s; }
+  unsetBorderTop(): Style { const s = this._clone(); s._set.delete('borderTop'); s._borderTop = false; return s; }
+  unsetBorderRight(): Style { const s = this._clone(); s._set.delete('borderRight'); s._borderRight = false; return s; }
+  unsetBorderBottom(): Style { const s = this._clone(); s._set.delete('borderBottom'); s._borderBottom = false; return s; }
+  unsetBorderLeft(): Style { const s = this._clone(); s._set.delete('borderLeft'); s._borderLeft = false; return s; }
+  unsetBorderStyle(): Style { const s = this._clone(); s._set.delete('borderStyle'); s._borderStyle = noBorder; return s; }
+  unsetTabWidth(): Style { const s = this._clone(); s._set.delete('tabWidth'); s._tabWidth = TAB_WIDTH_DEFAULT; return s; }
+  unsetTransform(): Style { const s = this._clone(); s._set.delete('transform'); s._transform = null; return s; }
+  unsetHyperlink(): Style { const s = this._clone(); s._set.delete('link'); s._link = ''; s._set.delete('linkParams'); s._linkParams = ''; return s; }
+  unsetColorWhitespace(): Style { const s = this._clone(); s._set.delete('colorWhitespace'); s._colorWhitespace = false; return s; }
 
   // -----------------------------------------------------------------------
   // Getters
@@ -610,6 +663,7 @@ export class Style {
   getStrikethroughSpaces(): boolean { return this._set.has('strikethroughSpaces') ? this._strikethroughSpaces : false; }
   getColorWhitespace(): boolean { return this._set.has('colorWhitespace') ? this._colorWhitespace : false; }
   getTransform(): ((s: string) => string) | null { return this._set.has('transform') ? this._transform : null; }
+  getPaddingChar(): string { return this._set.has('paddingChar') ? this._paddingChar : ' '; }
   getHyperlink(): { link: string; params: string } {
     return { link: this._set.has('link') ? this._link : '', params: this._set.has('linkParams') ? this._linkParams : '' };
   }
@@ -736,7 +790,7 @@ export class Style {
       borderTopBg: 'borderTopBg', borderRightBg: 'borderRightBg',
       borderBottomBg: 'borderBottomBg', borderLeftBg: 'borderLeftBg',
       inline: 'inline', tabWidth: 'tabWidth', transform: 'transform',
-      link: 'link', linkParams: 'linkParams',
+      link: 'link', linkParams: 'linkParams', paddingChar: 'paddingChar',
     };
     return map[key] || key;
   }
@@ -865,8 +919,9 @@ export class Style {
     // Padding
     if (!isInline) {
       const wsStyle = (colorWS || styleWhitespace) ? teWSOpts : null;
-      if (leftPad > 0) str = padLeft(str, leftPad, wsStyle);
-      if (rightPad > 0) str = padRight(str, rightPad, wsStyle);
+      const padCh = this._set.has('paddingChar') ? this._paddingChar : ' ';
+      if (leftPad > 0) str = padLeft(str, leftPad, wsStyle, padCh);
+      if (rightPad > 0) str = padRight(str, rightPad, wsStyle, padCh);
       if (topPad > 0) str = '\n'.repeat(topPad) + str;
       if (bottomPad > 0) str = str + '\n'.repeat(bottomPad);
     }
