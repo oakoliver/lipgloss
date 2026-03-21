@@ -35,23 +35,29 @@ export function joinHorizontal(pos: Position, ...strs: string[]): string {
   for (let i = 0; i < blocks.length; i++) {
     if (blocks[i].length >= maxHeight) continue;
     const extra = maxHeight - blocks[i].length;
-    const empties = new Array<string>(extra).fill('');
 
     const p = Math.min(1, Math.max(0, pos));
     if (p <= 0) {
       // Top aligned
+      const empties = new Array<string>(extra).fill('');
       blocks[i] = [...blocks[i], ...empties];
     } else if (p >= 1) {
       // Bottom aligned
+      const empties = new Array<string>(extra).fill('');
       blocks[i] = [...empties, ...blocks[i]];
     } else {
+      // Somewhere in the middle
+      // Go logic: split = round(n * pos), then uses array slicing
+      // extraLines[top:] prepends (n - split) items from end
+      // extraLines[bottom:] appends (n - (n - split)) = split items from end
+      // Result: prepend (split) empties, append (n - split) empties
       const split = Math.round(extra * p);
-      const top = extra - split;
-      const bottom = extra - top;
+      const prependCount = split;
+      const appendCount = extra - split;
       blocks[i] = [
-        ...new Array<string>(top).fill(''),
+        ...new Array<string>(prependCount).fill(''),
         ...blocks[i],
-        ...new Array<string>(bottom).fill(''),
+        ...new Array<string>(appendCount).fill(''),
       ];
     }
   }
@@ -112,8 +118,8 @@ export function joinVertical(pos: Position, ...strs: string[]): string {
           result.push(' '.repeat(gap) + line);
         } else {
           const split = Math.round(gap * p);
-          const left = gap - split;
-          const right = gap - left;
+          const right = gap - split;
+          const left = gap - right;
           result.push(' '.repeat(left) + line + ' '.repeat(right));
         }
       }

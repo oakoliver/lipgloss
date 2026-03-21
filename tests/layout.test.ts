@@ -39,10 +39,10 @@ describe('joinHorizontal', () => {
     const result = joinHorizontal(0.25, 'A\nB\nC\nD', 'X');
     const lines = result.split('\n');
     expect(lines.length).toBe(4);
-    // extra=3, split=round(3*0.25)=round(0.75)=1, top=3-1=2, bottom=1
-    // X appears at row 2 (0-indexed)
+    // extra=3, split=round(3*0.25)=1, prepend 1 empty, append 2 empties
+    // X appears at row 1 (0-indexed)
     const xLine = lines.findIndex(l => l.includes('X'));
-    expect(xLine).toBe(2);
+    expect(xLine).toBe(1);
   });
 });
 
@@ -77,12 +77,12 @@ describe('joinVertical', () => {
     const result = joinVertical(0.25, 'Hi', 'World');
     const lines = result.split('\n');
     expect(lines.length).toBe(2);
-    // gap=3, split=round(3*0.25)=round(0.75)=1, left=3-1=2, right=3-2=1
-    // pos=0.25 means "closer to left edge" anchor, so text gets more left-padding
+    // gap=3, split=round(3*0.25)=round(0.75)=1, right=3-1=2, left=3-2=1
+    // pos=0.25 means "closer to left edge", so: 1 space left, 2 spaces right
     const leftSpaces = lines[0].length - lines[0].trimStart().length;
     const rightSpaces = lines[0].length - lines[0].trimEnd().length;
-    expect(leftSpaces).toBe(2);
-    expect(rightSpaces).toBe(1);
+    expect(leftSpaces).toBe(1);
+    expect(rightSpaces).toBe(2);
     expect(lines[0].trim()).toBe('Hi');
   });
 });
@@ -219,5 +219,128 @@ describe('place (combined)', () => {
     const lines = result.split('\n');
     expect(lines.length).toBe(3);
     expect(lines[0].startsWith('X')).toBe(true);
+  });
+});
+
+// Go parity tests from join_test.go
+describe('Go parity: TestJoinVertical', () => {
+  it('pos0 (Left)', () => {
+    const result = joinVertical(Left, 'A', 'BBBB');
+    expect(result).toBe('A   \nBBBB');
+  });
+  it('pos1 (Right)', () => {
+    const result = joinVertical(Right, 'A', 'BBBB');
+    expect(result).toBe('   A\nBBBB');
+  });
+  it('pos0.25', () => {
+    const result = joinVertical(0.25, 'A', 'BBBB');
+    expect(result).toBe(' A  \nBBBB');
+  });
+});
+
+describe('Go parity: TestJoinHorizontal', () => {
+  it('pos0 (Top)', () => {
+    const result = joinHorizontal(Top, 'A', 'B\nB\nB\nB');
+    expect(result).toBe('AB\n B\n B\n B');
+  });
+  it('pos1 (Bottom)', () => {
+    const result = joinHorizontal(Bottom, 'A', 'B\nB\nB\nB');
+    expect(result).toBe(' B\n B\n B\nAB');
+  });
+  it('pos0.25', () => {
+    const result = joinHorizontal(0.25, 'A', 'B\nB\nB\nB');
+    expect(result).toBe(' B\nAB\n B\n B');
+  });
+});
+
+// Go parity tests from align_test.go (via placeVertical)
+describe('Go parity: TestAlignTextVertical', () => {
+  it('Foo top height 2', () => {
+    const result = placeVertical(2, Top, 'Foo');
+    expect(result).toBe('Foo\n   ');
+  });
+  it('Foo center height 5', () => {
+    const result = placeVertical(5, Center, 'Foo');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[0].trim()).toBe('');
+    expect(lines[1].trim()).toBe('');
+    expect(lines[2]).toBe('Foo');
+    expect(lines[3].trim()).toBe('');
+    expect(lines[4].trim()).toBe('');
+  });
+  it('Foo bottom height 5', () => {
+    const result = placeVertical(5, Bottom, 'Foo');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[4]).toBe('Foo');
+  });
+  it('Foo\\nBar bottom height 5', () => {
+    const result = placeVertical(5, Bottom, 'Foo\nBar');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[3]).toBe('Foo');
+    expect(lines[4]).toBe('Bar');
+  });
+  it('Foo\\nBar center height 5', () => {
+    const result = placeVertical(5, Center, 'Foo\nBar');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    // 2 lines content, 3 gap, split = round(3*0.5)=2, topCount=3-2=1, bottom=2
+    expect(lines[1]).toBe('Foo');
+    expect(lines[2]).toBe('Bar');
+  });
+  it('Foo\\nBar top height 5', () => {
+    const result = placeVertical(5, Top, 'Foo\nBar');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[0]).toBe('Foo');
+    expect(lines[1]).toBe('Bar');
+  });
+  it('Foo\\nBar\\nBaz bottom height 5', () => {
+    const result = placeVertical(5, Bottom, 'Foo\nBar\nBaz');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[2]).toBe('Foo');
+    expect(lines[3]).toBe('Bar');
+    expect(lines[4]).toBe('Baz');
+  });
+  it('Foo\\nBar\\nBaz center height 5', () => {
+    const result = placeVertical(5, Center, 'Foo\nBar\nBaz');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(5);
+    expect(lines[1]).toBe('Foo');
+    expect(lines[2]).toBe('Bar');
+    expect(lines[3]).toBe('Baz');
+  });
+  it('3 lines in height 3 (exact fit) bottom', () => {
+    const result = placeVertical(3, Bottom, 'Foo\nBar\nBaz');
+    expect(result).toBe('Foo\nBar\nBaz');
+  });
+  it('3 lines in height 3 (exact fit) center', () => {
+    const result = placeVertical(3, Center, 'Foo\nBar\nBaz');
+    expect(result).toBe('Foo\nBar\nBaz');
+  });
+  it('3 lines in height 3 (exact fit) top', () => {
+    const result = placeVertical(3, Top, 'Foo\nBar\nBaz');
+    expect(result).toBe('Foo\nBar\nBaz');
+  });
+  it('Foo\\nBar\\nBaz center height 9', () => {
+    const result = placeVertical(9, Center, 'Foo\nBar\nBaz');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(9);
+    // 3 content, gap=6, split=round(6*0.5)=3, topCount=6-3=3
+    expect(lines[3]).toBe('Foo');
+    expect(lines[4]).toBe('Bar');
+    expect(lines[5]).toBe('Baz');
+  });
+  it('Foo\\nBar\\nBaz center height 10', () => {
+    const result = placeVertical(10, Center, 'Foo\nBar\nBaz');
+    const lines = result.split('\n');
+    expect(lines.length).toBe(10);
+    // 3 content, gap=7, split=round(7*0.5)=round(3.5)=4, topCount=7-4=3
+    expect(lines[3]).toBe('Foo');
+    expect(lines[4]).toBe('Bar');
+    expect(lines[5]).toBe('Baz');
   });
 });
