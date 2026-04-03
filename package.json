@@ -1,6 +1,6 @@
 {
   "name": "@oakoliver/lipgloss",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CSS-like terminal styling for JavaScript. Zero dependencies, multi-runtime (Node.js, Bun, Deno). Fluent API for colors, borders, padding, margins, alignment, and layout.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -15,7 +15,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs && npm run build:types",
