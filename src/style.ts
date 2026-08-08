@@ -3,13 +3,15 @@
  * Every setter returns a new Style instance (value-type semantics).
  */
 
-import { SGR, stringWidth, stripAnsi, truncate as truncateStr, setHyperlink, resetHyperlink } from './ansi.js';
+import {
+  graphemes, stringWidth, truncate as truncateStr, setHyperlink, resetHyperlink, styled,
+} from './ansi.js';
 import type { ColorValue, UnderlineStyle, AnsiStyleOptions } from './ansi.js';
-import { styled } from './ansi.js';
-import { parseColor, NO_COLOR } from './color.js';
+import { blend1D, parseColor } from './color.js';
 import type { Color } from './color.js';
 import { noBorder, isNoBorder, maxRuneWidth, getTopSize, getRightSize, getBottomSize, getLeftSize } from './border.js';
 import type { Border } from './border.js';
+import { wrap } from './wrap.js';
 
 // ---------------------------------------------------------------------------
 // Position type
@@ -23,6 +25,15 @@ export const Bottom: Position = 1.0;
 export const Center: Position = 0.5;
 export const Left: Position = 0.0;
 export const Right: Position = 1.0;
+
+export const NBSP = '\u00a0';
+export const NoTabConversion = -1;
+export const UnderlineNone: UnderlineStyle = 'none';
+export const UnderlineSingle: UnderlineStyle = 'single';
+export const UnderlineDouble: UnderlineStyle = 'double';
+export const UnderlineCurly: UnderlineStyle = 'curly';
+export const UnderlineDotted: UnderlineStyle = 'dotted';
+export const UnderlineDashed: UnderlineStyle = 'dashed';
 
 function clampPos(p: Position): number {
   return Math.min(1, Math.max(0, p));
@@ -73,63 +84,35 @@ export function getLines(s: string): { lines: string[]; widest: number } {
   s = s.replace(/\t/g, '    ').replace(/\r\n/g, '\n');
   const lines = s.split('\n');
   let widest = 0;
-  for (const l of lines) {
-    const w = stringWidth(l);
-    if (w > widest) widest = w;
-  }
+  for (const line of lines) widest = Math.max(widest, stringWidth(line));
   return { lines, widest };
 }
 
-/** Horizontal alignment: pads each line so all are the same width. */
-function alignTextHorizontal(str: string, pos: Position, width: number, wsStyle: AnsiStyleOptions | null): string {
+/** Horizontal alignment also equalizes every line to the widest line. */
+function alignTextHorizontal(
+  str: string,
+  pos: Position,
+  width: number,
+  wsStyle: AnsiStyleOptions | null,
+): string {
   const { lines, widest } = getLines(str);
-  const parts: string[] = [];
-
-  for (const l of lines) {
-    const lineWidth = stringWidth(l);
-    const shortAmount = Math.max(0, widest - lineWidth) + Math.max(0, width - Math.max(widest, lineWidth));
-
-    if (shortAmount > 0) {
-      const p = clampPos(pos);
-      if (p <= 0) {
-        // Left
-        parts.push(l + styledSpaces(shortAmount, wsStyle));
-      } else if (p >= 1) {
-        // Right
-        parts.push(styledSpaces(shortAmount, wsStyle) + l);
-      } else {
-        // Center
-        const leftPad = Math.floor(shortAmount * p);
-        const rightPad = shortAmount - leftPad;
-        parts.push(styledSpaces(leftPad, wsStyle) + l + styledSpaces(rightPad, wsStyle));
-      }
-    } else {
-      parts.push(l);
-    }
-  }
-
-  return parts.join('\n');
+  return lines.map(line => {
+    const lineWidth = stringWidth(line);
+    const shortAmount = widest - lineWidth + Math.max(0, width - widest);
+    if (shortAmount <= 0) return line;
+    const leftPad = Math.floor(shortAmount * clampPos(pos));
+    return styledSpaces(leftPad, wsStyle) + line +
+      styledSpaces(shortAmount - leftPad, wsStyle);
+  }).join('\n');
 }
 
-/** Vertical alignment within a given height. */
+/** Vertical alignment within a fixed height. */
 function alignTextVertical(str: string, pos: Position, height: number): string {
   const strHeight = str.split('\n').length;
-  if (height <= strHeight) return str;
+  if (height < strHeight) return str;
   const gap = height - strHeight;
-  const p = clampPos(pos);
-
-  if (p <= 0) {
-    // Top
-    return str + '\n'.repeat(gap);
-  } else if (p >= 1) {
-    // Bottom
-    return '\n'.repeat(gap) + str;
-  } else {
-    // Center
-    const topPad = Math.round(gap * (1 - p));
-    const bottomPad = gap - topPad;
-    return '\n'.repeat(topPad) + str + '\n'.repeat(bottomPad);
-  }
+  const topPad = Math.floor(gap * clampPos(pos));
+  return '\n'.repeat(topPad) + str + '\n'.repeat(gap - topPad);
 }
 
 /** Create styled spaces (optionally styled with background/reverse). */
@@ -154,65 +137,28 @@ function padRight(str: string, n: number, wsStyle: AnsiStyleOptions | null, ch =
   return str.split('\n').map(line => line + sp).join('\n');
 }
 
-/** Simple word-wrap: break lines at width boundary. */
-function wordWrap(str: string, width: number): string {
-  if (width <= 0) return str;
-  const inputLines = str.split('\n');
-  const out: string[] = [];
-
-  for (const line of inputLines) {
-    if (stringWidth(line) <= width) {
-      out.push(line);
-      continue;
-    }
-    // Break by words first, fall back to chars
-    const words = line.split(/(\s+)/);
-    let current = '';
-    for (const word of words) {
-      const combined = current + word;
-      if (stringWidth(combined) <= width) {
-        current = combined;
-      } else {
-        if (current) out.push(current);
-        // If a single word is wider than width, break by chars
-        if (stringWidth(word) > width) {
-          let rem = word;
-          while (stringWidth(rem) > width) {
-            let cut = '';
-            for (const ch of rem) {
-              if (stringWidth(cut + ch) > width) break;
-              cut += ch;
-            }
-            if (!cut) { cut = rem[0]; rem = rem.slice(1); }
-            else { rem = rem.slice(cut.length); }
-            out.push(cut);
-          }
-          current = rem;
-        } else {
-          current = word;
-        }
-      }
-    }
-    if (current) out.push(current);
-  }
-
-  return out.join('\n');
-}
 
 /** Render a horizontal border edge (top or bottom row). */
 function renderHorizontalEdge(left: string, middle: string, right: string, width: number): string {
   if (!middle) middle = ' ';
   const leftW = stringWidth(left);
   const rightW = stringWidth(right);
-  const runes = [...middle];
+  const runes = graphemes(middle).filter(rune => stringWidth(rune) > 0);
+  if (runes.length === 0) runes.push(' ');
   let j = 0;
   let result = left;
   let i = 0;
   const target = width - leftW - rightW;
   while (i < target) {
     const r = runes[j % runes.length];
+    const runeWidth = stringWidth(r);
+    const remaining = target - i;
+    if (runeWidth > remaining) {
+      result += ' '.repeat(remaining);
+      break;
+    }
     result += r;
-    i += stringWidth(r);
+    i += runeWidth;
     j++;
   }
   result += right;
@@ -279,6 +225,7 @@ export class Style {
   private _marginBottom = 0;
   private _marginLeft = 0;
   private _marginBg: Color = null;
+  private _marginChar = ' ';
 
   // Border
   private _borderStyle: Border = noBorder;
@@ -290,6 +237,8 @@ export class Style {
   private _borderRightFg: Color = null;
   private _borderBottomFg: Color = null;
   private _borderLeftFg: Color = null;
+  private _borderBlendFg: Color[] = [];
+  private _borderBlendOffset = 0;
   private _borderTopBg: Color = null;
   private _borderRightBg: Color = null;
   private _borderBottomBg: Color = null;
@@ -336,6 +285,7 @@ export class Style {
     s._marginBottom = this._marginBottom;
     s._marginLeft = this._marginLeft;
     s._marginBg = this._marginBg;
+    s._marginChar = this._marginChar;
     s._borderStyle = this._borderStyle;
     s._borderTop = this._borderTop;
     s._borderRight = this._borderRight;
@@ -345,6 +295,8 @@ export class Style {
     s._borderRightFg = this._borderRightFg;
     s._borderBottomFg = this._borderBottomFg;
     s._borderLeftFg = this._borderLeftFg;
+    s._borderBlendFg = this._borderBlendFg.slice();
+    s._borderBlendOffset = this._borderBlendOffset;
     s._borderTopBg = this._borderTopBg;
     s._borderRightBg = this._borderRightBg;
     s._borderBottomBg = this._borderBottomBg;
@@ -366,6 +318,9 @@ export class Style {
     const s = this._clone();
     s._value = strs.join(' ');
     return s;
+  }
+  value(): string {
+    return this._value;
   }
 
   bold(v: boolean): Style {
@@ -478,6 +433,9 @@ export class Style {
   marginBackground(c: Color): Style {
     const s = this._clone(); s._marginBg = c; s._set.add('marginBg'); return s;
   }
+  marginChar(ch: string): Style {
+    const s = this._clone(); s._marginChar = graphemes(ch)[0] ?? ' '; s._set.add('marginChar'); return s;
+  }
 
   border(b: Border, ...sides: boolean[]): Style {
     const s = this._clone();
@@ -535,6 +493,20 @@ export class Style {
   borderLeftForeground(c: Color): Style {
     const s = this._clone(); s._borderLeftFg = c; s._set.add('borderLeftFg'); return s;
   }
+  borderForegroundBlend(...colors: Color[]): Style {
+    if (colors.length === 0) return this;
+    if (colors.length === 1) return this.borderForeground(colors[0]);
+    const s = this._clone();
+    s._borderBlendFg = colors.slice();
+    s._set.add('borderBlendFg');
+    return s;
+  }
+  borderForegroundBlendOffset(offset: number): Style {
+    const s = this._clone();
+    s._borderBlendOffset = Math.trunc(offset);
+    s._set.add('borderBlendOffset');
+    return s;
+  }
 
   borderBackground(...colors: Color[]): Style {
     if (colors.length === 0) return this;
@@ -569,10 +541,10 @@ export class Style {
   transform(fn: (s: string) => string): Style {
     const s = this._clone(); s._transform = fn; s._set.add('transform'); return s;
   }
-  hyperlink(url: string, params?: string): Style {
+  hyperlink(url: string, ...params: string[]): Style {
     const s = this._clone();
     s._link = url; s._set.add('link');
-    if (params !== undefined) { s._linkParams = params; s._set.add('linkParams'); }
+    if (params.length > 0) { s._linkParams = params.join(':'); s._set.add('linkParams'); }
     return s;
   }
   underlineSpaces(v: boolean): Style {
@@ -600,6 +572,7 @@ export class Style {
   // Unset methods — remove a property from the set so it reverts to default
   // -----------------------------------------------------------------------
 
+  unsetString(): Style { const s = this._clone(); s._value = ''; return s; }
   unsetBold(): Style { const s = this._clone(); s._set.delete('bold'); s._bold = false; return s; }
   unsetItalic(): Style { const s = this._clone(); s._set.delete('italic'); s._italic = false; return s; }
   unsetUnderline(): Style { const s = this._clone(); s._set.delete('underline'); s._underlineStyle = 'none'; return s; }
@@ -617,20 +590,49 @@ export class Style {
   unsetHeight(): Style { const s = this._clone(); s._set.delete('height'); s._height = 0; return s; }
   unsetMaxWidth(): Style { const s = this._clone(); s._set.delete('maxWidth'); s._maxWidth = 0; return s; }
   unsetMaxHeight(): Style { const s = this._clone(); s._set.delete('maxHeight'); s._maxHeight = 0; return s; }
+  unsetAlign(): Style { return this.unsetAlignHorizontal().unsetAlignVertical(); }
+  unsetAlignHorizontal(): Style { const s = this._clone(); s._set.delete('alignH'); s._alignH = Left; return s; }
+  unsetAlignVertical(): Style { const s = this._clone(); s._set.delete('alignV'); s._alignV = Top; return s; }
   unsetPaddingTop(): Style { const s = this._clone(); s._set.delete('paddingTop'); s._paddingTop = 0; return s; }
   unsetPaddingRight(): Style { const s = this._clone(); s._set.delete('paddingRight'); s._paddingRight = 0; return s; }
   unsetPaddingBottom(): Style { const s = this._clone(); s._set.delete('paddingBottom'); s._paddingBottom = 0; return s; }
   unsetPaddingLeft(): Style { const s = this._clone(); s._set.delete('paddingLeft'); s._paddingLeft = 0; return s; }
   unsetPaddingChar(): Style { const s = this._clone(); s._set.delete('paddingChar'); s._paddingChar = ' '; return s; }
+  unsetPadding(): Style {
+    return this.unsetPaddingTop().unsetPaddingRight().unsetPaddingBottom().unsetPaddingLeft();
+  }
   unsetMarginTop(): Style { const s = this._clone(); s._set.delete('marginTop'); s._marginTop = 0; return s; }
   unsetMarginRight(): Style { const s = this._clone(); s._set.delete('marginRight'); s._marginRight = 0; return s; }
   unsetMarginBottom(): Style { const s = this._clone(); s._set.delete('marginBottom'); s._marginBottom = 0; return s; }
   unsetMarginLeft(): Style { const s = this._clone(); s._set.delete('marginLeft'); s._marginLeft = 0; return s; }
+  unsetMargins(): Style {
+    return this.unsetMarginTop().unsetMarginRight().unsetMarginBottom().unsetMarginLeft();
+  }
+  unsetMarginBackground(): Style { const s = this._clone(); s._set.delete('marginBg'); s._marginBg = null; return s; }
   unsetBorderTop(): Style { const s = this._clone(); s._set.delete('borderTop'); s._borderTop = false; return s; }
   unsetBorderRight(): Style { const s = this._clone(); s._set.delete('borderRight'); s._borderRight = false; return s; }
   unsetBorderBottom(): Style { const s = this._clone(); s._set.delete('borderBottom'); s._borderBottom = false; return s; }
   unsetBorderLeft(): Style { const s = this._clone(); s._set.delete('borderLeft'); s._borderLeft = false; return s; }
   unsetBorderStyle(): Style { const s = this._clone(); s._set.delete('borderStyle'); s._borderStyle = noBorder; return s; }
+  unsetBorderForeground(): Style {
+    return this.unsetBorderTopForeground().unsetBorderRightForeground()
+      .unsetBorderBottomForeground().unsetBorderLeftForeground();
+  }
+  unsetBorderTopForeground(): Style { const s = this._clone(); s._set.delete('borderTopFg'); s._borderTopFg = null; return s; }
+  unsetBorderRightForeground(): Style { const s = this._clone(); s._set.delete('borderRightFg'); s._borderRightFg = null; return s; }
+  unsetBorderBottomForeground(): Style { const s = this._clone(); s._set.delete('borderBottomFg'); s._borderBottomFg = null; return s; }
+  unsetBorderLeftForeground(): Style { const s = this._clone(); s._set.delete('borderLeftFg'); s._borderLeftFg = null; return s; }
+  unsetBorderForegroundBlend(): Style { const s = this._clone(); s._set.delete('borderBlendFg'); s._borderBlendFg = []; return s; }
+  unsetBorderForegroundBlendOffset(): Style { const s = this._clone(); s._set.delete('borderBlendOffset'); s._borderBlendOffset = 0; return s; }
+  unsetBorderBackground(): Style {
+    return this.unsetBorderTopBackground().unsetBorderRightBackground()
+      .unsetBorderBottomBackground().unsetBorderLeftBackground();
+  }
+  unsetBorderTopBackground(): Style { const s = this._clone(); s._set.delete('borderTopBg'); s._borderTopBg = null; return s; }
+  unsetBorderTopBackgroundColor(): Style { return this.unsetBorderTopBackground(); }
+  unsetBorderRightBackground(): Style { const s = this._clone(); s._set.delete('borderRightBg'); s._borderRightBg = null; return s; }
+  unsetBorderBottomBackground(): Style { const s = this._clone(); s._set.delete('borderBottomBg'); s._borderBottomBg = null; return s; }
+  unsetBorderLeftBackground(): Style { const s = this._clone(); s._set.delete('borderLeftBg'); s._borderLeftBg = null; return s; }
   unsetTabWidth(): Style { const s = this._clone(); s._set.delete('tabWidth'); s._tabWidth = TAB_WIDTH_DEFAULT; return s; }
   unsetTransform(): Style { const s = this._clone(); s._set.delete('transform'); s._transform = null; return s; }
   unsetHyperlink(): Style { const s = this._clone(); s._set.delete('link'); s._link = ''; s._set.delete('linkParams'); s._linkParams = ''; return s; }
@@ -655,6 +657,7 @@ export class Style {
   getHeight(): number { return this._set.has('height') ? this._height : 0; }
   getMaxWidth(): number { return this._set.has('maxWidth') ? this._maxWidth : 0; }
   getMaxHeight(): number { return this._set.has('maxHeight') ? this._maxHeight : 0; }
+  getAlign(): Position { return this.getAlignHorizontal(); }
   getAlignHorizontal(): Position { return this._set.has('alignH') ? this._alignH : Left; }
   getAlignVertical(): Position { return this._set.has('alignV') ? this._alignV : Top; }
   getInline(): boolean { return this._set.has('inline') ? this._inline : false; }
@@ -697,12 +700,36 @@ export class Style {
   getMarginLeft(): number { return this._set.has('marginLeft') ? this._marginLeft : 0; }
   getHorizontalMargins(): number { return this.getMarginLeft() + this.getMarginRight(); }
   getVerticalMargins(): number { return this.getMarginTop() + this.getMarginBottom(); }
+  getMarginChar(): string { return this._set.has('marginChar') ? this._marginChar : ' '; }
 
   getBorderStyle(): Border { return this._set.has('borderStyle') ? this._borderStyle : noBorder; }
   getBorderTop(): boolean { return this._set.has('borderTop') ? this._borderTop : false; }
   getBorderRight(): boolean { return this._set.has('borderRight') ? this._borderRight : false; }
   getBorderBottom(): boolean { return this._set.has('borderBottom') ? this._borderBottom : false; }
   getBorderLeft(): boolean { return this._set.has('borderLeft') ? this._borderLeft : false; }
+  getBorder(): { style: Border; top: boolean; right: boolean; bottom: boolean; left: boolean } {
+    return {
+      style: this.getBorderStyle(),
+      top: this.getBorderTop(),
+      right: this.getBorderRight(),
+      bottom: this.getBorderBottom(),
+      left: this.getBorderLeft(),
+    };
+  }
+  getBorderTopForeground(): Color { return this._set.has('borderTopFg') ? this._borderTopFg : null; }
+  getBorderRightForeground(): Color { return this._set.has('borderRightFg') ? this._borderRightFg : null; }
+  getBorderBottomForeground(): Color { return this._set.has('borderBottomFg') ? this._borderBottomFg : null; }
+  getBorderLeftForeground(): Color { return this._set.has('borderLeftFg') ? this._borderLeftFg : null; }
+  getBorderForegroundBlend(): Color[] {
+    return this._set.has('borderBlendFg') ? this._borderBlendFg.slice() : [];
+  }
+  getBorderForegroundBlendOffset(): number {
+    return this._set.has('borderBlendOffset') ? this._borderBlendOffset : 0;
+  }
+  getBorderTopBackground(): Color { return this._set.has('borderTopBg') ? this._borderTopBg : null; }
+  getBorderRightBackground(): Color { return this._set.has('borderRightBg') ? this._borderRightBg : null; }
+  getBorderBottomBackground(): Color { return this._set.has('borderBottomBg') ? this._borderBottomBg : null; }
+  getBorderLeftBackground(): Color { return this._set.has('borderLeftBg') ? this._borderLeftBg : null; }
 
   /** True when border style is set but no individual side bools are set. */
   private _isBorderStyleSetWithoutSides(): boolean {
@@ -717,6 +744,7 @@ export class Style {
     if (!this.getBorderTop()) return 0;
     return getTopSize(this.getBorderStyle());
   }
+  getBorderTopWidth(): number { return this.getBorderTopSize(); }
   getBorderRightSize(): number {
     if (this._isBorderStyleSetWithoutSides()) return 1;
     if (!this.getBorderRight()) return 0;
@@ -753,7 +781,11 @@ export class Style {
   /** Copy explicitly-set values from `other` that are NOT set on this style. Margins/padding are not inherited. */
   inherit(other: Style): Style {
     const s = this._clone();
-    const skip = new Set(['paddingTop','paddingRight','paddingBottom','paddingLeft','marginTop','marginRight','marginBottom','marginLeft']);
+    const skip = new Set([
+      'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
+      'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
+      'link', 'linkParams',
+    ]);
     for (const key of other._set) {
       if (skip.has(key)) continue;
       // If background is inherited, also inherit margin bg
@@ -781,8 +813,10 @@ export class Style {
       paddingTop: 'paddingTop', paddingRight: 'paddingRight',
       paddingBottom: 'paddingBottom', paddingLeft: 'paddingLeft',
       marginTop: 'marginTop', marginRight: 'marginRight',
-      marginBottom: 'marginBottom', marginLeft: 'marginLeft', marginBg: 'marginBg',
-      borderStyle: 'borderStyle',
+      marginBottom: 'marginBottom', marginLeft: 'marginLeft',
+      marginBg: 'marginBg', marginChar: 'marginChar',
+      borderStyle: 'borderStyle', borderBlendFg: 'borderBlendFg',
+      borderBlendOffset: 'borderBlendOffset',
       borderTop: 'borderTop', borderRight: 'borderRight',
       borderBottom: 'borderBottom', borderLeft: 'borderLeft',
       borderTopFg: 'borderTopFg', borderRightFg: 'borderRightFg',
@@ -887,7 +921,7 @@ export class Style {
     // Word wrap
     if (!isInline && width > 0) {
       const wrapAt = width - leftPad - rightPad;
-      str = wordWrap(str, wrapAt);
+      str = wrap(str, wrapAt);
     }
 
     // Render core text — apply ANSI styles line by line
@@ -897,8 +931,8 @@ export class Style {
       for (const line of lines) {
         if (useSpaceStyler) {
           let buf = '';
-          for (const ch of line) {
-            if (ch === ' ' || ch === '\t') {
+          for (const ch of graphemes(line)) {
+            if (/\s/u.test(ch)) {
               buf += styled(ch, teSpaceOpts);
             } else {
               buf += styled(ch, teOpts);
@@ -1034,13 +1068,31 @@ export class Style {
     const rightBg = this._set.has('borderRightBg') ? parseColor(this._borderRightBg) : null;
     const bottomBg = this._set.has('borderBottomBg') ? parseColor(this._borderBottomBg) : null;
     const leftBg = this._set.has('borderLeftBg') ? parseColor(this._borderLeftBg) : null;
+    let blend: { top: Color[]; right: Color[]; bottom: Color[]; left: Color[] } | null = null;
+    if (this._set.has('borderBlendFg') && this._borderBlendFg.length > 1) {
+      const gradient = blend1D((lines.length + width + 2) * 2, ...this._borderBlendFg);
+      const shift = ((this._borderBlendOffset % gradient.length) + gradient.length) % gradient.length;
+      if (shift) gradient.unshift(...gradient.splice(gradient.length - shift));
+      let offset = 0;
+      const take = (count: number) => {
+        const values = gradient.slice(offset, offset + count);
+        offset += count;
+        return values;
+      };
+      blend = {
+        top: take(width + 2),
+        right: take(lines.length),
+        bottom: take(width + 2).reverse(),
+        left: take(lines.length).reverse(),
+      };
+    }
 
     let out = '';
 
     // Top edge
     if (hasT) {
       const top = renderHorizontalEdge(borderDef.topLeft, borderDef.top, borderDef.topRight, width);
-      out += styleBorderStr(top, topFg, topBg) + '\n';
+      out += (blend ? styleBorderBlend(top, blend.top, topBg) : styleBorderStr(top, topFg, topBg)) + '\n';
     }
 
     // Side edges
@@ -1052,13 +1104,17 @@ export class Style {
       if (hasL) {
         const r = leftRunes[li % leftRunes.length];
         li++;
-        out += styleBorderStr(r, leftFg, leftBg);
+        out += blend
+          ? styleBorderStr(r, parseColor(blend.left[i]) ?? null, leftBg)
+          : styleBorderStr(r, leftFg, leftBg);
       }
       out += lines[i];
       if (hasR) {
         const r = rightRunes[ri % rightRunes.length];
         ri++;
-        out += styleBorderStr(r, rightFg, rightBg);
+        out += blend
+          ? styleBorderStr(r, parseColor(blend.right[i]) ?? null, rightBg)
+          : styleBorderStr(r, rightFg, rightBg);
       }
       if (i < lines.length - 1) out += '\n';
     }
@@ -1066,7 +1122,9 @@ export class Style {
     // Bottom edge
     if (hasB) {
       const bottom = renderHorizontalEdge(borderDef.bottomLeft, borderDef.bottom, borderDef.bottomRight, width);
-      out += '\n' + styleBorderStr(bottom, bottomFg, bottomBg);
+      out += '\n' + (blend
+        ? styleBorderBlend(bottom, blend.bottom, bottomBg)
+        : styleBorderStr(bottom, bottomFg, bottomBg));
     }
 
     return out;
@@ -1085,8 +1143,9 @@ export class Style {
     const marginBg = this._set.has('marginBg') ? parseColor(this._marginBg) : null;
     const marginStyle: AnsiStyleOptions | null = marginBg ? { bg: marginBg } : null;
 
-    if (leftM > 0) str = padLeft(str, leftM, marginStyle);
-    if (rightM > 0) str = padRight(str, rightM, marginStyle);
+    const marginChar = this._set.has('marginChar') ? this._marginChar : ' ';
+    if (leftM > 0) str = padLeft(str, leftM, marginStyle, marginChar);
+    if (rightM > 0) str = padRight(str, rightM, marginStyle, marginChar);
 
     if (!isInline) {
       const { widest: totalWidth } = getLines(str);
@@ -1119,6 +1178,15 @@ export class Style {
 function styleBorderStr(border: string, fg: ColorValue | null, bg: ColorValue | null): string {
   if (!fg && !bg) return border;
   return styled(border, { fg, bg });
+}
+
+function styleBorderBlend(border: string, foreground: Color[], bg: ColorValue | null): string {
+  let result = '';
+  let index = 0;
+  for (const cluster of graphemes(border)) {
+    result += styled(cluster, { fg: parseColor(foreground[index++]) ?? null, bg });
+  }
+  return result;
 }
 
 // ---------------------------------------------------------------------------

@@ -2,7 +2,7 @@
  * Border definitions and built-in border styles.
  */
 
-import { stringWidth } from './ansi.js';
+import { graphemes, stringWidth } from './ansi.js';
 
 /** Border character set */
 export interface Border {
@@ -123,12 +123,8 @@ export function asciiBorder(): Border {
 
 /** Get the max rune width of a border edge string */
 export function maxRuneWidth(str: string): number {
-  if (!str) return 0;
-  if (str.length === 1) return stringWidth(str);
   let width = 0;
-  for (const ch of str) {
-    width = Math.max(width, stringWidth(ch));
-  }
+  for (const cluster of graphemes(str)) width = Math.max(width, stringWidth(cluster));
   return width;
 }
 

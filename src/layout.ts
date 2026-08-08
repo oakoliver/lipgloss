@@ -1,212 +1,167 @@
-/**
- * Layout utilities: JoinHorizontal, JoinVertical, Place, PlaceHorizontal, PlaceVertical.
- * Ported from charmbracelet/lipgloss join.go and position.go.
- */
+/** ANSI-aware layout and placement helpers. */
 
-import { stringWidth } from './ansi.js';
-import { getLines } from './style.js';
+import { graphemes, graphemeWidth, stringWidth } from './ansi.js';
 import type { Position } from './style.js';
-import { Top, Bottom, Left, Right } from './style.js';
+import { Bottom, Left, Right, Top } from './style.js';
+import { Style } from './style.js';
 
-// ---------------------------------------------------------------------------
-// JoinHorizontal
-// ---------------------------------------------------------------------------
+interface WhitespaceConfig {
+  chars: string;
+  style: Style;
+}
 
-/**
- * Horizontally join multi-line strings along a vertical axis.
- * `pos` is the vertical alignment: 0 = top, 0.5 = center, 1 = bottom.
- */
+export type WhitespaceOption = (whitespace: WhitespaceConfig) => void;
+
+export function withWhitespaceStyle(style: Style): WhitespaceOption {
+  return whitespace => { whitespace.style = style; };
+}
+
+export function withWhitespaceChars(chars: string): WhitespaceOption {
+  return whitespace => { whitespace.chars = chars; };
+}
+
+function normalizedText(str: string): string {
+  return str.replace(/\t/g, '    ').replace(/\r\n/g, '\n');
+}
+
+function normalizedLines(str: string): string[] {
+  return normalizedText(str).split('\n');
+}
+
+function renderWhitespace(cells: number, options: WhitespaceOption[]): string {
+  if (cells <= 0) return '';
+  const whitespace: WhitespaceConfig = { chars: ' ', style: new Style() };
+  for (const option of options) option(whitespace);
+  const chars = graphemes(whitespace.chars || ' ').filter(char => graphemeWidth(char) > 0);
+  if (chars.length === 0) chars.push(' ');
+  let rendered = '';
+  let used = 0;
+  let index = 0;
+  while (used < cells) {
+    const char = chars[index++ % chars.length];
+    const charWidth = graphemeWidth(char);
+    const remaining = cells - used;
+    if (charWidth > remaining) {
+      rendered += ' '.repeat(remaining);
+      break;
+    }
+    rendered += char;
+    used += charWidth;
+  }
+  return whitespace.style.render(rendered);
+}
+
+/** Horizontally join blocks, aligning them along the vertical axis. */
 export function joinHorizontal(pos: Position, ...strs: string[]): string {
   if (strs.length === 0) return '';
   if (strs.length === 1) return strs[0];
 
-  const blocks: string[][] = [];
-  const maxWidths: number[] = [];
-  let maxHeight = 0;
+  const blocks = strs.map(normalizedLines);
+  const maxWidths = blocks.map(lines => lines.reduce((max, line) => Math.max(max, stringWidth(line)), 0));
+  const maxHeight = blocks.reduce((max, lines) => Math.max(max, lines.length), 0);
+  const position = Math.min(1, Math.max(0, pos));
 
-  for (let i = 0; i < strs.length; i++) {
-    const { lines, widest } = getLines(strs[i]);
-    blocks.push(lines);
-    maxWidths.push(widest);
-    if (lines.length > maxHeight) maxHeight = lines.length;
-  }
-
-  // Equalize heights
-  for (let i = 0; i < blocks.length; i++) {
-    if (blocks[i].length >= maxHeight) continue;
-    const extra = maxHeight - blocks[i].length;
-
-    const p = Math.min(1, Math.max(0, pos));
-    if (p <= 0) {
-      // Top aligned
-      const empties = new Array<string>(extra).fill('');
-      blocks[i] = [...blocks[i], ...empties];
-    } else if (p >= 1) {
-      // Bottom aligned
-      const empties = new Array<string>(extra).fill('');
-      blocks[i] = [...empties, ...blocks[i]];
-    } else {
-      // Somewhere in the middle
-      // Go logic: split = round(n * pos), then uses array slicing
-      // extraLines[top:] prepends (n - split) items from end
-      // extraLines[bottom:] appends (n - (n - split)) = split items from end
-      // Result: prepend (split) empties, append (n - split) empties
-      const split = Math.round(extra * p);
-      const prependCount = split;
-      const appendCount = extra - split;
-      blocks[i] = [
-        ...new Array<string>(prependCount).fill(''),
-        ...blocks[i],
-        ...new Array<string>(appendCount).fill(''),
-      ];
+  for (const block of blocks) {
+    const missing = maxHeight - block.length;
+    if (missing <= 0) continue;
+    const empty = Array<string>(missing).fill('');
+    if (pos === Top) block.push(...empty);
+    else if (pos === Bottom) block.unshift(...empty);
+    else {
+      const bottom = Math.round(missing * position);
+      block.unshift(...empty.slice(missing - bottom));
+      block.push(...empty.slice(bottom));
     }
   }
 
-  // Merge
-  const result: string[] = [];
+  const rows = new Array<string>(maxHeight);
   for (let row = 0; row < maxHeight; row++) {
     let line = '';
-    for (let col = 0; col < blocks.length; col++) {
-      const cell = blocks[col][row] || '';
-      line += cell;
-      // Pad to max width
-      const pad = maxWidths[col] - stringWidth(cell);
-      if (pad > 0) line += ' '.repeat(pad);
+    for (let block = 0; block < blocks.length; block++) {
+      const value = blocks[block][row];
+      line += value + ' '.repeat(maxWidths[block] - stringWidth(value));
     }
-    result.push(line);
+    rows[row] = line;
   }
-
-  return result.join('\n');
+  return rows.join('\n');
 }
 
-// ---------------------------------------------------------------------------
-// JoinVertical
-// ---------------------------------------------------------------------------
-
-/**
- * Vertically join multi-line strings along a horizontal axis.
- * `pos` is the horizontal alignment: 0 = left, 0.5 = center, 1 = right.
- */
+/** Vertically join blocks, aligning each line along the horizontal axis. */
 export function joinVertical(pos: Position, ...strs: string[]): string {
   if (strs.length === 0) return '';
   if (strs.length === 1) return strs[0];
 
-  const blocks: string[][] = [];
-  let maxWidth = 0;
-
-  for (const str of strs) {
-    const { lines, widest } = getLines(str);
-    blocks.push(lines);
-    if (widest > maxWidth) maxWidth = widest;
-  }
-
-  const result: string[] = [];
-  for (let i = 0; i < blocks.length; i++) {
-    for (let j = 0; j < blocks[i].length; j++) {
-      const line = blocks[i][j];
-      const gap = maxWidth - stringWidth(line);
-
-      if (gap <= 0) {
-        result.push(line);
-      } else {
-        const p = Math.min(1, Math.max(0, pos));
-        if (p <= 0) {
-          // Left
-          result.push(line + ' '.repeat(gap));
-        } else if (p >= 1) {
-          // Right
-          result.push(' '.repeat(gap) + line);
-        } else {
-          const split = Math.round(gap * p);
-          const right = gap - split;
-          const left = gap - right;
-          result.push(' '.repeat(left) + line + ' '.repeat(right));
-        }
+  const blocks = strs.map(normalizedLines);
+  const widest = blocks.reduce(
+    (outer, lines) => Math.max(outer, ...lines.map(line => stringWidth(line))),
+    0,
+  );
+  const position = Math.min(1, Math.max(0, pos));
+  const rows: string[] = [];
+  for (const block of blocks) {
+    for (const line of block) {
+      const gap = widest - stringWidth(line);
+      if (pos === Left) rows.push(line + ' '.repeat(gap));
+      else if (pos === Right) rows.push(' '.repeat(gap) + line);
+      else {
+        const left = Math.round(gap * position);
+        rows.push(' '.repeat(left) + line + ' '.repeat(gap - left));
       }
     }
   }
-
-  return result.join('\n');
+  return rows.join('\n');
 }
 
-// ---------------------------------------------------------------------------
-// Place
-// ---------------------------------------------------------------------------
-
-/**
- * Place a string in an unstyled box of given width and height.
- */
-export function place(width: number, height: number, hPos: Position, vPos: Position, str: string): string {
-  return placeVertical(height, vPos, placeHorizontal(width, hPos, str));
+export function place(
+  boxWidth: number,
+  boxHeight: number,
+  horizontal: Position,
+  vertical: Position,
+  str: string,
+  ...options: WhitespaceOption[]
+): string {
+  return placeVertical(boxHeight, vertical, placeHorizontal(boxWidth, horizontal, str, ...options), ...options);
 }
 
-/**
- * Place a string horizontally in an unstyled block of given width.
- */
-export function placeHorizontal(width: number, pos: Position, str: string): string {
-  const { lines, widest: contentWidth } = getLines(str);
-  const gap = width - contentWidth;
-  if (gap <= 0) return str;
+export function placeHorizontal(
+  boxWidth: number,
+  pos: Position,
+  str: string,
+  ...options: WhitespaceOption[]
+): string {
+  const normalized = normalizedText(str);
+  const lines = normalized.split('\n');
+  const widest = lines.reduce((max, line) => Math.max(max, stringWidth(line)), 0);
+  const gap = boxWidth - widest;
+  if (gap <= 0) return normalized;
+  const position = Math.min(1, Math.max(0, pos));
 
-  const result: string[] = [];
-  for (const line of lines) {
-    const short = Math.max(0, contentWidth - stringWidth(line));
-    const totalGap = gap + short;
-    const p = Math.min(1, Math.max(0, pos));
-
-    if (p <= 0) {
-      // Left
-      result.push(line + ' '.repeat(totalGap));
-    } else if (p >= 1) {
-      // Right
-      result.push(' '.repeat(totalGap) + line);
-    } else {
-      const split = Math.round(totalGap * p);
-      const left = totalGap - split;
-      const right = totalGap - left;
-      result.push(' '.repeat(left) + line + ' '.repeat(right));
-    }
-  }
-
-  return result.join('\n');
+  return lines.map(line => {
+    const totalGap = gap + Math.max(0, widest - stringWidth(line));
+    if (pos === Left) return line + renderWhitespace(totalGap, options);
+    if (pos === Right) return renderWhitespace(totalGap, options) + line;
+    const left = totalGap - Math.round(totalGap * position);
+    return renderWhitespace(left, options) + line + renderWhitespace(totalGap - left, options);
+  }).join('\n');
 }
 
-/**
- * Place a string vertically in an unstyled block of given height.
- */
-export function placeVertical(height: number, pos: Position, str: string): string {
-  const contentHeight = str.split('\n').length;
-  const gap = height - contentHeight;
-  if (gap <= 0) return str;
+export function placeVertical(
+  boxHeight: number,
+  pos: Position,
+  str: string,
+  ...options: WhitespaceOption[]
+): string {
+  const normalized = normalizedText(str);
+  const lines = normalized.split('\n');
+  const contentHeight = lines.length;
+  const gap = boxHeight - contentHeight;
+  if (gap <= 0) return normalized;
+  const normalizedWidth = lines.reduce((max, line) => Math.max(max, stringWidth(line)), 0);
+  const emptyLine = renderWhitespace(normalizedWidth, options);
+  if (pos === Top) return normalized + '\n' + Array<string>(gap).fill(emptyLine).join('\n');
+  if (pos === Bottom) return (emptyLine + '\n').repeat(gap) + normalized;
 
-  const { widest: width } = getLines(str);
-  const emptyLine = ' '.repeat(width);
-  const p = Math.min(1, Math.max(0, pos));
-
-  if (p <= 0) {
-    // Top
-    const bottom: string[] = [];
-    for (let i = 0; i < gap; i++) bottom.push(emptyLine);
-    return str + '\n' + bottom.join('\n');
-  } else if (p >= 1) {
-    // Bottom
-    const top: string[] = [];
-    for (let i = 0; i < gap; i++) top.push(emptyLine);
-    return top.join('\n') + '\n' + str;
-  } else {
-    const split = Math.round(gap * p);
-    const topCount = gap - split;
-    const bottomCount = gap - topCount;
-
-    const topLines: string[] = [];
-    for (let i = 0; i < topCount; i++) topLines.push(emptyLine);
-    const bottomLines: string[] = [];
-    for (let i = 0; i < bottomCount; i++) bottomLines.push(emptyLine);
-
-    let result = '';
-    if (topLines.length > 0) result += topLines.join('\n') + '\n';
-    result += str;
-    if (bottomLines.length > 0) result += '\n' + bottomLines.join('\n');
-    return result;
-  }
+  const bottom = Math.round(gap * Math.min(1, Math.max(0, pos)));
+  const top = gap - bottom;
+  return (emptyLine + '\n').repeat(top) + normalized + ('\n' + emptyLine).repeat(bottom);
 }

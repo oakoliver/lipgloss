@@ -4,6 +4,14 @@ CSS-like terminal styling for JavaScript. Zero dependencies, multi-runtime (Node
 
 Ported from [charmbracelet/lipgloss](https://github.com/charmbracelet/lipgloss) (Go) to TypeScript.
 
+Parity target: [Lip Gloss v2.0.5](https://github.com/charmbracelet/lipgloss/releases/tag/v2.0.5).
+The Go-only synchronous terminal query functions `BackgroundColor` and
+`HasDarkBackground`, and the legacy Windows console helper
+`EnableLegacyWindowsANSI`, are excluded: JavaScript's supported Node, Bun, and
+Deno streams do not share Go's synchronous `term.File` query contract, and
+modern JavaScript runtimes enable Windows virtual-terminal processing
+themselves.
+
 ## Install
 
 ```bash
@@ -38,11 +46,12 @@ console.log(style.render('Hello, Lipgloss!'));
 - **Fluent, immutable API** — every setter returns a new `Style` (safe to share and compose)
 - **CSS-like box model** — padding, margin, border, width, height, alignment
 - **10 built-in border styles** — normal, rounded, block, thick, double, hidden, ASCII, markdown, and more
-- **Full ANSI color support** — basic 16, 256-color palette, and 24-bit RGB
+- **Full ANSI color support** — detected ASCII, ANSI, ANSI-256, and truecolor output profiles
+- **Unicode cell correctness** — ANSI-safe grapheme measurement for emoji, flags, combining text, and CJK
 - **Text attributes** — bold, italic, underline (5 styles), strikethrough, reverse, blink, faint
-- **Layout utilities** — `joinHorizontal`, `joinVertical`, `place`, `placeHorizontal`, `placeVertical`
-- **Color utilities** — `complementary`, `darken`, `lighten`, `isDarkColor`, `lightDark`, `alpha`
-- **Zero dependencies** — pure TypeScript, works everywhere
+- **Layout utilities** — joins, placement, patterned whitespace, wrapping, ranges, layers, and canvases
+- **Color utilities** — profile selection, CIELAB gradients, complement, brightness, and alpha
+- **Zero dependencies** — pure TypeScript using the runtime's built-in Unicode segmenter
 - **TypeScript-first** — full type declarations included
 
 ## API

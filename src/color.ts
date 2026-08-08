@@ -17,6 +17,8 @@ export interface RGBColor {
   r: number;
   g: number;
   b: number;
+  /** Alpha channel on a 0-255 scale. Omitted means fully opaque. */
+  a?: number;
 }
 
 /**
@@ -74,10 +76,8 @@ export function parseColor(c: Color): ColorValue | null {
       if (!rgb) return null;
       return { type: 'rgb', value: 0, ...rgb };
     }
-    // Try parsing as number
-    const n = parseInt(c, 10);
-    if (!isNaN(n)) {
-      return parseColor(n);
+    if (/^[+-]?\d+$/.test(c)) {
+      return parseColor(Number(c));
     }
     return null;
   }
@@ -129,22 +129,22 @@ export function colorToRGB(c: Color): RGBColor | null {
 
 /** Standard ANSI 16 color palette (approximate RGB values) */
 const ANSI_16_COLORS: RGBColor[] = [
-  { r: 0, g: 0, b: 0 },       // Black
-  { r: 170, g: 0, b: 0 },     // Red
-  { r: 0, g: 170, b: 0 },     // Green
-  { r: 170, g: 85, b: 0 },    // Yellow
-  { r: 0, g: 0, b: 170 },     // Blue
-  { r: 170, g: 0, b: 170 },   // Magenta
-  { r: 0, g: 170, b: 170 },   // Cyan
-  { r: 170, g: 170, b: 170 }, // White
-  { r: 85, g: 85, b: 85 },    // Bright Black
-  { r: 255, g: 85, b: 85 },   // Bright Red
-  { r: 85, g: 255, b: 85 },   // Bright Green
-  { r: 255, g: 255, b: 85 },  // Bright Yellow
-  { r: 85, g: 85, b: 255 },   // Bright Blue
-  { r: 255, g: 85, b: 255 },  // Bright Magenta
-  { r: 85, g: 255, b: 255 },  // Bright Cyan
-  { r: 255, g: 255, b: 255 }, // Bright White
+  { r: 0, g: 0, b: 0 },
+  { r: 128, g: 0, b: 0 },
+  { r: 0, g: 128, b: 0 },
+  { r: 128, g: 128, b: 0 },
+  { r: 0, g: 0, b: 128 },
+  { r: 128, g: 0, b: 128 },
+  { r: 0, g: 128, b: 128 },
+  { r: 192, g: 192, b: 192 },
+  { r: 128, g: 128, b: 128 },
+  { r: 255, g: 0, b: 0 },
+  { r: 0, g: 255, b: 0 },
+  { r: 255, g: 255, b: 0 },
+  { r: 0, g: 0, b: 255 },
+  { r: 255, g: 0, b: 255 },
+  { r: 0, g: 255, b: 255 },
+  { r: 255, g: 255, b: 255 },
 ];
 
 /**
@@ -213,38 +213,37 @@ export function darken(c: Color, percent: number): Color {
   if (!rgb) return null;
   const mult = 1 - clamp(percent, 0, 1);
   return {
-    r: Math.round(rgb.r * mult),
-    g: Math.round(rgb.g * mult),
-    b: Math.round(rgb.b * mult),
+    r: Math.trunc(rgb.r * mult),
+    g: Math.trunc(rgb.g * mult),
+    b: Math.trunc(rgb.b * mult),
+    a: typeof c === 'object' && c && 'a' in c ? c.a : 255,
   };
 }
 
 /**
- * Lighten a color by a percentage (0-1).
+ * Lighten a color by adding the requested fraction of the full channel range.
  */
 export function lighten(c: Color, percent: number): Color {
   const rgb = colorToRGB(c);
   if (!rgb) return null;
   const add = 255 * clamp(percent, 0, 1);
   return {
-    r: Math.min(255, Math.round(rgb.r + add)),
-    g: Math.min(255, Math.round(rgb.g + add)),
-    b: Math.min(255, Math.round(rgb.b + add)),
+    r: Math.min(255, Math.trunc(rgb.r + add)),
+    g: Math.min(255, Math.trunc(rgb.g + add)),
+    b: Math.min(255, Math.trunc(rgb.b + add)),
+    a: typeof c === 'object' && c && 'a' in c ? c.a : 255,
   };
 }
 
 /**
- * Adjust alpha (0 = transparent, 1 = opaque). Returns an RGBColor
- * (terminal colors don't truly support alpha, but useful for blending).
+ * Adjust alpha without premultiplying RGB channels.
  */
-export function alpha(c: Color, a: number): RGBColor | null {
+export function alpha(c: Color, opacity: number): RGBColor | null {
   const rgb = colorToRGB(c);
   if (!rgb) return null;
-  const al = clamp(a, 0, 1);
   return {
-    r: Math.round(rgb.r * al),
-    g: Math.round(rgb.g * al),
-    b: Math.round(rgb.b * al),
+    ...rgb,
+    a: Math.trunc(clamp(opacity, 0, 1) * 255),
   };
 }
 
@@ -291,4 +290,158 @@ function hsvToRgb(h: number, s: number, v: number): RGBColor {
     g: Math.round((g + m) * 255),
     b: Math.round((b + m) * 255),
   };
+}
+
+/** Parse the upstream Color string form into a concrete TypeScript color. */
+export function color(value: string): Color {
+  if (value.startsWith('#')) return parseHex(value) ?? NO_COLOR;
+  if (!/^[+-]?\d+$/.test(value)) return NO_COLOR;
+  const numeric = Math.abs(Number(value));
+  if (numeric < 256) return numeric;
+  return { r: (numeric >> 16) & 0xff, g: (numeric >> 8) & 0xff, b: numeric & 0xff };
+}
+
+/** Construct an indexed ANSI color. */
+export function ansiColor(index: number): number {
+  return Math.abs(Math.trunc(index));
+}
+
+export type ColorProfile = 'notty' | 'ascii' | 'ansi' | 'ansi256' | 'truecolor';
+
+export const ColorProfiles = {
+  notty: 'notty',
+  ascii: 'ascii',
+  ansi: 'ansi',
+  ansi256: 'ansi256',
+  truecolor: 'truecolor',
+} as const satisfies Record<string, ColorProfile>;
+
+export type CompleteFunc = (ansi: Color, ansi256: Color, truecolor: Color) => Color;
+
+/** Select a caller-provided color appropriate for an output profile. */
+export function complete(profile: ColorProfile): CompleteFunc {
+  return (ansi, ansi256, truecolor) => {
+    if (profile === 'ansi') return ansi;
+    if (profile === 'ansi256') return ansi256;
+    if (profile === 'truecolor') return truecolor;
+    return NO_COLOR;
+  };
+}
+
+interface LabColor {
+  l: number;
+  a: number;
+  b: number;
+}
+
+function rgbToLab(rgb: RGBColor): LabColor {
+  const linear = (channel: number) => {
+    const value = channel / 255;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+  const r = linear(rgb.r);
+  const g = linear(rgb.g);
+  const b = linear(rgb.b);
+  const x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
+  const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+  const z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
+  const pivot = (value: number) => value > 0.008856 ? Math.cbrt(value) : 7.787 * value + 16 / 116;
+  const fx = pivot(x);
+  const fy = pivot(y);
+  const fz = pivot(z);
+  return { l: 116 * fy - 16, a: 500 * (fx - fy), b: 200 * (fy - fz) };
+}
+
+function labToRgb(lab: LabColor): RGBColor {
+  const fy = (lab.l + 16) / 116;
+  const fx = lab.a / 500 + fy;
+  const fz = fy - lab.b / 200;
+  const pivot = (value: number) => {
+    const cube = value ** 3;
+    return cube > 0.008856 ? cube : (value - 16 / 116) / 7.787;
+  };
+  const x = 0.95047 * pivot(fx);
+  const y = pivot(fy);
+  const z = 1.08883 * pivot(fz);
+  const linear = [
+    x * 3.2406 + y * -1.5372 + z * -0.4986,
+    x * -0.9689 + y * 1.8758 + z * 0.0415,
+    x * 0.0557 + y * -0.204 + z * 1.057,
+  ];
+  const encode = (value: number) => {
+    const channel = value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055;
+    return Math.round(clamp(channel, 0, 1) * 255);
+  };
+  return { r: encode(linear[0]), g: encode(linear[1]), b: encode(linear[2]), a: 255 };
+}
+
+function blendLab(from: Color, to: Color, factor: number): RGBColor {
+  const fromLab = rgbToLab(colorToRGB(from)!);
+  const toLab = rgbToLab(colorToRGB(to)!);
+  return labToRgb({
+    l: fromLab.l + (toLab.l - fromLab.l) * factor,
+    a: fromLab.a + (toLab.a - fromLab.a) * factor,
+    b: fromLab.b + (toLab.b - fromLab.b) * factor,
+  });
+}
+
+/** Create a multi-stop CIELAB gradient with upstream segment distribution. */
+export function blend1D(steps: number, ...inputStops: Color[]): Color[] {
+  steps = Math.max(0, Math.trunc(steps));
+  if (steps <= inputStops.length) return inputStops.slice(0, steps);
+  const stops = inputStops.filter(stop => parseColor(stop) !== null);
+  if (stops.length === 0) return [];
+  if (stops.length === 1) return Array<Color>(steps).fill(stops[0]);
+
+  const result = new Array<Color>(steps);
+  const segments = stops.length - 1;
+  const defaultSize = Math.floor(steps / segments);
+  const remaining = steps % segments;
+  let resultIndex = 0;
+  for (let segment = 0; segment < segments; segment++) {
+    const segmentSize = defaultSize + (segment < remaining ? 1 : 0);
+    for (let index = 0; index < segmentSize; index++) {
+      result[resultIndex++] = blendLab(
+        stops[segment],
+        stops[segment + 1],
+        segmentSize > 1 ? index / (segmentSize - 1) : 0,
+      );
+    }
+  }
+  return result;
+}
+
+/** Create a rotated, row-major two-dimensional CIELAB gradient. */
+export function blend2D(
+  requestedWidth: number,
+  requestedHeight: number,
+  angle: number,
+  ...inputStops: Color[]
+): Color[] {
+  const width = Math.max(1, Math.trunc(requestedWidth));
+  const height = Math.max(1, Math.trunc(requestedHeight));
+  const stops = inputStops.filter(stop => parseColor(stop) !== null);
+  if (stops.length === 0) return [];
+  if (stops.length === 1) return Array<Color>(width * height).fill(stops[0]);
+
+  const gradient = blend1D(Math.max(width, height), ...stops);
+  const result = new Array<Color>(width * height);
+  const centerX = (width - 1) / 2;
+  const centerY = (height - 1) / 2;
+  const normalizedAngle = ((angle % 360) + 360) % 360;
+  const radians = normalizedAngle * Math.PI / 180;
+  const cosine = Math.cos(radians);
+  const sine = Math.sin(radians);
+  const diagonal = Math.sqrt(width * width + height * height);
+  const gradientLength = gradient.length - 1;
+  for (let y = 0; y < height; y++) {
+    const dy = y - centerY;
+    for (let x = 0; x < width; x++) {
+      const dx = x - centerX;
+      const rotatedX = dx * cosine - dy * sine;
+      const position = clamp((rotatedX + diagonal / 2) / diagonal, 0, 1);
+      result[y * width + x] = gradient[Math.min(gradient.length - 1, Math.trunc(position * gradientLength))];
+    }
+  }
+  return result;
 }

@@ -1,3 +1,5 @@
+import { SgrState } from './sgr.js';
+
 /**
  * ANSI escape code utilities for terminal styling.
  * Pure TypeScript implementation — no dependencies.
@@ -84,118 +86,248 @@ export function resetHyperlink(): string {
 }
 
 /**
- * Strip all ANSI escape sequences from a string.
+ * ANSI-aware Unicode helpers. Lip Gloss measures terminal cells rather than
+ * UTF-16 code units. Intl.Segmenter is available in every supported runtime
+ * and keeps emoji ZWJ sequences, flags, keycaps, and combining marks intact.
  */
-// eslint-disable-next-line no-control-regex
-const ANSI_REGEX = /[\x1b\x9b][[()#;?]*(?:[0-9]{1,4}(?:[;:][0-9]{0,4})*)?[0-9A-ORZcf-nqry=><~]|\x1b\]8;[^\x1b]*\x1b\\/g;
+const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
+const MARK = /\p{Mark}/u;
+const CONTROL = /[\p{Cc}\p{Cf}]/u;
 
-export function stripAnsi(str: string): string {
-  return str.replace(ANSI_REGEX, '');
+export interface AnsiToken {
+  value: string;
+  ansi: boolean;
 }
 
-/**
- * Measure the visible (printable) width of a string, ignoring ANSI codes.
- * This is a simplified implementation that handles common cases.
- * For full Unicode width support, a proper East Asian Width implementation
- * would be needed, but this covers the vast majority of use cases.
- */
-export function stringWidth(str: string): number {
-  const stripped = stripAnsi(str);
-  let width = 0;
-  for (let i = 0; i < stripped.length; i++) {
-    const code = stripped.charCodeAt(i);
-    // Skip combining characters (rough heuristic)
-    if (code >= 0x0300 && code <= 0x036f) continue;
-    if (code >= 0x1ab0 && code <= 0x1aff) continue;
-    if (code >= 0x1dc0 && code <= 0x1dff) continue;
-    if (code >= 0x20d0 && code <= 0x20ff) continue;
-    if (code >= 0xfe20 && code <= 0xfe2f) continue;
+/** Split a string into ANSI control sequences and printable text. */
+export function ansiTokens(input: string): AnsiToken[] {
+  const tokens: AnsiToken[] = [];
+  let textStart = 0;
+  const pushText = (end: number) => {
+    if (end > textStart) tokens.push({ value: input.slice(textStart, end), ansi: false });
+  };
 
-    // Handle surrogate pairs for full Unicode
-    if (code >= 0xd800 && code <= 0xdbff) {
-      const next = stripped.charCodeAt(i + 1);
-      if (next >= 0xdc00 && next <= 0xdfff) {
-        const cp = (code - 0xd800) * 0x400 + (next - 0xdc00) + 0x10000;
-        // CJK Unified Ideographs Extension B+
-        if (cp >= 0x20000 && cp <= 0x3ffff) {
-          width += 2;
-        } else {
-          width += 1;
-        }
-        i++; // skip low surrogate
-        continue;
+  for (let i = 0; i < input.length;) {
+    const c = input.charCodeAt(i);
+    const c1String = c === 0x90 || c === 0x98 || c === 0x9d || c === 0x9e || c === 0x9f;
+    if (c !== 0x1b && c !== 0x9b && c !== 0x9c && !c1String) {
+      i++;
+      continue;
+    }
+    pushText(i);
+    const start = i;
+    if (c === 0x9b || input[i + 1] === '[') {
+      i += c === 0x9b ? 1 : 2;
+      while (i < input.length) {
+        const n = input.charCodeAt(i++);
+        if (n >= 0x40 && n <= 0x7e) break;
       }
+    } else if (c === 0x9d || input[i + 1] === ']') {
+      i += c === 0x9d ? 1 : 2;
+      while (i < input.length) {
+        if (input.charCodeAt(i) === 0x07 || input.charCodeAt(i) === 0x9c) { i++; break; }
+        if (input.charCodeAt(i) === 0x1b && input[i + 1] === '\\') { i += 2; break; }
+        i++;
+      }
+    } else if (c1String || 'PX^_'.includes(input[i + 1] ?? '')) {
+      i += c1String ? 1 : 2;
+      while (i < input.length) {
+        if (input.charCodeAt(i) === 0x9c) { i++; break; }
+        if (input.charCodeAt(i) === 0x1b && input[i + 1] === '\\') { i += 2; break; }
+        i++;
+      }
+    } else {
+      i = Math.min(input.length, i + (c === 0x1b ? 2 : 1));
+    }
+    tokens.push({ value: input.slice(start, i), ansi: true });
+    textStart = i;
+  }
+  pushText(input.length);
+  return tokens;
+}
+
+export function stripAnsi(str: string): string {
+  let result = '';
+  for (const token of ansiTokens(str)) if (!token.ansi) result += token.value;
+  return result;
+}
+
+/** Return extended grapheme clusters without splitting emoji or combining text. */
+export function graphemes(str: string): string[] {
+  return Array.from(segmenter.segment(str), part => part.segment);
+}
+
+export type AnsiGraphemeEvent =
+  | { kind: 'ansi'; value: string }
+  | { kind: 'grapheme'; value: string; width: number; parts: AnsiToken[] };
+
+/**
+ * Segment printable text after removing controls, then restore controls at
+ * their original code-point boundaries. This keeps ANSI inside ZWJ/combining
+ * sequences from splitting one terminal grapheme into several cells.
+ */
+export function ansiGraphemeEvents(input: string): AnsiGraphemeEvent[] {
+  const controls: Array<{ offset: number; value: string }> = [];
+  let plain = '';
+  for (const token of ansiTokens(input)) {
+    if (token.ansi) controls.push({ offset: plain.length, value: token.value });
+    else plain += token.value;
+  }
+
+  const events: AnsiGraphemeEvent[] = [];
+  let controlIndex = 0;
+  for (const segment of segmenter.segment(plain)) {
+    const start = segment.index;
+    const end = start + segment.segment.length;
+    while (controlIndex < controls.length && controls[controlIndex].offset === start) {
+      events.push({ kind: 'ansi', value: controls[controlIndex++].value });
     }
 
-    // East Asian Full-width and Wide characters
-    if (isFullWidth(code)) {
-      width += 2;
-    } else if (code === 0x09) {
-      // Tab — we handle this at a higher level
-      width += 4;
-    } else {
-      width += 1;
+    const parts: AnsiToken[] = [];
+    let textIndex = start;
+    while (controlIndex < controls.length && controls[controlIndex].offset < end) {
+      const control = controls[controlIndex++];
+      if (control.offset > textIndex) {
+        parts.push({ value: plain.slice(textIndex, control.offset), ansi: false });
+      }
+      parts.push({ value: control.value, ansi: true });
+      textIndex = control.offset;
     }
+    if (textIndex < end) parts.push({ value: plain.slice(textIndex, end), ansi: false });
+    events.push({
+      kind: 'grapheme',
+      value: segment.segment,
+      width: graphemeWidth(segment.segment),
+      parts,
+    });
   }
+  while (controlIndex < controls.length) {
+    events.push({ kind: 'ansi', value: controls[controlIndex++].value });
+  }
+  return events;
+}
+
+/** Measure one extended grapheme cluster in terminal cells. */
+export function graphemeWidth(cluster: string): number {
+  if (!cluster || cluster === '\n' || cluster === '\r') return 0;
+  if (cluster === '\t') return 4;
+
+  const codepoints = Array.from(cluster);
+  const first = codepoints[0].codePointAt(0)!;
+  if (first === 0 || first < 0x20 || (first >= 0x7f && first < 0xa0)) return 0;
+
+  // Default emoji-presentation code points and explicit VS16 sequences use
+  // two cells. Extended_Pictographic alone is insufficient: many symbols
+  // (such as gear, scissors, and text heart) default to one-cell text.
+  if (
+    EMOJI_PRESENTATION.test(cluster) ||
+    /\u20e3/u.test(cluster) ||
+    /[\u{1f1e6}-\u{1f1ff}]{2}/u.test(cluster) ||
+    /\ufe0f/u.test(cluster)
+  ) return 2;
+
+  // A cluster made entirely of combining/default-ignorable characters has no
+  // width. Otherwise the base character determines the width.
+  if (codepoints.every(ch => MARK.test(ch) || CONTROL.test(ch))) return 0;
+  return isFullWidth(first) ? 2 : 1;
+}
+
+/** Measure visible terminal-cell width, ignoring ANSI control sequences. */
+export function stringWidth(str: string): number {
+  let width = 0;
+  for (const cluster of graphemes(stripAnsi(str))) width += graphemeWidth(cluster);
   return width;
 }
 
-/** Check if a Unicode code point is full-width */
+/** Check whether a Unicode code point has East Asian Wide/Fullwidth width. */
 function isFullWidth(code: number): boolean {
   return (
-    (code >= 0x1100 && code <= 0x115f) || // Hangul Jamo
-    (code >= 0x2e80 && code <= 0x303e) || // CJK Radicals, Kangxi, Ideographic Description
-    (code >= 0x3040 && code <= 0x33bf) || // Hiragana, Katakana, Bopomofo, etc.
-    (code >= 0x3400 && code <= 0x4dbf) || // CJK Unified Ideographs Extension A
-    (code >= 0x4e00 && code <= 0xa4cf) || // CJK Unified Ideographs, Yi
-    (code >= 0xac00 && code <= 0xd7a3) || // Hangul Syllables
-    (code >= 0xf900 && code <= 0xfaff) || // CJK Compatibility Ideographs
-    (code >= 0xfe30 && code <= 0xfe6f) || // CJK Compatibility Forms, Small Form Variants
-    (code >= 0xff01 && code <= 0xff60) || // Fullwidth Forms
-    (code >= 0xffe0 && code <= 0xffe6)    // Fullwidth Signs
+    code >= 0x1100 && (
+      code <= 0x115f ||
+      code === 0x2329 || code === 0x232a ||
+      (code >= 0x2e80 && code <= 0x303e) ||
+      (code >= 0x3040 && code <= 0xa4cf) ||
+      (code >= 0xac00 && code <= 0xd7a3) ||
+      (code >= 0xf900 && code <= 0xfaff) ||
+      (code >= 0xfe10 && code <= 0xfe19) ||
+      (code >= 0xfe30 && code <= 0xfe6f) ||
+      (code >= 0xff00 && code <= 0xff60) ||
+      (code >= 0xffe0 && code <= 0xffe6) ||
+      (code >= 0x1b000 && code <= 0x1b2ff) ||
+      (code >= 0x20000 && code <= 0x3fffd)
+    )
   );
 }
 
 /**
- * Truncate a string to a maximum visible width, stripping ANSI codes as needed.
+ * Truncate to a visible width without splitting a grapheme or dropping ANSI
+ * sequences already encountered.
  */
 export function truncate(str: string, maxWidth: number): string {
   if (maxWidth <= 0) return '';
   if (stringWidth(str) <= maxWidth) return str;
 
-  let width = 0;
   let result = '';
-  let inEscape = false;
-  let escapeSeq = '';
+  let width = 0;
+  const sgr = new SgrState();
+  let linkActive = false;
+  const trackControl = (control: string): void => {
+    sgr.apply(control);
+    const link = /^(?:\x1b\]|\x9d)8;[^;]*;(.*?)(?:\x07|\x1b\\|\x9c)$/.exec(control);
+    if (link) linkActive = link[1].length > 0;
+  };
 
-  for (let i = 0; i < str.length; i++) {
-    const ch = str[i];
-
-    if (inEscape) {
-      escapeSeq += ch;
-      // Check for end of escape sequence
-      if (/[A-Za-z~]/.test(ch) || (escapeSeq.startsWith('\x1b]') && ch === '\\' && escapeSeq[escapeSeq.length - 2] === '\x1b')) {
-        result += escapeSeq;
-        inEscape = false;
-        escapeSeq = '';
-      }
+  for (const event of ansiGraphemeEvents(str)) {
+    if (event.kind === 'ansi') {
+      result += event.value;
+      trackControl(event.value);
       continue;
     }
-
-    if (ch === '\x1b' || ch === '\x9b') {
-      inEscape = true;
-      escapeSeq = ch;
-      continue;
+    if (width + event.width > maxWidth) break;
+    for (const part of event.parts) {
+      result += part.value;
+      if (part.ansi) trackControl(part.value);
     }
-
-    const code = ch.charCodeAt(0);
-    const charWidth = isFullWidth(code) ? 2 : 1;
-
-    if (width + charWidth > maxWidth) break;
-    width += charWidth;
-    result += ch;
+    width += event.width;
   }
+  if (sgr.toString()) result += SGR.reset;
+  if (linkActive) result += resetHyperlink();
+  return result;
+}
 
+/**
+ * Cut a visible cell range while retaining ANSI state encountered before the
+ * range. This mirrors x/ansi Cut's cell-based indexing and is used by ranges.
+ */
+export function sliceAnsi(str: string, start: number, end = Number.POSITIVE_INFINITY): string {
+  start = Math.max(0, start);
+  end = Math.max(start, end);
+  let position = 0;
+  let prefix = '';
+  let result = '';
+  let started = false;
+
+  for (const event of ansiGraphemeEvents(str)) {
+    if (event.kind === 'ansi') {
+      if (started) result += event.value;
+      else prefix += event.value;
+      continue;
+    }
+    const next = position + event.width;
+    if (next <= start) {
+      for (const part of event.parts) if (part.ansi) prefix += part.value;
+      position = next;
+      continue;
+    }
+    if (position >= end) break;
+    if (!started) {
+      result = prefix;
+      started = true;
+    }
+    for (const part of event.parts) result += part.value;
+    position = next;
+  }
   return result;
 }
 

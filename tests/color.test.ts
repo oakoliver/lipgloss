@@ -274,9 +274,9 @@ describe('complementary', () => {
 describe('darken', () => {
   it('should darken white by 50%', () => {
     const result = darken('#ffffff', 0.5) as RGBColor;
-    expect(result.r).toBe(128);
-    expect(result.g).toBe(128);
-    expect(result.b).toBe(128);
+    expect(result.r).toBe(127);
+    expect(result.g).toBe(127);
+    expect(result.b).toBe(127);
   });
   it('should darken to black at 100%', () => {
     const result = darken('#ffffff', 1.0) as RGBColor;
@@ -295,7 +295,7 @@ describe('darken', () => {
     const result = darken('#0000ff', 0.75) as RGBColor;
     expect(result.r).toBe(0);
     expect(result.g).toBe(0);
-    expect(result.b).toBe(64); // 255 * 0.25 ≈ 64
+    expect(result.b).toBe(63);
   });
   it('should darken black by 10% (stays black)', () => {
     const result = darken('#000000', 0.1) as RGBColor;
@@ -317,9 +317,9 @@ describe('darken', () => {
 describe('lighten', () => {
   it('should lighten black by 50%', () => {
     const result = lighten('#000000', 0.5) as RGBColor;
-    expect(result.r).toBe(128);
-    expect(result.g).toBe(128);
-    expect(result.b).toBe(128);
+    expect(result.r).toBe(127);
+    expect(result.g).toBe(127);
+    expect(result.b).toBe(127);
   });
   it('should cap at 255', () => {
     const result = lighten('#ff0000', 1.0) as RGBColor;
@@ -331,8 +331,8 @@ describe('lighten', () => {
   it('should lighten red by 25%', () => {
     const result = lighten('#ff0000', 0.25) as RGBColor;
     expect(result.r).toBe(255);
-    expect(result.g).toBe(64); // 0 + 255*0.25 ≈ 64
-    expect(result.b).toBe(64);
+    expect(result.g).toBe(63);
+    expect(result.b).toBe(63);
   });
   it('should lighten blue by 75%', () => {
     const result = lighten('#0000ff', 0.75) as RGBColor;
@@ -365,39 +365,23 @@ describe('alpha', () => {
     expect(result!.g).toBe(128);
     expect(result!.b).toBe(64);
   });
-  it('should apply half opacity', () => {
+  it('changes opacity without premultiplying RGB channels', () => {
     const result = alpha('#ff8040', 0.5);
-    expect(result).not.toBeNull();
-    expect(result!.r).toBe(128);
-    expect(result!.g).toBe(64);
-    expect(result!.b).toBe(32);
+    expect(result).toEqual({ r: 255, g: 128, b: 64, a: 127 });
   });
-  it('should apply quarter opacity', () => {
+  it('truncates the 8-bit alpha channel', () => {
     const result = alpha('#ff8040', 0.25);
-    expect(result).not.toBeNull();
-    expect(result!.r).toBe(64);
-    expect(result!.g).toBe(32);
-    expect(result!.b).toBe(16);
+    expect(result).toEqual({ r: 255, g: 128, b: 64, a: 63 });
   });
-  it('should handle alpha=0 as fully transparent', () => {
+  it('handles alpha=0 as fully transparent without losing color', () => {
     const result = alpha('#ffffff', 0);
-    expect(result).toEqual({ r: 0, g: 0, b: 0 });
+    expect(result).toEqual({ r: 255, g: 255, b: 255, a: 0 });
   });
-  it('should clamp alpha above 1.0', () => {
-    const result = alpha('#ff0000', 1.5);
-    expect(result).not.toBeNull();
-    // Clamped to 1.0
-    expect(result!.r).toBe(255);
-    expect(result!.g).toBe(0);
-    expect(result!.b).toBe(0);
+  it('clamps opacity above 1.0', () => {
+    expect(alpha('#ff0000', 1.5)).toEqual({ r: 255, g: 0, b: 0, a: 255 });
   });
-  it('should clamp alpha below 0', () => {
-    const result = alpha('#ff0000', -0.5);
-    expect(result).not.toBeNull();
-    // Clamped to 0
-    expect(result!.r).toBe(0);
-    expect(result!.g).toBe(0);
-    expect(result!.b).toBe(0);
+  it('clamps opacity below 0', () => {
+    expect(alpha('#ff0000', -0.5)).toEqual({ r: 255, g: 0, b: 0, a: 0 });
   });
   it('should return null for NO_COLOR', () => {
     expect(alpha(NO_COLOR, 0.5)).toBeNull();
