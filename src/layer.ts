@@ -1,4 +1,4 @@
-import { ansiGraphemeEvents, graphemeWidth, resetHyperlink } from './ansi.js';
+import { ansiGraphemeEvents, graphemeWidth, resetHyperlink, setHyperlink } from './ansi.js';
 import { height, width } from './size.js';
 import { SgrState } from './sgr.js';
 
@@ -201,37 +201,51 @@ export class Canvas implements Screen, Drawable {
     }
   }
 
+  /**
+   * Render the canvas. Mirrors ultraviolet's `Line.Render` + `TrimSpace`:
+   * blank cells close the pen and link and are deferred, the style is written
+   * before the link, links use x/ansi (BEL-terminated) sequences, and each line
+   * ends by closing the link and then the style (`ESC[m`). Trailing spaces
+   * are trimmed.
+   */
   render(): string {
     return this.cells.map(row => {
-      let last = row.length - 1;
-      while (last >= 0) {
-        const cell = row[last];
-        if (cell.continuation || ((cell.content === '' || cell.content === ' ') && !cell.style && !cell.link)) last--;
-        else break;
-      }
       let output = '';
-      let activeStyle = '';
-      let activeLink = { url: '', params: '' };
-      for (let x = 0; x <= last; x++) {
-        const cell = row[x];
+      let pending = '';
+      let pen = '';
+      let link = { url: '', params: '' };
+      for (const cell of row) {
         if (cell.continuation) continue;
-        const nextLink = cell.link ?? { url: '', params: '' };
-        if (nextLink.url !== activeLink.url || nextLink.params !== activeLink.params) {
-          if (activeLink.url) output += resetHyperlink();
-          if (nextLink.url) output += `\x1b]8;${nextLink.params};${nextLink.url}\x1b\\`;
-          activeLink = nextLink;
+        const style = cell.style ?? '';
+        const next = cell.link ?? { url: '', params: '' };
+        if ((cell.content === '' || cell.content === ' ') && !style && !next.url) {
+          if (pen) { output += '\x1b[m'; pen = ''; }
+          if (link.url) { output += resetHyperlink(); link = { url: '', params: '' }; }
+          pending += ' ';
+          continue;
         }
-        const nextStyle = cell.style ?? '';
-        if (nextStyle !== activeStyle) {
-          if (activeStyle) output += '\x1b[0m';
-          output += nextStyle;
-          activeStyle = nextStyle;
+        output += pending;
+        pending = '';
+        if (!style && pen) { output += '\x1b[m'; pen = ''; }
+        if (style !== pen) {
+          // ultraviolet writes a minimal SGR diff here; the port resets and
+          // reapplies the full pen when switching between two styles.
+          if (pen) output += '\x1b[m';
+          output += style;
+          pen = style;
+        }
+        const linkChanged = next.url !== link.url || next.params !== link.params;
+        if (linkChanged && link.url) { output += resetHyperlink(); link = { url: '', params: '' }; }
+        if (next.url !== link.url || next.params !== link.params) {
+          output += setHyperlink(next.url, next.params);
+          link = next;
         }
         output += cell.content || ' ';
       }
-      if (activeStyle) output += '\x1b[0m';
-      if (activeLink.url) output += resetHyperlink();
-      return output;
+      output += pending;
+      if (link.url) output += resetHyperlink();
+      if (pen) output += '\x1b[m';
+      return output.replace(/ +$/, '');
     }).join('\n');
   }
 }

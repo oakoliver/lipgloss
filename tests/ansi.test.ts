@@ -70,13 +70,13 @@ describe('fgColor / bgColor / ulColor', () => {
 
 describe('hyperlink', () => {
   it('should produce OSC hyperlink sequence', () => {
-    expect(setHyperlink('https://example.com')).toBe('\x1b]8;;https://example.com\x1b\\');
+    expect(setHyperlink('https://example.com')).toBe('\x1b]8;;https://example.com\x07');
   });
   it('should produce reset hyperlink', () => {
-    expect(resetHyperlink()).toBe('\x1b]8;;\x1b\\');
+    expect(resetHyperlink()).toBe('\x1b]8;;\x07');
   });
   it('should include params in hyperlink', () => {
-    expect(setHyperlink('https://example.com', 'id=foo')).toBe('\x1b]8;id=foo;https://example.com\x1b\\');
+    expect(setHyperlink('https://example.com', 'id=foo')).toBe('\x1b]8;id=foo;https://example.com\x07');
   });
 });
 
@@ -135,14 +135,14 @@ describe('truncate', () => {
 describe('styled', () => {
   it('should wrap text with bold', () => {
     const result = styled('Hi', { bold: true });
-    expect(result).toBe('\x1b[1mHi\x1b[0m');
+    expect(result).toBe('\x1b[1mHi\x1b[m');
   });
   it('should wrap with multiple attributes', () => {
     const result = styled('Hi', { bold: true, italic: true });
     expect(result).toContain('\x1b[1m');
     expect(result).toContain('\x1b[3m');
     expect(result).toContain('Hi');
-    expect(result).toEndWith('\x1b[0m');
+    expect(result).toEndWith('\x1b[m');
   });
   it('should add foreground color', () => {
     const result = styled('Hi', { fg: { type: 'rgb', value: 0, r: 255, g: 0, b: 0 } });

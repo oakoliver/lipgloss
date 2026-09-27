@@ -68,10 +68,11 @@ describe('Lip Gloss v2.0.5 Unicode cell semantics', () => {
     expect(stripAnsi(truncate(input, 3))).toBe('A👨‍👩‍👧‍👦');
   });
 
-  it('closes a C1 OSC 8 hyperlink when truncation cuts its linked text', () => {
+  it('keeps the closing C1 OSC 8 sequence when truncation cuts its linked text', () => {
+    // Like x/ansi Truncate: escapes past the cut are kept verbatim.
     const output = truncate('\x9d8;;https://example.com\x9clink\x9d8;;\x9c', 1);
     expect(stripAnsi(output)).toBe('l');
-    expect(output.endsWith('\x1b]8;;\x1b\\')).toBe(true);
+    expect(output).toBe('\x9d8;;https://example.com\x9cl\x9d8;;\x9c');
   });
 
 
@@ -278,8 +279,8 @@ describe('profiles, gradients, borders, and layers', () => {
     wrapWriter.write('\x9cA\n');
     wrapWriter.close();
     const output = chunks.join('');
-    expect(output).toContain('\x1b[m\x1b]8;;\x1b\\\n');
-    expect(output).toContain('\x1b]8;;https://example.com\x1b\\\x1b[31m');
+    expect(output).toContain('\x1b[m\x1b]8;;\x07\n');
+    expect(output).toContain('\x1b]8;;https://example.com\x07\x1b[31m');
   });
 
   it('downsamples colors, preserves ASCII styles, and strips non-TTY controls', () => {

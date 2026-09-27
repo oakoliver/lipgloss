@@ -1,4 +1,4 @@
-import { ansiGraphemeEvents, ansiTokens, resetHyperlink } from './ansi.js';
+import { ansiGraphemeEvents, ansiTokens, resetHyperlink, setHyperlink } from './ansi.js';
 import { AnsiStreamDecoder } from './stream.js';
 import { SgrState } from './sgr.js';
 
@@ -51,7 +51,7 @@ export class WrapWriter {
           if (this.activeLink.url) output += resetHyperlink();
           output += '\n';
           if (this.activeLink.url) {
-            output += `\x1b]8;${this.activeLink.params};${this.activeLink.url}\x1b\\`;
+            output += setHyperlink(this.activeLink.url, this.activeLink.params);
           }
           output += this.sgr.toString();
         }
@@ -60,6 +60,15 @@ export class WrapWriter {
     }
     if (output) this.target.write(output);
     return count;
+  }
+
+  /**
+   * @internal Return (without writing) input held back while waiting for a
+   * split escape sequence or UTF-8 character to complete. Go's byte-wise
+   * writer has already passed such bytes through by this point.
+   */
+  flushPending(): string {
+    return this.stream.finish();
   }
 
   close(): void {
@@ -224,9 +233,13 @@ export function wrap(input: string, width: number, breakpoints = ''): string {
   flushTrailingSpace();
   addWord();
 
+  // Upstream returns buf.String() before its deferred WrapWriter.Close runs,
+  // so the style/link resets Close would append never reach the result: an
+  // unclosed link or style in the input stays open, exactly as in Go.
   let result = '';
   const writer = new WrapWriter({ write: chunk => { result += String(chunk); } });
   writer.write(buf);
-  writer.close();
+  const trailing = writer.flushPending();
+  if (trailing) result += trailing;
   return result;
 }

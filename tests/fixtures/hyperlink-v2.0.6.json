@@ -1,0 +1,2858 @@
+[
+ {
+  "name": "link-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\clic\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007k\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u001b\\clic\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007k\u001b]8;;\u0007   \n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u001b\\ "
+ },
+ {
+  "name": "link-st",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u001b\\clic\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\click\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u001b\\click\u001b]8;;\u0007  \n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007   \n\u001b]8;;https://example.com\u0007now\u001b]8;;\u001b\\    "
+ },
+ {
+  "name": "link-st",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u001b\\click h\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\click here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u001b\\click here\u001b]8;;\u0007  \n\u001b]8;;https://example.com\u0007now\u001b]8;;\u001b\\         "
+ },
+ {
+  "name": "link-st",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u001b\\click here n\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\c\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\cli\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\click \u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "writer",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "writer",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "writer",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "ranges",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;https://example.com\u001b\\cl\u001b]8;;\u001b\\\u001b[1mick \u001b[m\u001b]8;;https://example.com\u001b\\here now\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "link-st",
+  "kind": "canvas",
+  "in": "\u001b]8;;https://example.com\u001b\\click here now\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-st",
+  "kind": "wrap",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the\u001b]8;;\u0007 \n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the \u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "wrap",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the\u001b]8;;\u0007    \n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007   \n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u001b\\   "
+ },
+ {
+  "name": "params-st",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the doc\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "wrap",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs\u001b]8;;\u0007    \n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u001b\\        "
+ },
+ {
+  "name": "params-st",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs pag\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\t\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the do\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "writer",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "writer",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "writer",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "ranges",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\th\u001b]8;;\u001b\\\u001b[1me do\u001b[m\u001b]8;id=42;https://example.com/a?b=c\u001b\\cs page\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "params-st",
+  "kind": "canvas",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u001b\\the docs page\u001b]8;;\u001b\\",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-st",
+  "kind": "wrap",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 4,
+  "opt": "",
+  "out": "see\n\u001b]8;;http://a.b\u001b\\the\u001b]8;;\u0007\n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u001b\\\nfor\nmore\ninfo\nplea\nse"
+ },
+ {
+  "name": "mid-st",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 4,
+  "opt": "width",
+  "out": "see \n\u001b]8;;http://a.b\u001b\\the\u001b]8;;\u0007 \n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u001b\\\nfor \nmore\ninfo\nplea\nse  "
+ },
+ {
+  "name": "mid-st",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "see \u001b]8;;http://a.b\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "wrap",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 7,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u001b\\the\u001b]8;;\u0007\n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u001b\\\nfor\nmore\ninfo\nplease"
+ },
+ {
+  "name": "mid-st",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 7,
+  "opt": "width",
+  "out": "see \u001b]8;;http://a.b\u001b\\the\u001b]8;;\u0007\n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u001b\\   \nfor    \nmore   \ninfo   \nplease "
+ },
+ {
+  "name": "mid-st",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "see \u001b]8;;http://a.b\u001b\\the\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "wrap",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 12,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\\nfor more\ninfo please"
+ },
+ {
+  "name": "mid-st",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 12,
+  "opt": "width",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\\nfor more    \ninfo please "
+ },
+ {
+  "name": "mid-st",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://a.b\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 1,
+  "opt": "",
+  "out": "s\u001b]8;;http://a.b\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 3,
+  "opt": "",
+  "out": "see\u001b]8;;http://a.b\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 6,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u001b\\th\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "mid-st",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 100,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please"
+ },
+ {
+  "name": "mid-st",
+  "kind": "writer",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 0,
+  "opt": "whole",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please"
+ },
+ {
+  "name": "mid-st",
+  "kind": "writer",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 1,
+  "opt": "chunk",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please"
+ },
+ {
+  "name": "mid-st",
+  "kind": "writer",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 3,
+  "opt": "chunk",
+  "out": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please"
+ },
+ {
+  "name": "mid-st",
+  "kind": "ranges",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 0,
+  "opt": "2-6",
+  "out": "se\u001b]8;;http://a.b\u001b\\\u001b]8;;\u001b\\\u001b[1me th\u001b[m\u001b]8;;http://a.b\u001b\\e docs\u001b]8;;\u001b\\ for more info please"
+ },
+ {
+  "name": "mid-st",
+  "kind": "canvas",
+  "in": "see \u001b]8;;http://a.b\u001b\\the docs\u001b]8;;\u001b\\ for more info please",
+  "n": 0,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "wrap",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u001b\\\u001b[m\ntail\nword\ns"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007 \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u001b\\\u001b[m\ntail\nword\ns   "
+ },
+ {
+  "name": "sgr-st",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "wrap",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u001b\\\u001b[m\ntail\nwords"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold\u001b[m\u001b]8;;\u0007   \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007    \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007   \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u001b\\\u001b[m   \ntail   \nwords  "
+ },
+ {
+  "name": "sgr-st",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold re\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "wrap",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink text\u001b]8;;\u001b\\\u001b[m\ntail words"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red\u001b[m\u001b]8;;\u0007    \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink text\u001b]8;;\u001b\\\u001b[m   \ntail words  "
+ },
+ {
+  "name": "sgr-st",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red lin\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\b\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bol\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold r\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "writer",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "writer",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "writer",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words"
+ },
+ {
+  "name": "sgr-st",
+  "kind": "ranges",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bold red link text\u001b]8;;\u001b\\\u001b[m tail words",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\bo\u001b]8;;\u001b\\\u001b[m\u001b[1mld r\u001b[m\u001b[1;31m\u001b]8;id=x;http://a.b\u001b\\ed link text\u001b]8;;\u001b\\\u001b[m tail words"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\firs\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007t\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007seco\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007nd\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u001b\\\nend"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;http://m.l\u001b\\firs\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007t\u001b]8;;\u0007   \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007seco\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007nd\u001b]8;;\u0007  \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u001b\\\nend "
+ },
+ {
+  "name": "multiline-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://m.l\u001b\\firs\nseco\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\first\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u001b\\\nend"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;http://m.l\u001b\\first\u001b]8;;\u0007  \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007   \n\u001b]8;;http://m.l\u0007second\u001b]8;;\u0007 \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007   \n\u001b]8;;http://m.l\u0007here\u001b]8;;\u001b\\   \nend    "
+ },
+ {
+  "name": "multiline-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://m.l\u001b\\first l\nsecond \u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u001b\\ end"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;http://m.l\u001b\\first line\u001b]8;;\u0007  \n\u001b]8;;http://m.l\u0007second line\u001b]8;;\u0007 \n\u001b]8;;http://m.l\u0007here\u001b]8;;\u001b\\ end    "
+ },
+ {
+  "name": "multiline-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://m.l\u001b\\first line  \nsecond line \u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\f\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\fir\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\first \u001b]8;;\u001b\\"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;http://m.l\u001b\\first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u001b\\ end"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://m.l\u001b\\first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u001b\\ end"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://m.l\u001b\\first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u001b\\ end"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "ranges",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;http://m.l\u001b\\fi\u001b]8;;\u001b\\\u001b[1mrst \u001b[m\u001b]8;;http://m.l\u001b\\line\nsecond line here\u001b]8;;\u001b\\ end"
+ },
+ {
+  "name": "multiline-st",
+  "kind": "canvas",
+  "in": "\u001b]8;;http://m.l\u001b\\first line\nsecond line here\u001b]8;;\u001b\\ end",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "open-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\neve\u001b]8;;\u0007\n\u001b]8;;http://open\u0007r\u001b]8;;\u0007\n\u001b]8;;http://open\u0007clos\u001b]8;;\u0007\n\u001b]8;;http://open\u0007ed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link\u001b]8;;\u0007\n\u001b]8;;http://open\u0007text"
+ },
+ {
+  "name": "open-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;http://open\u001b\\neve\u001b]8;;\u0007\n\u001b]8;;http://open\u0007r\u001b]8;;\u0007   \n\u001b]8;;http://open\u0007clos\u001b]8;;\u0007\n\u001b]8;;http://open\u0007ed\u001b]8;;\u0007  \n\u001b]8;;http://open\u0007link\u001b]8;;\u0007\n\u001b]8;;http://open\u0007text"
+ },
+ {
+  "name": "open-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://open\u001b\\neve"
+ },
+ {
+  "name": "open-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\never\u001b]8;;\u0007\n\u001b]8;;http://open\u0007closed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link\u001b]8;;\u0007\n\u001b]8;;http://open\u0007text"
+ },
+ {
+  "name": "open-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;http://open\u001b\\never\u001b]8;;\u0007  \n\u001b]8;;http://open\u0007closed\u001b]8;;\u0007 \n\u001b]8;;http://open\u0007link\u001b]8;;\u0007   \n\u001b]8;;http://open\u0007text   "
+ },
+ {
+  "name": "open-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://open\u001b\\never c"
+ },
+ {
+  "name": "open-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\never closed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link text"
+ },
+ {
+  "name": "open-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;http://open\u001b\\never closed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link text   "
+ },
+ {
+  "name": "open-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://open\u001b\\never closed"
+ },
+ {
+  "name": "open-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\"
+ },
+ {
+  "name": "open-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\n"
+ },
+ {
+  "name": "open-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\nev"
+ },
+ {
+  "name": "open-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\never "
+ },
+ {
+  "name": "open-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u001b\\never closed link text"
+ },
+ {
+  "name": "open-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;http://open\u001b\\never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "open-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://open\u001b\\never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "open-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://open\u001b\\never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "open-st",
+  "kind": "ranges",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;http://open\u001b\\ne\u001b[1mver \u001b[m\u001b]8;;http://open\u001b\\closed link text"
+ },
+ {
+  "name": "open-st",
+  "kind": "canvas",
+  "in": "\u001b]8;;http://open\u001b\\never closed link text",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "bold-st",
+  "kind": "wrap",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 4,
+  "opt": "",
+  "out": "a\n\u001b[1m\u001b]8;;http://b.c\u001b\\bold\u001b[m\u001b]8;;\u0007\n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u001b\\\u001b[m\n\u001b[1mb\u001b[m\nend"
+ },
+ {
+  "name": "bold-st",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 4,
+  "opt": "width",
+  "out": "a   \n\u001b[1m\u001b]8;;http://b.c\u001b\\bold\u001b[m\u001b]8;;\u0007\n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u001b\\\u001b[m\n\u001b[1mb\u001b[m   \nend "
+ },
+ {
+  "name": "bold-st",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bo\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "wrap",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 7,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold\u001b[m\u001b]8;;\u0007\n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u001b\\ b\u001b[m\nend"
+ },
+ {
+  "name": "bold-st",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 7,
+  "opt": "width",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold\u001b[m\u001b]8;;\u0007 \n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u001b\\ b\u001b[m \nend    "
+ },
+ {
+  "name": "bold-st",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold \u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "wrap",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 12,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\\u001b[m\n\u001b[1mb\u001b[m end"
+ },
+ {
+  "name": "bold-st",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 12,
+  "opt": "width",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\\u001b[m \n\u001b[1mb\u001b[m end       "
+ },
+ {
+  "name": "bold-st",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ \u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b[1m\u001b]8;;http://b.c\u001b\\\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 1,
+  "opt": "",
+  "out": "a\u001b[1m\u001b]8;;http://b.c\u001b\\\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 3,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\b\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 6,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold\u001b]8;;\u001b\\\u001b[m"
+ },
+ {
+  "name": "bold-st",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 100,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end"
+ },
+ {
+  "name": "bold-st",
+  "kind": "writer",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 0,
+  "opt": "whole",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end"
+ },
+ {
+  "name": "bold-st",
+  "kind": "writer",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 1,
+  "opt": "chunk",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end"
+ },
+ {
+  "name": "bold-st",
+  "kind": "writer",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 3,
+  "opt": "chunk",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end"
+ },
+ {
+  "name": "bold-st",
+  "kind": "ranges",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 0,
+  "opt": "2-6",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u001b\\\u001b]8;;\u001b\\\u001b[m\u001b[1mbold\u001b[m\u001b[1m\u001b]8;;http://b.c\u001b\\ link\u001b]8;;\u001b\\ b\u001b[m end"
+ },
+ {
+  "name": "bold-st",
+  "kind": "canvas",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u001b\\bold link\u001b]8;;\u001b\\ b\u001b[m end",
+  "n": 0,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "wide-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\日本\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007語の\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007テキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;http://cjk\u001b\\日本\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007語の\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007テキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007\u001b]8;;\u001b\\x   "
+ },
+ {
+  "name": "wide-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://cjk\u001b\\日本\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007のテキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語\u001b]8;;\u0007 \n\u001b]8;;http://cjk\u0007のテキ\u001b]8;;\u0007 \n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u001b\\x  "
+ },
+ {
+  "name": "wide-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u001b\\x       "
+ },
+ {
+  "name": "wide-st",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキ\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\日\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語\u001b]8;;\u001b\\"
+ },
+ {
+  "name": "wide-st",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "writer",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "ranges",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;http://cjk\u001b\\日\u001b]8;;\u001b\\\u001b[1m本語\u001b[m\u001b]8;;http://cjk\u001b\\のテキスト\u001b]8;;\u001b\\x"
+ },
+ {
+  "name": "wide-st",
+  "kind": "canvas",
+  "in": "\u001b]8;;http://cjk\u001b\\日本語のテキスト\u001b]8;;\u001b\\x",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "link-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007clic\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007k\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007clic\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007k\u001b]8;;\u0007   \n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u0007 "
+ },
+ {
+  "name": "link-bel",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007clic\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007click\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007click\u001b]8;;\u0007  \n\u001b]8;;https://example.com\u0007here\u001b]8;;\u0007   \n\u001b]8;;https://example.com\u0007now\u001b]8;;\u0007    "
+ },
+ {
+  "name": "link-bel",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007click h\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007click here\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007click here\u001b]8;;\u0007  \n\u001b]8;;https://example.com\u0007now\u001b]8;;\u0007         "
+ },
+ {
+  "name": "link-bel",
+  "kind": "style",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007click here n\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007c\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007cli\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007click \u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "ranges",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;https://example.com\u0007cl\u001b]8;;\u0007\u001b[1mick \u001b[m\u001b]8;;https://example.com\u0007here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "link-bel",
+  "kind": "canvas",
+  "in": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the\u001b]8;;\u0007 \n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the \u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the\u001b]8;;\u0007    \n\u001b]8;id=42;https://example.com/a?b=c\u0007docs\u001b]8;;\u0007   \n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u0007   "
+ },
+ {
+  "name": "params-bel",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the doc\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs\u001b]8;;\u0007\n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs\u001b]8;;\u0007    \n\u001b]8;id=42;https://example.com/a?b=c\u0007page\u001b]8;;\u0007        "
+ },
+ {
+  "name": "params-bel",
+  "kind": "style",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs pag\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007t\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the do\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "writer",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "writer",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "writer",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "ranges",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007th\u001b]8;;\u0007\u001b[1me do\u001b[m\u001b]8;id=42;https://example.com/a?b=c\u0007cs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "params-bel",
+  "kind": "canvas",
+  "in": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;id=42;https://example.com/a?b=c\u0007the docs page\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "wrap",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 4,
+  "opt": "",
+  "out": "see\n\u001b]8;;http://a.b\u0007the\u001b]8;;\u0007\n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u0007\nfor\nmore\ninfo\nplea\nse"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 4,
+  "opt": "width",
+  "out": "see \n\u001b]8;;http://a.b\u0007the\u001b]8;;\u0007 \n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u0007\nfor \nmore\ninfo\nplea\nse  "
+ },
+ {
+  "name": "mid-bel",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "see \u001b]8;;http://a.b\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "wrap",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 7,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u0007the\u001b]8;;\u0007\n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u0007\nfor\nmore\ninfo\nplease"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 7,
+  "opt": "width",
+  "out": "see \u001b]8;;http://a.b\u0007the\u001b]8;;\u0007\n\u001b]8;;http://a.b\u0007docs\u001b]8;;\u0007   \nfor    \nmore   \ninfo   \nplease "
+ },
+ {
+  "name": "mid-bel",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "see \u001b]8;;http://a.b\u0007the\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "wrap",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 12,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007\nfor more\ninfo please"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 12,
+  "opt": "width",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007\nfor more    \ninfo please "
+ },
+ {
+  "name": "mid-bel",
+  "kind": "style",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://a.b\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 1,
+  "opt": "",
+  "out": "s\u001b]8;;http://a.b\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 3,
+  "opt": "",
+  "out": "see\u001b]8;;http://a.b\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 6,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u0007th\u001b]8;;\u0007"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "truncate",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 100,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "writer",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 0,
+  "opt": "whole",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "writer",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 1,
+  "opt": "chunk",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "writer",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 3,
+  "opt": "chunk",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "ranges",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 0,
+  "opt": "2-6",
+  "out": "se\u001b]8;;http://a.b\u0007\u001b]8;;\u0007\u001b[1me th\u001b[m\u001b]8;;http://a.b\u0007e docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "mid-bel",
+  "kind": "canvas",
+  "in": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please",
+  "n": 0,
+  "opt": "",
+  "out": "see \u001b]8;;http://a.b\u0007the docs\u001b]8;;\u0007 for more info please"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "wrap",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u0007\u001b[m\ntail\nword\ns"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007 \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u0007\u001b[m\ntail\nword\ns   "
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "wrap",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u0007\u001b[m\ntail\nwords"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold\u001b[m\u001b]8;;\u0007   \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mred\u001b[m\u001b]8;;\u0007    \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink\u001b[m\u001b]8;;\u0007   \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mtext\u001b]8;;\u0007\u001b[m   \ntail   \nwords  "
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold re\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "wrap",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red\u001b[m\u001b]8;;\u0007\n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink text\u001b]8;;\u0007\u001b[m\ntail words"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red\u001b[m\u001b]8;;\u0007    \n\u001b]8;id=x;http://a.b\u0007\u001b[1;31mlink text\u001b]8;;\u0007\u001b[m   \ntail words  "
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "style",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red lin\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007b\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bol\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold r\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "truncate",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "writer",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "writer",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "writer",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words"
+ },
+ {
+  "name": "sgr-bel",
+  "kind": "ranges",
+  "in": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bold red link text\u001b]8;;\u0007\u001b[m tail words",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b[1;31m\u001b]8;id=x;http://a.b\u0007bo\u001b]8;;\u0007\u001b[m\u001b[1mld r\u001b[m\u001b[1;31m\u001b]8;id=x;http://a.b\u0007ed link text\u001b]8;;\u0007\u001b[m tail words"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007firs\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007t\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007seco\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007nd\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u0007\nend"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;http://m.l\u0007firs\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007t\u001b]8;;\u0007   \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007seco\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007nd\u001b]8;;\u0007  \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u0007\nend "
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://m.l\u0007firs\nseco\u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007first\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u0007\nend"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;http://m.l\u0007first\u001b]8;;\u0007  \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007   \n\u001b]8;;http://m.l\u0007second\u001b]8;;\u0007 \n\u001b]8;;http://m.l\u0007line\u001b]8;;\u0007   \n\u001b]8;;http://m.l\u0007here\u001b]8;;\u0007   \nend    "
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://m.l\u0007first l\nsecond \u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007  \n\u001b]8;;http://m.l\u0007second line\u001b]8;;\u0007 \n\u001b]8;;http://m.l\u0007here\u001b]8;;\u0007 end    "
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://m.l\u0007first line  \nsecond line \u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007f\u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007fir\u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007first \u001b]8;;\u0007"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "ranges",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;http://m.l\u0007fi\u001b]8;;\u0007\u001b[1mrst \u001b[m\u001b]8;;http://m.l\u0007line\nsecond line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "multiline-bel",
+  "kind": "canvas",
+  "in": "\u001b]8;;http://m.l\u0007first line\nsecond line here\u001b]8;;\u0007 end",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://m.l\u0007first line\u001b]8;;\u0007\n\u001b]8;;http://m.l\u0007second line here\u001b]8;;\u0007 end"
+ },
+ {
+  "name": "open-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007neve\u001b]8;;\u0007\n\u001b]8;;http://open\u0007r\u001b]8;;\u0007\n\u001b]8;;http://open\u0007clos\u001b]8;;\u0007\n\u001b]8;;http://open\u0007ed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link\u001b]8;;\u0007\n\u001b]8;;http://open\u0007text"
+ },
+ {
+  "name": "open-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;http://open\u0007neve\u001b]8;;\u0007\n\u001b]8;;http://open\u0007r\u001b]8;;\u0007   \n\u001b]8;;http://open\u0007clos\u001b]8;;\u0007\n\u001b]8;;http://open\u0007ed\u001b]8;;\u0007  \n\u001b]8;;http://open\u0007link\u001b]8;;\u0007\n\u001b]8;;http://open\u0007text"
+ },
+ {
+  "name": "open-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://open\u0007neve"
+ },
+ {
+  "name": "open-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007never\u001b]8;;\u0007\n\u001b]8;;http://open\u0007closed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link\u001b]8;;\u0007\n\u001b]8;;http://open\u0007text"
+ },
+ {
+  "name": "open-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;http://open\u0007never\u001b]8;;\u0007  \n\u001b]8;;http://open\u0007closed\u001b]8;;\u0007 \n\u001b]8;;http://open\u0007link\u001b]8;;\u0007   \n\u001b]8;;http://open\u0007text   "
+ },
+ {
+  "name": "open-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://open\u0007never c"
+ },
+ {
+  "name": "open-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007never closed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link text"
+ },
+ {
+  "name": "open-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;http://open\u0007never closed\u001b]8;;\u0007\n\u001b]8;;http://open\u0007link text   "
+ },
+ {
+  "name": "open-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://open\u0007never closed"
+ },
+ {
+  "name": "open-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007"
+ },
+ {
+  "name": "open-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007n"
+ },
+ {
+  "name": "open-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007nev"
+ },
+ {
+  "name": "open-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007never "
+ },
+ {
+  "name": "open-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007never closed link text"
+ },
+ {
+  "name": "open-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;http://open\u0007never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "open-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://open\u0007never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "open-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://open\u0007never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "open-bel",
+  "kind": "ranges",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;http://open\u0007ne\u001b[1mver \u001b[m\u001b]8;;http://open\u0007closed link text"
+ },
+ {
+  "name": "open-bel",
+  "kind": "canvas",
+  "in": "\u001b]8;;http://open\u0007never closed link text",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://open\u0007never closed link text\u001b]8;;\u0007"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "wrap",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 4,
+  "opt": "",
+  "out": "a\n\u001b[1m\u001b]8;;http://b.c\u0007bold\u001b[m\u001b]8;;\u0007\n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u0007\u001b[m\n\u001b[1mb\u001b[m\nend"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 4,
+  "opt": "width",
+  "out": "a   \n\u001b[1m\u001b]8;;http://b.c\u0007bold\u001b[m\u001b]8;;\u0007\n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u0007\u001b[m\n\u001b[1mb\u001b[m   \nend "
+ },
+ {
+  "name": "bold-bel",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bo\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "wrap",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 7,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold\u001b[m\u001b]8;;\u0007\n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u0007 b\u001b[m\nend"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 7,
+  "opt": "width",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold\u001b[m\u001b]8;;\u0007 \n\u001b]8;;http://b.c\u0007\u001b[1mlink\u001b]8;;\u0007 b\u001b[m \nend    "
+ },
+ {
+  "name": "bold-bel",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold \u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "wrap",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 12,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007\u001b[m\n\u001b[1mb\u001b[m end"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 12,
+  "opt": "width",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007\u001b[m \n\u001b[1mb\u001b[m end       "
+ },
+ {
+  "name": "bold-bel",
+  "kind": "style",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 \u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b[1m\u001b]8;;http://b.c\u0007\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 1,
+  "opt": "",
+  "out": "a\u001b[1m\u001b]8;;http://b.c\u0007\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 3,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007b\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 6,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold\u001b]8;;\u0007\u001b[m"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "truncate",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 100,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "writer",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 0,
+  "opt": "whole",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "writer",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 1,
+  "opt": "chunk",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "writer",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 3,
+  "opt": "chunk",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "ranges",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 0,
+  "opt": "2-6",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007\u001b]8;;\u0007\u001b[m\u001b[1mbold\u001b[m\u001b[1m\u001b]8;;http://b.c\u0007 link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "bold-bel",
+  "kind": "canvas",
+  "in": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end",
+  "n": 0,
+  "opt": "",
+  "out": "a \u001b[1m\u001b]8;;http://b.c\u0007bold link\u001b]8;;\u0007 b\u001b[m end"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 4,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007語の\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007テキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 4,
+  "opt": "width",
+  "out": "\u001b]8;;http://cjk\u0007日本\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007語の\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007テキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007\u001b]8;;\u0007x   "
+ },
+ {
+  "name": "wide-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 4,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://cjk\u0007日本\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 7,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本語\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007のテキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 7,
+  "opt": "width",
+  "out": "\u001b]8;;http://cjk\u0007日本語\u001b]8;;\u0007 \n\u001b]8;;http://cjk\u0007のテキ\u001b]8;;\u0007 \n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007x  "
+ },
+ {
+  "name": "wide-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 7,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://cjk\u0007日本語\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "wrap",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 12,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 12,
+  "opt": "width",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキ\u001b]8;;\u0007\n\u001b]8;;http://cjk\u0007スト\u001b]8;;\u0007x       "
+ },
+ {
+  "name": "wide-bel",
+  "kind": "style",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 12,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキ\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 1,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 3,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 6,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本語\u001b]8;;\u0007"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "truncate",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 100,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 0,
+  "opt": "whole",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 1,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "writer",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 3,
+  "opt": "chunk",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "ranges",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 0,
+  "opt": "2-6",
+  "out": "\u001b]8;;http://cjk\u0007日\u001b]8;;\u0007\u001b[1m本語\u001b[m\u001b]8;;http://cjk\u0007のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "wide-bel",
+  "kind": "canvas",
+  "in": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;http://cjk\u0007日本語のテキスト\u001b]8;;\u0007x"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 0,
+  "opt": "plain",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 0,
+  "opt": "params",
+  "out": "\u001b]8;id=1;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 5,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007click\nhere \nnow\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 5,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1mclick\u001b[m\n\u001b[1mhere\u001b[m \n\u001b[1mnow\u001b[m\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 5,
+  "opt": "pad-center",
+  "out": " \u001b]8;;https://example.com\u0007cli \n ck  \n her \n  e  \n now\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 5,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007click\u001b]8;;\u0007"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 5,
+  "opt": "border-maxwidth",
+  "out": "┌────\n│\u001b]8;;https://example.com\u0007clic\n│here\n│now\u001b]8;;\u0007 \n└────"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 9,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007click    \nhere now\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 9,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1mclick\u001b[m    \n\u001b[1mhere now\u001b[m\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 9,
+  "opt": "pad-center",
+  "out": "  \u001b]8;;https://example.com\u0007click  \n  here   \n   now\u001b]8;;\u0007   "
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 9,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007click her\u001b]8;;\u0007"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 9,
+  "opt": "border-maxwidth",
+  "out": "┌────────\n│\u001b]8;;https://example.com\u0007click   \n│here now\u001b]8;;\u0007\n└────────"
+ },
+ {
+  "name": "text0",
+  "kind": "hyperlink",
+  "in": "click here now",
+  "n": 0,
+  "opt": "canvas",
+  "out": "\u001b]8;;https://example.com\u0007click here now\u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 0,
+  "opt": "plain",
+  "out": "\u001b]8;;https://example.com\u0007a longer label that wraps\u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 0,
+  "opt": "params",
+  "out": "\u001b]8;id=1;https://example.com\u0007a longer label that wraps\u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 5,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007a    \nlonge\nr    \nlabel\nthat \nwraps\u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 5,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1ma\u001b[m    \n\u001b[1mlonge\u001b[m\n\u001b[1mr\u001b[m    \n\u001b[1mlabel\u001b[m\n\u001b[1mthat\u001b[m \n\u001b[1mwraps\u001b[m\u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 5,
+  "opt": "pad-center",
+  "out": "  \u001b]8;;https://example.com\u0007a  \n lon \n ger \n lab \n el  \n tha \n  t  \n wra \n ps\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 5,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007a lon\u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 5,
+  "opt": "border-maxwidth",
+  "out": "┌────\n│\u001b]8;;https://example.com\u0007a   \n│long\n│r   \n│labe\n│that\n│wrap\u001b]8;;\u0007\n└────"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 9,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007a longer \nlabel    \nthat     \nwraps\u001b]8;;\u0007    "
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 9,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1ma longer\u001b[m \n\u001b[1mlabel\u001b[m    \n\u001b[1mthat\u001b[m     \n\u001b[1mwraps\u001b[m\u001b]8;;\u0007    "
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 9,
+  "opt": "pad-center",
+  "out": "    \u001b]8;;https://example.com\u0007a    \n longer  \n  label  \n  that   \n  wraps\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 9,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007a longer \u001b]8;;\u0007"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 9,
+  "opt": "border-maxwidth",
+  "out": "┌────────\n│\u001b]8;;https://example.com\u0007a longer\n│label   \n│that    \n│wraps\u001b]8;;\u0007   \n└────────"
+ },
+ {
+  "name": "text1",
+  "kind": "hyperlink",
+  "in": "a longer label that wraps",
+  "n": 0,
+  "opt": "canvas",
+  "out": "\u001b]8;;https://example.com\u0007a longer label that wraps\u001b]8;;\u0007"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 0,
+  "opt": "plain",
+  "out": "\u001b]8;;https://example.com\u0007line one\nline two\u001b]8;;\u0007"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 0,
+  "opt": "params",
+  "out": "\u001b]8;id=1;https://example.com\u0007line one\nline two\u001b]8;;\u0007"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 5,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007line \none  \nline \ntwo\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 5,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1mline\u001b[m \n\u001b[1mone\u001b[m  \n\u001b[1mline\u001b[m \n\u001b[1mtwo\u001b[m\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 5,
+  "opt": "pad-center",
+  "out": " \u001b]8;;https://example.com\u0007lin \n  e  \n one \n lin \n  e  \n two\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 5,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007line \nline \u001b]8;;\u0007"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 5,
+  "opt": "border-maxwidth",
+  "out": "┌────\n│\u001b]8;;https://example.com\u0007line\n│one \n│line\n│two\u001b]8;;\u0007 \n└────"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 9,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007line one \nline two\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 9,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1mline one\u001b[m \n\u001b[1mline two\u001b[m\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 9,
+  "opt": "pad-center",
+  "out": "  \u001b]8;;https://example.com\u0007line   \n   one   \n  line   \n   two\u001b]8;;\u0007   "
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 9,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007line one\nline two\u001b]8;;\u0007"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 9,
+  "opt": "border-maxwidth",
+  "out": "┌────────\n│\u001b]8;;https://example.com\u0007line one\n│line two\u001b]8;;\u0007\n└────────"
+ },
+ {
+  "name": "text2",
+  "kind": "hyperlink",
+  "in": "line one\nline two",
+  "n": 0,
+  "opt": "canvas",
+  "out": "\u001b]8;;https://example.com\u0007line one\u001b]8;;\u0007\n\u001b]8;;https://example.com\u0007line two\u001b]8;;\u0007"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 0,
+  "opt": "plain",
+  "out": "\u001b]8;;https://example.com\u0007日本語のテキスト\u001b]8;;\u0007"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 0,
+  "opt": "params",
+  "out": "\u001b]8;id=1;https://example.com\u0007日本語のテキスト\u001b]8;;\u0007"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 5,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007日本 \n語の \nテキ \nスト\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 5,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1m日本\u001b[m \n\u001b[1m語の\u001b[m \n\u001b[1mテキ\u001b[m \n\u001b[1mスト\u001b[m\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 5,
+  "opt": "pad-center",
+  "out": " \u001b]8;;https://example.com\u0007日  \n 本  \n 語  \n の  \n テ  \n キ  \n ス  \n ト\u001b]8;;\u0007  "
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 5,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007日本\u001b]8;;\u0007"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 5,
+  "opt": "border-maxwidth",
+  "out": "┌────\n│\u001b]8;;https://example.com\u0007日本\n│語の\n│テキ\n│スト\u001b]8;;\u0007\n└────"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 9,
+  "opt": "width",
+  "out": "\u001b]8;;https://example.com\u0007日本語の \nテキスト\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 9,
+  "opt": "bold-width",
+  "out": "\u001b]8;id=1;https://example.com\u0007\u001b[1m日本語の\u001b[m \n\u001b[1mテキスト\u001b[m\u001b]8;;\u0007 "
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 9,
+  "opt": "pad-center",
+  "out": " \u001b]8;;https://example.com\u0007日本語  \n のテキ  \n  スト\u001b]8;;\u0007   "
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 9,
+  "opt": "maxwidth",
+  "out": "\u001b]8;;https://example.com\u0007日本語の\u001b]8;;\u0007"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 9,
+  "opt": "border-maxwidth",
+  "out": "┌────────\n│\u001b]8;;https://example.com\u0007日本語の\n│テキスト\u001b]8;;\u0007\n└────────"
+ },
+ {
+  "name": "text3",
+  "kind": "hyperlink",
+  "in": "日本語のテキスト",
+  "n": 0,
+  "opt": "canvas",
+  "out": "\u001b]8;;https://example.com\u0007日本語のテキスト\u001b]8;;\u0007"
+ },
+ {
+  "name": "set",
+  "kind": "sethyperlink",
+  "in": "https://example.com",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;https://example.com\u0007"
+ },
+ {
+  "name": "set",
+  "kind": "sethyperlink",
+  "in": "https://example.com",
+  "n": 0,
+  "opt": "id=foo",
+  "out": "\u001b]8;id=foo;https://example.com\u0007"
+ },
+ {
+  "name": "reset",
+  "kind": "resethyperlink",
+  "in": "",
+  "n": 0,
+  "opt": "",
+  "out": "\u001b]8;;\u0007"
+ }
+]

@@ -1,4 +1,3 @@
-import { SgrState } from './sgr.js';
 
 /**
  * ANSI escape code utilities for terminal styling.
@@ -75,14 +74,17 @@ export function ulAnsi256(n: number): string {
   return `${CSI}58;5;${n}m`;
 }
 
-/** OSC hyperlink escape sequences */
+/**
+ * OSC 8 hyperlink escape sequences. Like x/ansi `SetHyperlink` (used by every
+ * Lip Gloss v2 path that emits links), these are terminated with BEL.
+ */
 export function setHyperlink(url: string, params?: string): string {
   const p = params ? params : '';
-  return `${ESC}]8;${p};${url}${ESC}\\`;
+  return `${ESC}]8;${p};${url}\x07`;
 }
 
 export function resetHyperlink(): string {
-  return `${ESC}]8;;${ESC}\\`;
+  return `${ESC}]8;;\x07`;
 }
 
 /**
@@ -260,75 +262,97 @@ function isFullWidth(code: number): boolean {
   );
 }
 
+/** A grapheme event that the x/ansi parser executes (C0 control) rather than prints. */
+function isExecute(value: string): boolean {
+  const c = value.charCodeAt(0);
+  return c < 0x20 || c === 0x7f;
+}
+
+/** Append only the control sequences interposed in a grapheme event. */
+function controlsOf(event: { parts: AnsiToken[] }): string {
+  let out = '';
+  for (const part of event.parts) if (part.ansi) out += part.value;
+  return out;
+}
+
 /**
- * Truncate to a visible width without splitting a grapheme or dropping ANSI
- * sequences already encountered.
+ * Truncate to a visible width without splitting a grapheme.
+ *
+ * Faithful port of x/ansi `Truncate(s, length, "")`: every escape sequence is
+ * kept, including those after the cut (so an OSC 8 hyperlink or SGR style is
+ * closed by the input's own closing sequence, with its original terminator);
+ * only printable text and C0 controls past the limit are dropped. Nothing is
+ * appended.
  */
 export function truncate(str: string, maxWidth: number): string {
-  if (maxWidth <= 0) return '';
   if (stringWidth(str) <= maxWidth) return str;
+  if (maxWidth < 0) return '';
 
   let result = '';
   let width = 0;
-  const sgr = new SgrState();
-  let linkActive = false;
-  const trackControl = (control: string): void => {
-    sgr.apply(control);
-    const link = /^(?:\x1b\]|\x9d)8;[^;]*;(.*?)(?:\x07|\x1b\\|\x9c)$/.exec(control);
-    if (link) linkActive = link[1].length > 0;
-  };
-
+  let ignoring = false;
   for (const event of ansiGraphemeEvents(str)) {
     if (event.kind === 'ansi') {
       result += event.value;
-      trackControl(event.value);
       continue;
     }
-    if (width + event.width > maxWidth) break;
-    for (const part of event.parts) {
-      result += part.value;
-      if (part.ansi) trackControl(part.value);
+    if (isExecute(event.value)) {
+      result += ignoring ? controlsOf(event) : event.parts.map(p => p.value).join('');
+      continue;
     }
+    if (!ignoring) {
+      // Go compares ASCII bytes before counting them (>=), but adds a UTF-8
+      // cluster's width first and then compares (>).
+      const ascii = event.value.charCodeAt(0) < 0x80;
+      if (ascii ? width >= maxWidth : width + event.width > maxWidth) ignoring = true;
+    }
+    if (ignoring) {
+      result += controlsOf(event);
+      continue;
+    }
+    result += event.parts.map(p => p.value).join('');
     width += event.width;
   }
-  if (sgr.toString()) result += SGR.reset;
-  if (linkActive) result += resetHyperlink();
   return result;
 }
 
 /**
- * Cut a visible cell range while retaining ANSI state encountered before the
- * range. This mirrors x/ansi Cut's cell-based indexing and is used by ranges.
+ * Remove `n` cells from the left. Faithful port of x/ansi
+ * `TruncateLeft(s, n, "")`: escape sequences in the removed part are kept, and
+ * a wide grapheme straddling the cut is kept whole.
  */
-export function sliceAnsi(str: string, start: number, end = Number.POSITIVE_INFINITY): string {
-  start = Math.max(0, start);
-  end = Math.max(start, end);
-  let position = 0;
-  let prefix = '';
+export function truncateLeft(str: string, n: number): string {
+  if (n <= 0) return str;
   let result = '';
-  let started = false;
-
+  let width = 0;
+  let ignoring = true;
   for (const event of ansiGraphemeEvents(str)) {
-    if (event.kind === 'ansi') {
-      if (started) result += event.value;
-      else prefix += event.value;
+    if (event.kind === 'ansi' || !ignoring) {
+      result += event.kind === 'ansi' ? event.value : event.parts.map(p => p.value).join('');
       continue;
     }
-    const next = position + event.width;
-    if (next <= start) {
-      for (const part of event.parts) if (part.ansi) prefix += part.value;
-      position = next;
-      continue;
+    if (!isExecute(event.value)) width += event.width;
+    if (width > n) {
+      ignoring = false;
+      result += event.parts.map(p => p.value).join('');
+    } else {
+      result += controlsOf(event);
     }
-    if (position >= end) break;
-    if (!started) {
-      result = prefix;
-      started = true;
-    }
-    for (const part of event.parts) result += part.value;
-    position = next;
   }
   return result;
+}
+
+/**
+ * Cut the visible cell range `[start, end)`. Faithful port of x/ansi `Cut`
+ * (used by `styleRanges`): `truncateLeft(truncate(s, end), start)`, so every
+ * escape sequence of the input is retained. With no `end`, this is
+ * `truncateLeft(s, start)`.
+ */
+export function sliceAnsi(str: string, start: number, end = Number.POSITIVE_INFINITY): string {
+  if (end === Number.POSITIVE_INFINITY) return truncateLeft(str, start);
+  if (end <= start) return '';
+  const right = truncate(str, end);
+  return start === 0 ? right : truncateLeft(right, start);
 }
 
 /**
@@ -393,7 +417,7 @@ export function styled(str: string, opts: AnsiStyleOptions): string {
   }
 
   if (prefix) {
-    suffix = SGR.reset;
+    suffix = `${CSI}m`; // ansi.ResetStyle, as in x/ansi Style.Styled
   }
 
   return prefix + str + suffix;

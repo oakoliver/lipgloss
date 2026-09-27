@@ -272,7 +272,7 @@ describe('Style render - bold', () => {
     const result = newStyle().bold(true).render('Hello');
     expect(result).toContain('\x1b[1m');
     expect(result).toContain('Hello');
-    expect(result).toContain('\x1b[0m');
+    expect(result).toContain('\x1b[m');
   });
 });
 
@@ -499,7 +499,7 @@ describe('Style hyperlink', () => {
     const result = newStyle().hyperlink('https://example.com').render('Click');
     expect(result).toContain('\x1b]8;');
     expect(result).toContain('https://example.com');
-    expect(result).toContain('\x1b]8;;\x1b\\');
+    expect(result).toContain('\x1b]8;;\x07');
   });
 });
 
@@ -779,15 +779,15 @@ describe('getFirstRune', () => {
 describe('Style render - exact ANSI output (Go parity)', () => {
   it('foreground #FF6AD2', () => {
     const result = newStyle().foreground('#FF6AD2').render('hello');
-    expect(result).toBe('\x1b[38;2;255;106;210mhello\x1b[0m');
+    expect(result).toBe('\x1b[38;2;255;106;210mhello\x1b[m');
   });
   it('bold', () => {
     const result = newStyle().bold(true).render('hello');
-    expect(result).toBe('\x1b[1mhello\x1b[0m');
+    expect(result).toBe('\x1b[1mhello\x1b[m');
   });
   it('italic', () => {
     const result = newStyle().italic(true).render('hello');
-    expect(result).toBe('\x1b[3mhello\x1b[0m');
+    expect(result).toBe('\x1b[3mhello\x1b[m');
   });
   it('underline', () => {
     const result = newStyle().underline(true).render('hello');
@@ -798,11 +798,11 @@ describe('Style render - exact ANSI output (Go parity)', () => {
   });
   it('blink', () => {
     const result = newStyle().blink(true).render('hello');
-    expect(result).toBe('\x1b[5mhello\x1b[0m');
+    expect(result).toBe('\x1b[5mhello\x1b[m');
   });
   it('faint', () => {
     const result = newStyle().faint(true).render('hello');
-    expect(result).toBe('\x1b[2mhello\x1b[0m');
+    expect(result).toBe('\x1b[2mhello\x1b[m');
   });
 });
 
@@ -1006,17 +1006,16 @@ describe('Style height with borders (Go parity)', () => {
 describe('Style hyperlink (Go parity)', () => {
   it('plain hyperlink', () => {
     const result = newStyle().hyperlink('https://example.com').render('Click');
-    expect(result).toContain('\x1b]8;;https://example.com\x1b\\');
-    expect(result).toContain('\x1b]8;;\x1b\\');
+    expect(result).toBe('\x1b]8;;https://example.com\x07Click\x1b]8;;\x07');
     expect(visible(result)).toBe('Click');
   });
   it('hyperlink with params', () => {
     const result = newStyle().hyperlink('https://example.com', 'id=123').render('Click');
-    expect(result).toContain('\x1b]8;id=123;https://example.com\x1b\\');
+    expect(result).toBe('\x1b]8;id=123;https://example.com\x07Click\x1b]8;;\x07');
   });
   it('hyperlink with bold + foreground', () => {
     const result = newStyle().bold(true).foreground('#ff0000').hyperlink('https://example.com').render('Click');
-    expect(result).toContain('\x1b]8;;https://example.com\x1b\\');
+    expect(result).toContain('\x1b]8;;https://example.com\x07');
     expect(result).toContain(SGR.bold);
     expect(result).toContain('\x1b[38;2;255;0;0m');
   });
