@@ -1,0 +1,2018 @@
+[
+ {
+  "name": "indented",
+  "kind": "wrap",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "",
+  "out": "\nhello\n\nworld\nnone"
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "plain",
+  "out": "      \nhello \n      \nworld \nnone  "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n hell \n o    \n      \n worl \n d    \n none "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "center",
+  "out": "      \nhello \n      \nworld \n none "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "right",
+  "out": "      \n hello\n      \n world\n  none"
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "tab2",
+  "out": "      \nhello \n      \nworld \nnone  "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "      \nhello \n      \nworld \nnone  "
+ },
+ {
+  "name": "indented",
+  "kind": "wrap",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "",
+  "out": "  hello\n    world\nnone"
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "plain",
+  "out": "  hello   \n    world \nnone      "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "pad",
+  "out": "   hello  \n          \n world    \n none     "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "center",
+  "out": "   hello  \n    world \n   none   "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "right",
+  "out": "     hello\n     world\n      none"
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "tab2",
+  "out": "  hello   \n    world \nnone      "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "  hello   \n    world \nnone      "
+ },
+ {
+  "name": "indented",
+  "kind": "wrap",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "",
+  "out": "  hello\n    world\nnone"
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "plain",
+  "out": "  hello             \n    world           \nnone                "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "pad",
+  "out": "   hello            \n     world          \n none               "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "center",
+  "out": "        hello       \n         world      \n        none        "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "right",
+  "out": "               hello\n               world\n                none"
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "tab2",
+  "out": "  hello             \n    world           \nnone                "
+ },
+ {
+  "name": "indented",
+  "kind": "style",
+  "in": "  hello\n    world\nnone",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "  hello             \n    world           \nnone                "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "wrap",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "",
+  "out": "\nthe\nquick\nbrown\nfox\njumps\nover\nthe\nlazy\ndog"
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "plain",
+  "out": "      \nthe   \nquick \nbrown \nfox   \njumps \nover  \nthe   \nlazy  \ndog   "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n the  \n quic \n k    \n brow \n n    \n fox  \n jump \n s    \n over \n the  \n lazy \n dog  "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "center",
+  "out": "      \n the  \nquick \nbrown \n fox  \njumps \n over \n the  \n lazy \n dog  "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "right",
+  "out": "      \n   the\n quick\n brown\n   fox\n jumps\n  over\n   the\n  lazy\n   dog"
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "tab2",
+  "out": "      \nthe   \nquick \nbrown \nfox   \njumps \nover  \nthe   \nlazy  \ndog   "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "      \nthe   \nquick \nbrown \nfox   \njumps \nover  \nthe   \nlazy  \ndog   "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "wrap",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "",
+  "out": "    the\nquick\nbrown fox\njumps over\nthe lazy\ndog"
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "plain",
+  "out": "    the   \nquick     \nbrown fox \njumps over\nthe lazy  \ndog       "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "pad",
+  "out": "     the  \n quick    \n brown    \n fox      \n jumps    \n over the \n lazy dog "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "center",
+  "out": "     the  \n  quick   \nbrown fox \njumps over\n the lazy \n   dog    "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "right",
+  "out": "       the\n     quick\n brown fox\njumps over\n  the lazy\n       dog"
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "tab2",
+  "out": "    the   \nquick     \nbrown fox \njumps over\nthe lazy  \ndog       "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "    the   \nquick     \nbrown fox \njumps over\nthe lazy  \ndog       "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "wrap",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "",
+  "out": "    the quick brown\nfox jumps over the\nlazy dog"
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "plain",
+  "out": "    the quick brown \nfox jumps over the  \nlazy dog            "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "pad",
+  "out": "     the quick      \n brown fox jumps    \n over the lazy dog  "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "center",
+  "out": "    the quick brown \n fox jumps over the \n      lazy dog      "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "right",
+  "out": "     the quick brown\n  fox jumps over the\n            lazy dog"
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "tab2",
+  "out": "    the quick brown \nfox jumps over the  \nlazy dog            "
+ },
+ {
+  "name": "indentWrap",
+  "kind": "style",
+  "in": "    the quick brown fox jumps over the lazy dog",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "    the quick brown \nfox jumps over the  \nlazy dog            "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "wrap",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "",
+  "out": "\nalpha\nbeta\ngamma\ndelta\n\nepsilo\nn zeta\neta\ntheta"
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "plain",
+  "out": "      \nalpha \nbeta  \ngamma \ndelta \n      \nepsilo\nn zeta\neta   \ntheta "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n alph \n a    \n beta \n gamm \n a    \n delt \n a    \n      \n epsi \n lon  \n zeta \n eta  \n thet \n a    "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "center",
+  "out": "      \nalpha \n beta \ngamma \ndelta \n      \nepsilo\nn zeta\n eta  \ntheta "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "right",
+  "out": "      \n alpha\n  beta\n gamma\n delta\n      \nepsilo\nn zeta\n   eta\n theta"
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "tab2",
+  "out": "      \nalpha \nbeta  \ngamma \ndelta \n      \nepsilo\nn zeta\neta   \ntheta "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "      \nalpha \nbeta  \ngamma \ndelta \n      \nepsilo\nn zeta\neta   \ntheta "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "wrap",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "",
+  "out": "  alpha\nbeta gamma\ndelta\n\nepsilon\nzeta eta\ntheta"
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "plain",
+  "out": "  alpha   \nbeta gamma\ndelta     \n          \nepsilon   \nzeta eta  \ntheta     "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "pad",
+  "out": "   alpha  \n beta     \n gamma    \n delta    \n          \n epsilon  \n zeta eta \n theta    "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "center",
+  "out": "   alpha  \nbeta gamma\n  delta   \n          \n epsilon  \n zeta eta \n  theta   "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "right",
+  "out": "     alpha\nbeta gamma\n     delta\n          \n   epsilon\n  zeta eta\n     theta"
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "tab2",
+  "out": "  alpha   \nbeta gamma\ndelta     \n          \nepsilon   \nzeta eta  \ntheta     "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "  alpha   \nbeta gamma\ndelta     \n          \nepsilon   \nzeta eta  \ntheta     "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "wrap",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "",
+  "out": "  alpha beta gamma\ndelta\n      epsilon zeta\neta theta"
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "plain",
+  "out": "  alpha beta gamma  \ndelta               \n      epsilon zeta  \neta theta           "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "pad",
+  "out": "   alpha beta gamma \n delta              \n       epsilon zeta \n eta theta          "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "center",
+  "out": "   alpha beta gamma \n       delta        \n       epsilon zeta \n     eta theta      "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "right",
+  "out": "    alpha beta gamma\n               delta\n        epsilon zeta\n           eta theta"
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "tab2",
+  "out": "  alpha beta gamma  \ndelta               \n      epsilon zeta  \neta theta           "
+ },
+ {
+  "name": "multiIndent",
+  "kind": "style",
+  "in": "  alpha beta gamma delta\n      epsilon zeta eta theta",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "  alpha beta gamma  \ndelta               \n      epsilon zeta  \neta theta           "
+ },
+ {
+  "name": "tabs",
+  "kind": "wrap",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "",
+  "out": "\tfoo\nbar\n\t\tbaz\nqux\nquux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "plain",
+  "out": "      \nfoo   \nbar   \n      \nbaz   \nqux   \nquux  "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n foo  \n bar  \n      \n baz  \n qux  \n quux "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "center",
+  "out": "      \n foo  \n bar  \n      \n baz  \n qux  \n quux "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "right",
+  "out": "      \n   foo\n   bar\n      \n   baz\n   qux\n  quux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "tab2",
+  "out": "  foo \nbar   \n      \nbaz   \nqux   \nquux  "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "    foo    \nbar        \n        baz\nqux        \nquux       "
+ },
+ {
+  "name": "tabs",
+  "kind": "wrap",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "",
+  "out": "\tfoo bar\n\t\tbaz qux\nquux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "plain",
+  "out": "    foo   \nbar       \n          \nbaz qux   \nquux      "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "pad",
+  "out": "     foo  \n bar      \n          \n baz qux  \n quux     "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "center",
+  "out": "     foo  \n   bar    \n          \n baz qux  \n   quux   "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "right",
+  "out": "       foo\n       bar\n          \n   baz qux\n      quux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "tab2",
+  "out": "  foo bar \n    baz   \nqux quux  "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "    foo bar    \n        baz qux\nquux           "
+ },
+ {
+  "name": "tabs",
+  "kind": "wrap",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "",
+  "out": "\tfoo bar\n\t\tbaz qux quux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "plain",
+  "out": "    foo bar         \n        baz qux quux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "pad",
+  "out": "     foo bar        \n         baz qux    \n quux               "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "center",
+  "out": "        foo bar     \n        baz qux quux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "right",
+  "out": "             foo bar\n        baz qux quux"
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "tab2",
+  "out": "  foo bar           \n    baz qux quux    "
+ },
+ {
+  "name": "tabs",
+  "kind": "style",
+  "in": "\tfoo bar\n\t\tbaz qux quux",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "    foo bar         \n        baz qux quux"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "wrap",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "",
+  "out": "abc\ndef\nghi\njkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "plain",
+  "out": "abc   \ndef   \nghi   \njkl   "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "pad",
+  "out": " abc  \n def  \n ghi  \n jkl  "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "center",
+  "out": " abc  \n def  \n ghi  \n jkl  "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "right",
+  "out": "   abc\n   def\n   ghi\n   jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "tab2",
+  "out": "abc   \ndef   \nghi   \njkl   "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "abc   \ndef   \nghi   \njkl   "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "wrap",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "",
+  "out": "abc    def\nghi    jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "plain",
+  "out": "abc    def\nghi    jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "pad",
+  "out": " abc      \n def      \n ghi      \n jkl      "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "center",
+  "out": "abc    def\nghi    jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "right",
+  "out": "abc    def\nghi    jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "tab2",
+  "out": "abc    def\nghi    jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "abc    def\nghi    jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "wrap",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "",
+  "out": "abc    def    ghi\njkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "plain",
+  "out": "abc    def    ghi   \njkl                 "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "pad",
+  "out": " abc    def    ghi  \n jkl                "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "center",
+  "out": " abc    def    ghi  \n        jkl         "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "right",
+  "out": "   abc    def    ghi\n                 jkl"
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "tab2",
+  "out": "abc    def    ghi   \njkl                 "
+ },
+ {
+  "name": "spaceAtBreak",
+  "kind": "style",
+  "in": "abc    def    ghi    jkl",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "abc    def    ghi   \njkl                 "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "wrap",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "",
+  "out": "a\n   \n  b"
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "plain",
+  "out": "a     \n      \n  b   "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "pad",
+  "out": " a    \n      \n   b  "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "center",
+  "out": "  a   \n      \n   b  "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "right",
+  "out": "     a\n      \n     b"
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "tab2",
+  "out": "a     \n      \n  b   "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "a     \n      \n  b   "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "wrap",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "",
+  "out": "a\n   \n  b"
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "plain",
+  "out": "a         \n          \n  b       "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "pad",
+  "out": " a        \n          \n   b      "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "center",
+  "out": "    a     \n          \n     b    "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "right",
+  "out": "         a\n          \n         b"
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "tab2",
+  "out": "a         \n          \n  b       "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "a         \n          \n  b       "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "wrap",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "",
+  "out": "a\n   \n  b"
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "plain",
+  "out": "a                   \n                    \n  b                 "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "pad",
+  "out": " a                  \n                    \n   b                "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "center",
+  "out": "         a          \n                    \n          b         "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "right",
+  "out": "                   a\n                    \n                   b"
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "tab2",
+  "out": "a                   \n                    \n  b                 "
+ },
+ {
+  "name": "blankIndent",
+  "kind": "style",
+  "in": "a\n   \n  b",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "a                   \n                    \n  b                 "
+ },
+ {
+  "name": "trailing",
+  "kind": "wrap",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "",
+  "out": "foo   \n  bar"
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "plain",
+  "out": "foo   \n  bar "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "pad",
+  "out": " foo  \n      \n bar  "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "center",
+  "out": "foo   \n  bar "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "right",
+  "out": "foo   \n   bar"
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "tab2",
+  "out": "foo   \n  bar "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "foo   \n  bar "
+ },
+ {
+  "name": "trailing",
+  "kind": "wrap",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "",
+  "out": "foo   \n  bar  "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "plain",
+  "out": "foo       \n  bar     "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "pad",
+  "out": " foo      \n   bar    "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "center",
+  "out": "  foo     \n   bar    "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "right",
+  "out": "    foo   \n     bar  "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "tab2",
+  "out": "foo       \n  bar     "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "foo       \n  bar     "
+ },
+ {
+  "name": "trailing",
+  "kind": "wrap",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "",
+  "out": "foo   \n  bar  "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "plain",
+  "out": "foo                 \n  bar               "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "pad",
+  "out": " foo                \n   bar              "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "center",
+  "out": "       foo          \n        bar         "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "right",
+  "out": "              foo   \n               bar  "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "tab2",
+  "out": "foo                 \n  bar               "
+ },
+ {
+  "name": "trailing",
+  "kind": "style",
+  "in": "foo   \n  bar  ",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "foo                 \n  bar               "
+ },
+ {
+  "name": "longWord",
+  "kind": "wrap",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "",
+  "out": "\nsuperc\nalifra\ngilist\nic\nword"
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "plain",
+  "out": "      \nsuperc\nalifra\ngilist\nic    \nword  "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n supe \n rcal \n ifra \n gili \n stic \n word "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "center",
+  "out": "      \nsuperc\nalifra\ngilist\n  ic  \n word "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "right",
+  "out": "      \nsuperc\nalifra\ngilist\n    ic\n  word"
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "tab2",
+  "out": "      \nsuperc\nalifra\ngilist\nic    \nword  "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "      \nsuperc\nalifra\ngilist\nic    \nword  "
+ },
+ {
+  "name": "longWord",
+  "kind": "wrap",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "",
+  "out": "\nsupercalif\nragilistic\nword"
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "plain",
+  "out": "          \nsupercalif\nragilistic\nword      "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "pad",
+  "out": "          \n supercal \n ifragili \n stic     \n word     "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "center",
+  "out": "          \nsupercalif\nragilistic\n   word   "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "right",
+  "out": "          \nsupercalif\nragilistic\n      word"
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "tab2",
+  "out": "          \nsupercalif\nragilistic\nword      "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "          \nsupercalif\nragilistic\nword      "
+ },
+ {
+  "name": "longWord",
+  "kind": "wrap",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "",
+  "out": "\nsupercalifragilistic\nword"
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "plain",
+  "out": "                    \nsupercalifragilistic\nword                "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "pad",
+  "out": "                    \n supercalifragilist \n ic word            "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "center",
+  "out": "                    \nsupercalifragilistic\n        word        "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "right",
+  "out": "                    \nsupercalifragilistic\n                word"
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "tab2",
+  "out": "                    \nsupercalifragilistic\nword                "
+ },
+ {
+  "name": "longWord",
+  "kind": "style",
+  "in": "  supercalifragilistic word",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "                    \nsupercalifragilistic\nword                "
+ },
+ {
+  "name": "hyphen",
+  "kind": "wrap",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "",
+  "out": "  well-k\nnown\nlong-\nwinded\nthing"
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "plain",
+  "out": "  well-k\nnown    \nlong-   \nwinded  \nthing   "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n well \n -kno \n wn   \n long \n -win \n ded  \n thin \n g    "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "center",
+  "out": "  well-k\n  nown  \n long-  \n winded \n thing  "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "right",
+  "out": "  well-k\n    nown\n   long-\n  winded\n   thing"
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "tab2",
+  "out": "  well-k\nnown    \nlong-   \nwinded  \nthing   "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "  well-k\nnown    \nlong-   \nwinded  \nthing   "
+ },
+ {
+  "name": "hyphen",
+  "kind": "wrap",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "",
+  "out": "  well-\nknown \nlong-winde\nd thing"
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "plain",
+  "out": "  well-   \nknown     \nlong-winde\nd thing   "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "pad",
+  "out": "   well-  \n known    \n long-    \n winded   \n thing    "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "center",
+  "out": "   well-  \n  known   \nlong-winde\n d thing  "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "right",
+  "out": "     well-\n    known \nlong-winde\n   d thing"
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "tab2",
+  "out": "  well-   \nknown     \nlong-winde\nd thing   "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "  well-   \nknown     \nlong-winde\nd thing   "
+ },
+ {
+  "name": "hyphen",
+  "kind": "wrap",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "",
+  "out": "  well-known long-\nwinded thing"
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "plain",
+  "out": "  well-known long-  \nwinded thing        "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "pad",
+  "out": "   well-known long- \n winded thing       "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "center",
+  "out": "   well-known long- \n    winded thing    "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "right",
+  "out": "    well-known long-\n        winded thing"
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "tab2",
+  "out": "  well-known long-  \nwinded thing        "
+ },
+ {
+  "name": "hyphen",
+  "kind": "style",
+  "in": "  well-known long-winded thing",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "  well-known long-  \nwinded thing        "
+ },
+ {
+  "name": "cjk",
+  "kind": "wrap",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "",
+  "out": "\n日本語\nのテキ\nスト\nです"
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "plain",
+  "out": "      \n日本語\nのテキ\nスト  \nです  "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n 日本 \n 語の \n テキ \n スト \n です "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "center",
+  "out": "      \n日本語\nのテキ\n スト \n です "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "right",
+  "out": "      \n日本語\nのテキ\n  スト\n  です"
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "tab2",
+  "out": "      \n日本語\nのテキ\nスト  \nです  "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "      \n日本語\nのテキ\nスト  \nです  "
+ },
+ {
+  "name": "cjk",
+  "kind": "wrap",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "",
+  "out": "\n日本語のテ\nキスト\nです"
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "plain",
+  "out": "          \n日本語のテ\nキスト    \nです      "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "pad",
+  "out": "          \n 日本語の \n テキスト \n です     "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "center",
+  "out": "          \n日本語のテ\n  キスト  \n   です   "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "right",
+  "out": "          \n日本語のテ\n    キスト\n      です"
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "tab2",
+  "out": "          \n日本語のテ\nキスト    \nです      "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "          \n日本語のテ\nキスト    \nです      "
+ },
+ {
+  "name": "cjk",
+  "kind": "wrap",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "",
+  "out": "  日本語のテキスト\nです"
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "plain",
+  "out": "  日本語のテキスト  \nです                "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "pad",
+  "out": "   日本語のテキスト \n です               "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "center",
+  "out": "   日本語のテキスト \n        です        "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "right",
+  "out": "    日本語のテキスト\n                です"
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "tab2",
+  "out": "  日本語のテキスト  \nです                "
+ },
+ {
+  "name": "cjk",
+  "kind": "style",
+  "in": "  日本語のテキスト です",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "  日本語のテキスト  \nです                "
+ },
+ {
+  "name": "ansi",
+  "kind": "wrap",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "",
+  "out": "  \u001b[31mred\u001b[m\n\u001b[31mtext\u001b[m\n\u001b[31mhere\u001b[0m\nand\nmore\nwords"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "plain",
+  "out": "  \u001b[31mred\u001b[m \n\u001b[31mtext\u001b[m  \n\u001b[31mhere\u001b[0m  \nand   \nmore  \nwords "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "pad",
+  "out": "      \n \u001b[31mred\u001b[m  \n \u001b[31mtext\u001b[m \n \u001b[31mhere\u001b[0m \n and  \n more \n word \n s    "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "center",
+  "out": "  \u001b[31mred\u001b[m \n \u001b[31mtext\u001b[m \n \u001b[31mhere\u001b[0m \n and  \n more \nwords "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "right",
+  "out": "   \u001b[31mred\u001b[m\n  \u001b[31mtext\u001b[m\n  \u001b[31mhere\u001b[0m\n   and\n  more\n words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "tab2",
+  "out": "  \u001b[31mred\u001b[m \n\u001b[31mtext\u001b[m  \n\u001b[31mhere\u001b[0m  \nand   \nmore  \nwords "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "  \u001b[31mred\u001b[m \n\u001b[31mtext\u001b[m  \n\u001b[31mhere\u001b[0m  \nand   \nmore  \nwords "
+ },
+ {
+  "name": "ansi",
+  "kind": "wrap",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "",
+  "out": "  \u001b[31mred text\u001b[m\n\u001b[31mhere\u001b[0m and\nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "plain",
+  "out": "  \u001b[31mred text\u001b[m\n\u001b[31mhere\u001b[0m and  \nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "pad",
+  "out": "   \u001b[31mred\u001b[m    \n \u001b[31mtext\u001b[m     \n \u001b[31mhere\u001b[0m and \n more     \n words    "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "center",
+  "out": "  \u001b[31mred text\u001b[m\n \u001b[31mhere\u001b[0m and \nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "right",
+  "out": "  \u001b[31mred text\u001b[m\n  \u001b[31mhere\u001b[0m and\nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "tab2",
+  "out": "  \u001b[31mred text\u001b[m\n\u001b[31mhere\u001b[0m and  \nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "  \u001b[31mred text\u001b[m\n\u001b[31mhere\u001b[0m and  \nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "wrap",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "",
+  "out": "  \u001b[31mred text here\u001b[0m and\nmore words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "plain",
+  "out": "  \u001b[31mred text here\u001b[0m and \nmore words          "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "pad",
+  "out": "   \u001b[31mred text here\u001b[0m    \n and more words     "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "center",
+  "out": "  \u001b[31mred text here\u001b[0m and \n     more words     "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "right",
+  "out": "   \u001b[31mred text here\u001b[0m and\n          more words"
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "tab2",
+  "out": "  \u001b[31mred text here\u001b[0m and \nmore words          "
+ },
+ {
+  "name": "ansi",
+  "kind": "style",
+  "in": "  \u001b[31mred text here\u001b[0m and more words",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "  \u001b[31mred text here\u001b[0m and \nmore words          "
+ },
+ {
+  "name": "code",
+  "kind": "wrap",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "",
+  "out": "func\nmain()\n{\n\tif x\n{\n\nreturn\n\t}\n}"
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "plain",
+  "out": "func  \nmain()\n{     \n    if\nx {   \n      \nreturn\n    } \n}     "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "pad",
+  "out": " func \n main \n () { \n      \n if x \n {    \n      \n retu \n rn   \n      \n }    \n }    "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "center",
+  "out": " func \nmain()\n  {   \n    if\n x {  \n      \nreturn\n    } \n  }   "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "right",
+  "out": "  func\nmain()\n     {\n    if\n   x {\n      \nreturn\n     }\n     }"
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "tab2",
+  "out": "func  \nmain()\n{     \n  if x\n{     \n      \nreturn\n  }   \n}     "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 6,
+  "opt": "tabkeep",
+  "out": "func    \nmain()  \n{       \n    if x\n{       \n        \nreturn  \n    }   \n}       "
+ },
+ {
+  "name": "code",
+  "kind": "wrap",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "",
+  "out": "func\nmain() {\n\tif x {\n\t\treturn\n\t}\n}"
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "plain",
+  "out": "func      \nmain() {  \n    if x {\n          \nreturn    \n    }     \n}         "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "pad",
+  "out": " func     \n main() { \n     if x \n {        \n          \n return   \n     }    \n }        "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "center",
+  "out": "   func   \n main() { \n    if x {\n          \n  return  \n      }   \n    }     "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "right",
+  "out": "      func\n  main() {\n    if x {\n          \n    return\n         }\n         }"
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "tab2",
+  "out": "func      \nmain() {  \n  if x {  \n    return\n  }       \n}         "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 10,
+  "opt": "tabkeep",
+  "out": "func          \nmain() {      \n    if x {    \n        return\n    }         \n}             "
+ },
+ {
+  "name": "code",
+  "kind": "wrap",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "",
+  "out": "func main() {\n\tif x {\n\t\treturn\n\t}\n}"
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "plain",
+  "out": "func main() {       \n    if x {          \n        return      \n    }               \n}                   "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "pad",
+  "out": " func main() {      \n     if x {         \n         return     \n     }              \n }                  "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "center",
+  "out": "   func main() {    \n         if x {     \n           return   \n           }        \n         }          "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "right",
+  "out": "       func main() {\n              if x {\n              return\n                   }\n                   }"
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "tab2",
+  "out": "func main() {       \n  if x {            \n    return          \n  }                 \n}                   "
+ },
+ {
+  "name": "code",
+  "kind": "style",
+  "in": "func main() {\n\tif x {\n\t\treturn\n\t}\n}",
+  "w": 20,
+  "opt": "tabkeep",
+  "out": "func main() {       \n    if x {          \n        return      \n    }               \n}                   "
+ }
+]

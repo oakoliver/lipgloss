@@ -4,7 +4,7 @@ CSS-like terminal styling for JavaScript. Zero dependencies, multi-runtime (Node
 
 Ported from [charmbracelet/lipgloss](https://github.com/charmbracelet/lipgloss) (Go) to TypeScript.
 
-Parity target: [Lip Gloss v2.0.5](https://github.com/charmbracelet/lipgloss/releases/tag/v2.0.5).
+Parity target: [Lip Gloss v2.0.6](https://github.com/charmbracelet/lipgloss/releases/tag/v2.0.6).
 The Go-only synchronous terminal query functions `BackgroundColor` and
 `HasDarkBackground`, and the legacy Windows console helper
 `EnableLegacyWindowsANSI`, are excluded: JavaScript's supported Node, Bun, and

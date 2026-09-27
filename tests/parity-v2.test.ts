@@ -176,7 +176,7 @@ describe('ANSI-aware layout, wrapping, and ranges', () => {
   it('wraps on cell boundaries and carries ANSI state across lines', () => {
     const result = wrap('\x1b[31mhello world\x1b[0m', 5);
     expect(stripAnsi(result)).toBe('hello\nworld');
-    expect(result).toContain('\x1b[0m\n\x1b[31m');
+    expect(result).toBe('\x1b[31mhello\x1b[m\n\x1b[31mworld\x1b[0m');
   });
 
   it('styles cell ranges while preserving pre-existing ANSI', () => {
@@ -278,7 +278,7 @@ describe('profiles, gradients, borders, and layers', () => {
     wrapWriter.write('\x9cA\n');
     wrapWriter.close();
     const output = chunks.join('');
-    expect(output).toContain('\x1b[0m\x1b]8;;\x1b\\\n');
+    expect(output).toContain('\x1b[m\x1b]8;;\x1b\\\n');
     expect(output).toContain('\x1b]8;;https://example.com\x1b\\\x1b[31m');
   });
 
@@ -337,7 +337,7 @@ describe('profiles, gradients, borders, and layers', () => {
     wrapWriter.write('\x1b[1;31mA\x1b[39m\nB');
     wrapWriter.close();
     const output = chunks.join('');
-    expect(output).toContain('\x1b[39m\x1b[0m\n\x1b[1mB');
+    expect(output).toBe('\x1b[1;31mA\x1b[39m\x1b[m\n\x1b[1mB\x1b[m');
     expect(output.slice(output.indexOf('\n'))).not.toContain('\x1b[31m');
   });
 
