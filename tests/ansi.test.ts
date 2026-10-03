@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'bun:test';
+import { wrap } from '../src/wrap.js';
 import {
   SGR, stringWidth, stripAnsi, truncate, styled,
   fgColor, fgAnsi256, fgBasic, bgColor, bgAnsi256, bgBasic,
@@ -164,5 +165,18 @@ describe('styled', () => {
   it('should handle strikethrough', () => {
     const result = styled('Hi', { strikethrough: true });
     expect(result).toContain('\x1b[9m');
+  });
+});
+
+describe('line and paragraph separators', () => {
+  // Grapheme_Cluster_Break=Control upstream: no width, and wrap() treats them
+  // as zero-width whitespace (x/ansi wrapCases "Paragraph Separator").
+  it('have no width', () => {
+    expect(stringWidth('a b c')).toBe(3);
+  });
+
+  it('do not push wrapped text onto a new line', () => {
+    const input = '0 1 2 3 4';
+    expect(wrap(input, 7)).toBe(input);
   });
 });

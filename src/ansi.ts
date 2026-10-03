@@ -95,7 +95,9 @@ export function resetHyperlink(): string {
 const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
 const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
 const MARK = /\p{Mark}/u;
-const CONTROL = /[\p{Cc}\p{Cf}]/u;
+// Grapheme_Cluster_Break=Control: no cell width (includes the line and
+// paragraph separators, U+2028/U+2029).
+const CONTROL = /[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]/u;
 
 export interface AnsiToken {
   value: string;
