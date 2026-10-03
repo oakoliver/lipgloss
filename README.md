@@ -2,6 +2,12 @@
 
 CSS-like terminal styling for JavaScript. Zero dependencies, multi-runtime (Node.js, Bun, Deno).
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/oakoliver/lipgloss/main/assets/poster.gif" width="760" alt="Terminal recording of bun examples/poster.ts: a block-letter LIPGLOSS banner with a pink-to-teal gradient, four border styles, a confirmation dialog placed on a patterned field, and two overlapping layers on a blend2D gradient">
+</p>
+
+<p align="center"><sub><code>bun examples/poster.ts</code>. Every picture in this README is recorded from the code in <code>examples/</code> with <a href="https://github.com/oakoliver/vhs">@oakoliver/vhs</a>; the tapes are in <code>assets/tapes/</code>.</sub></p>
+
 Ported from [charmbracelet/lipgloss](https://github.com/charmbracelet/lipgloss) (Go) to TypeScript.
 
 Parity target: [Lip Gloss v2.0.6](https://github.com/charmbracelet/lipgloss/releases/tag/v2.0.6).
@@ -74,6 +80,8 @@ const body = base.faint(true);
 
 #### Text Attributes
 
+<img src="https://raw.githubusercontent.com/oakoliver/lipgloss/main/assets/text-attributes.png" width="480" alt="bold, italic, underline, double, curly, dotted and dashed underlines, strikethrough, reverse and faint text rendered by lipgloss, each next to the method that produces it">
+
 ```ts
 s.bold(true)
 s.italic(true)
@@ -86,6 +94,8 @@ s.faint(true)
 ```
 
 #### Colors
+
+<img src="https://raw.githubusercontent.com/oakoliver/lipgloss/main/assets/colors.png" width="640" alt="The 16 ANSI colors, the 256-color palette with its grayscale ramp, two true-color blend1D gradients, and darken, lighten and complementary swatches">
 
 ```ts
 // Hex (#RGB or #RRGGBB)
@@ -138,6 +148,8 @@ s.marginBackground('#333')  // color the margin area
 ```
 
 #### Borders
+
+<img src="https://raw.githubusercontent.com/oakoliver/lipgloss/main/assets/borders.png" width="700" alt="Every built-in border style: normal, rounded, thick, double, block, ascii, outer and inner half-block, hidden and markdown, plus a box with a different color per side">
 
 ```ts
 import {
@@ -206,6 +218,10 @@ s.getFrameSize()           // { x, y }
 ```
 
 ### Layout
+
+<img src="https://raw.githubusercontent.com/oakoliver/lipgloss/main/assets/layout.gif" width="720" alt="Terminal recording of bun examples/layout.ts, the port of Lip Gloss's own layout demo: tabs, a gradient title, a dialog with buttons, styled lists, a color grid, three wrapped text columns and a status bar">
+
+<img src="https://raw.githubusercontent.com/oakoliver/lipgloss/main/assets/joins.png" width="760" alt="joinHorizontal with Top, Center and Bottom alignment, joinVertical with Left, Center and Right alignment, and place centering a box in a dotted area">
 
 ```ts
 import {

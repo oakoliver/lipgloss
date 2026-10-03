@@ -8,6 +8,10 @@ step. Use a truecolor terminal.
 |---------|---------------|-----|
 | `layout.ts` | Port of upstream's `examples/layout`: tabs, a dialog, a color grid, lists, history columns and a status bar. | `bun examples/layout.ts` |
 | `poster.ts` | One-screen tour: block-letter banner with a rotated `blend2D` gradient, border gallery (`borderForegroundBlend`, per-side colors, half-block borders), a dialog `place()`d on a patterned field, and overlapping layers from `newCompositor()`. All content is made up. `--goldens` adds a badge scoring this checkout against the upstream Go goldens in `tests/fixtures`. Best at 124 columns. | `bun examples/poster.ts` |
+| `text-attributes.ts` | Bold, italic, every underline style, strikethrough, reverse and faint, each next to the method that produces it. | `bun examples/text-attributes.ts` |
+| `colors.ts` | The 16 ANSI colors, the 256-color palette, `blend1D` gradients, and `darken`/`lighten`/`complementary`. | `bun examples/colors.ts` |
+| `borders.ts` | Every built-in border style, plus per-side border colors. | `bun examples/borders.ts` |
+| `joins.ts` | `joinHorizontal`, `joinVertical` and `place` with each alignment. | `bun examples/joins.ts` |
 | `wrap-parity.ts` | The same highlighted Go snippet wrapped at 40 and 30 columns by the 1.1.0 `wrap()` (which stripped indentation), by this checkout, and by upstream Go `lipgloss.Wrap`, compared byte for byte. The input is a bundled, made-up snippet. `--goldens` also scores both TypeScript versions against the upstream wrap goldens in `tests/fixtures`. Best at 136 columns. | `bun examples/wrap-parity.ts` |
 
 ## wrap-parity requirements
