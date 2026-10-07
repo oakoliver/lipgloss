@@ -1,6 +1,6 @@
 {
   "name": "@oakoliver/lipgloss",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "CSS-like terminal styling for JavaScript. Zero dependencies, multi-runtime (Node.js, Bun, Deno). Fluent API for colors, borders, padding, margins, alignment, and layout.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -60,9 +60,6 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "esbuild": "^0.28.2",
-    "typescript": "^5.0.0"
-  },
-  "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "engines": {

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3
+
+- Fix: `typescript` is no longer a required peer dependency. It was only needed
+  to build the package, but npm installed it for every consumer of lipgloss and
+  of the ports built on it, plain JavaScript projects included.
+
 ## 1.1.2
 
 - Fix: OSC 8 hyperlinks are now ended with BEL, matching Lip Gloss v2.0.6 /
