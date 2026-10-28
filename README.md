@@ -18,6 +18,8 @@ Deno streams do not share Go's synchronous `term.File` query contract, and
 modern JavaScript runtimes enable Windows virtual-terminal processing
 themselves.
 
+**Read the article:** [Getting Started with Lip Gloss](https://engineering.oakoliver.com/articles/getting-started-lipgloss-terminal-styling-typescript) · [Porting Lip Gloss and Glamour from Go](https://engineering.oakoliver.com/articles/porting-go-terminal-ui-ecosystem-to-typescript-glamour-lipgloss)
+
 ## Install
 
 ```bash
