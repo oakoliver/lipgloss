@@ -6,6 +6,9 @@ import {
   isDarkColor, lightDark, complementary, darken, lighten, alpha,
 } from '../src/color.js';
 import type { RGBColor } from '../src/color.js';
+import { convert16, convert256 } from '../src/colorconvert.js';
+import { renderColorProfile } from '../src/renderer.js';
+import goColours from './fixtures/colour-convert-go-v0.4.3.json';
 
 describe('color constants', () => {
   it('should have correct basic color values', () => {
@@ -385,5 +388,63 @@ describe('alpha', () => {
   });
   it('should return null for NO_COLOR', () => {
     expect(alpha(NO_COLOR, 0.5)).toBeNull();
+  });
+});
+
+/** Must match sample() in tests/fixtures/gen-colour-fixture.go. */
+function sampleColors(): number[] {
+  const out: number[] = [];
+  for (let r = 0; r <= 255; r += 7) for (let g = 0; g <= 255; g += 7) for (let b = 0; b <= 255; b += 7) out.push((r << 16) | (g << 8) | b);
+  for (let v = 0; v < 256; v++) out.push((v << 16) | (v << 8) | v);
+  let s = 0x2545f491;
+  for (let i = 0; i < 20000; i++) {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    out.push(s >>> 8);
+  }
+  return out;
+}
+
+// Expected values come from Go (x/ansi Convert256/Convert16 through
+// colorprofile), built for amd64: arm64 fuses an FMA and differs on a few
+// hundred colours.
+describe('colour downsampling parity with Go', () => {
+  const colours = sampleColors();
+
+  it('has a fixture for every sampled colour', () => {
+    expect(colours.length).toBe(goColours.count);
+    expect(goColours.convert256.length).toBe(goColours.count * 2);
+  });
+
+  it('turns #112233 into 17, as Go does', () => {
+    expect(convert256(0x11, 0x22, 0x33)).toBe(17);
+    expect(renderColorProfile('\x1b[38;2;17;34;51m', 'ansi256')).toBe('\x1b[38;5;17m');
+  });
+
+  it('matches Convert256 for every sampled colour', () => {
+    const wrong: string[] = [];
+    colours.forEach((c, i) => {
+      const expected = Number.parseInt(goColours.convert256.slice(i * 2, i * 2 + 2), 16);
+      const got = convert256((c >> 16) & 255, (c >> 8) & 255, c & 255);
+      if (got !== expected) wrong.push(`#${c.toString(16).padStart(6, '0')}: ${got} != ${expected}`);
+    });
+    expect(wrong.slice(0, 10)).toEqual([]);
+    expect(wrong.length).toBe(0);
+  });
+
+  it('matches Convert16 (the 256 colour mapped to the 16 ANSI colours)', () => {
+    const wrong: string[] = [];
+    colours.forEach((c, i) => {
+      const via256 = Number.parseInt(goColours.convert256.slice(i * 2, i * 2 + 2), 16);
+      const expected = goColours.convert16[via256];
+      const sgr = `\x1b[38;2;${(c >> 16) & 255};${(c >> 8) & 255};${c & 255}m`;
+      const got = renderColorProfile(sgr, 'ansi');
+      const base = expected < 8 ? 30 + expected : 90 + expected - 8;
+      if (got !== `\x1b[${base}m`) wrong.push(`#${c.toString(16).padStart(6, '0')}: ${JSON.stringify(got)} != ${base}`);
+    });
+    expect(wrong.slice(0, 10)).toEqual([]);
+  });
+
+  it('maps every 256-colour index to the 16 ANSI colours as Go does', () => {
+    expect(Array.from({ length: 256 }, (_, i) => convert16(i))).toEqual(goColours.convert16);
   });
 });

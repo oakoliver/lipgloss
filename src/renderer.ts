@@ -1,5 +1,5 @@
 import { ansiTokens, stripAnsi } from './ansi.js';
-import { ansi256ToRGB } from './color.js';
+import { convert16, convert256 } from './colorconvert.js';
 import type { ColorProfile, RGBColor } from './color.js';
 import { AnsiStreamDecoder } from './stream.js';
 
@@ -70,46 +70,17 @@ export function detectColorProfile(
   return 'ansi';
 }
 
-function colorDistance(left: RGBColor, right: RGBColor): number {
-  const red = left.r - right.r;
-  const green = left.g - right.g;
-  const blue = left.b - right.b;
-  return red * red + green * green + blue * blue;
-}
-
-function nearestIndex(rgb: RGBColor): number {
-  let nearest = 16;
-  let distance = Number.POSITIVE_INFINITY;
-  for (let index = 16; index < 256; index++) {
-    const candidate = ansi256ToRGB(index);
-    const candidateDistance = colorDistance(rgb, candidate);
-    if (candidateDistance < distance) {
-      nearest = index;
-      distance = candidateDistance;
-    }
-  }
-  return nearest;
-}
-
 function basicSgr(channel: number, index: number): number[] {
   const base = channel === 38 ? 30 : 40;
   return [index < 8 ? base + index : base + 60 + index - 8];
 }
 
-const ANSI256_TO_16 = [
-  0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,4,4,4,12,12,2,6,4,4,12,12,2,2,6,4,
-  12,12,2,2,2,6,12,12,10,10,10,10,14,12,10,10,10,10,10,14,1,5,4,4,12,12,3,8,4,4,12,12,
-  2,2,6,4,12,12,2,2,2,6,12,12,10,10,10,10,14,12,10,10,10,10,10,14,1,1,5,4,12,12,
-  1,1,5,4,12,12,3,3,8,4,12,12,2,2,2,6,12,12,10,10,10,10,14,12,10,10,10,10,10,14,1,1,
-  1,5,12,12,1,1,1,5,12,12,1,1,1,5,12,12,3,3,3,7,12,12,10,10,10,10,14,12,10,10,10,10,
-  10,14,9,9,9,9,13,12,9,9,9,9,13,12,9,9,9,9,13,12,9,9,9,9,13,12,11,11,11,11,7,12,
-  10,10,10,10,10,14,9,9,9,9,9,13,9,9,9,9,9,13,9,9,9,9,9,13,9,9,9,9,9,13,9,9,
-  9,9,9,13,11,11,11,11,11,15,0,0,0,0,0,0,8,8,8,8,8,8,7,7,7,7,7,7,15,15,15,15,
-  15,15,
-] as const;
+const nearestIndex = (rgb: RGBColor): number => convert256(rgb.r, rgb.g, rgb.b);
+const nearestBasicIndex = (rgb: RGBColor): number => convert16(nearestIndex(rgb));
 
-function nearestBasicIndex(rgb: RGBColor): number {
-  return ANSI256_TO_16[nearestIndex(rgb)];
+/** A colour parameter as a byte, wrapping like Go's uint8 conversion in x/ansi. */
+function byte(param: string): number {
+  return (Number(param) || 0) & 0xff;
 }
 
 function downsampleSgr(sequence: string, profile: ColorProfile): string {
@@ -126,7 +97,7 @@ function downsampleSgr(sequence: string, profile: ColorProfile): string {
     if ((channel === 38 || channel === 48 || channel === 58) && Number(params[index + 1]) === 2 && index + 4 < params.length) {
       sawColor = true;
       if (profile !== 'ascii' && (profile !== 'ansi' || channel !== 58)) {
-        const rgb = { r: Number(params[index + 2]), g: Number(params[index + 3]), b: Number(params[index + 4]) };
+        const rgb = { r: byte(params[index + 2]), g: byte(params[index + 3]), b: byte(params[index + 4]) };
         if (profile === 'ansi256') result.push(String(channel), '5', String(nearestIndex(rgb)));
         else result.push(...basicSgr(channel, nearestBasicIndex(rgb)).map(String));
       }
@@ -134,9 +105,9 @@ function downsampleSgr(sequence: string, profile: ColorProfile): string {
     } else if ((channel === 38 || channel === 48 || channel === 58) && Number(params[index + 1]) === 5 && index + 2 < params.length) {
       sawColor = true;
       if (profile !== 'ascii' && (profile !== 'ansi' || channel !== 58)) {
-        const indexed = Math.max(0, Math.min(255, Number(params[index + 2])));
+        const indexed = byte(params[index + 2]);
         if (profile === 'ansi256') result.push(String(channel), '5', String(indexed));
-        else result.push(...basicSgr(channel, ANSI256_TO_16[indexed]).map(String));
+        else result.push(...basicSgr(channel, convert16(indexed)).map(String));
       }
       index += 2;
     } else if (
@@ -147,7 +118,10 @@ function downsampleSgr(sequence: string, profile: ColorProfile): string {
     ) {
       sawColor = true;
     } else {
-      result.push(params[index]);
+      // Like colorprofile, write a reset (parameter 0) as an empty parameter:
+      // `ESC[0m` becomes `ESC[m`.
+      const colourParam = index > 0 && [38, 48, 58].includes(Number(params[index - 1]));
+      result.push(channel === 0 && !colourParam ? '' : params[index]);
     }
   }
   if (result.length > 0) return `\x1b[${result.join(';')}m`;

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'bun:test';
+import goColours from './fixtures/colour-convert-go-v0.4.3.json';
 import {
   Bottom,
   Canvas,
@@ -294,6 +295,18 @@ describe('profiles, gradients, borders, and layers', () => {
     expect(renderColorProfile(input, 'notty')).toBe('red');
   });
 
+
+  it('writes the same SGR sequences as Go colorprofile for ANSI and ANSI256', () => {
+    for (const { profile, input, expected } of goColours.writer) {
+      expect({ profile, input, output: renderColorProfile(input, profile as 'ansi' | 'ansi256') })
+        .toEqual({ profile, input, output: expected });
+    }
+    const chunks: string[] = [];
+    const profileWriter = new ColorProfileWriter({ write: chunk => chunks.push(chunk) }, 'ansi256');
+    profileWriter.write('\x1b[1;38;2;17;34;51mx\x1b[0m');
+    profileWriter.close();
+    expect(chunks.join('')).toBe('\x1b[1;38;5;17mx\x1b[m');
+  });
 
   it('drops unsupported ANSI underline colors without resetting other styles', () => {
     const underline = '\x1b[58;2;255;0;0m';
